@@ -1,0 +1,92 @@
+﻿@model SalesApp.Models.PRODUCT_RESERVATION
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PRODUCT_RESERVATION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AGENCY.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AGENCY.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AGENT.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AGENT.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PAX.First_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PAX.First_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PAYMENT_TYPE.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PAYMENT_TYPE.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCT_CALENDER.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCT_CALENDER.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCT_CALENDERHOUR.Times)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCT_CALENDERHOUR.Times)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "BacktoList", new { ProductCalenderId = Request.Params["ProductCalenderId"] })
+
+
+</p>

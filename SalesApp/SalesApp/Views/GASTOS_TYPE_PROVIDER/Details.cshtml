@@ -1,0 +1,66 @@
+﻿@model SalesApp.Models.GASTOS_TYPE_PROVIDER
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GASTOS_TYPE_PROVIDER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Populate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Populate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CATEGORY_PRODUCT.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORY_PRODUCT.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GASTOS_TYPE.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GASTOS_TYPE.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PROVIDER.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PROVIDER.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

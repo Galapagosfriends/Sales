@@ -1,0 +1,179 @@
+﻿@model IEnumerable<SalesApp.Models.PRODUCT_CALENDER>
+   
+@{
+    ViewBag.Title = "Boat";
+}
+
+    <table id="tableMonths" width="100%" cellpadding="6">
+        <tr>            
+            @{  int startMonth = startMonth = DateTime.Now.Month; }
+            @if(Request.IsAuthenticated && (User.IsInRole("Contador") || User.IsInRole("Admin"))){
+                startMonth = 4;
+            }
+                @for (int ii = startMonth; ii < 13; ii++)
+                {
+                    @:  <td > <h4>
+                        @Html.ActionLink(DateTime.Now.AddMonths((ii - DateTime.Now.Month)).Date.ToString("MMMM"), "Index", "Boat", new { id = Model.First().CategoryProductId, month = ii }, null)                      
+                    @:  </h4></td >
+                }
+            </tr>
+        </table>
+
+<table class="table">
+    <tr>
+  <th style="background-color:cornflowerblue; color:white" colspan="6">
+      <h3>
+          @if(Model.Count() == 0){
+             @:"";
+          }
+          else
+          { @Model.FirstOrDefault().CATEGORY_PRODUCT.Name }      
+      </h3>
+</th>  
+    <th style="background-color: darkblue; color:white; font-variant:small-caps"> 
+        <h3> 
+           
+          @Model.FirstOrDefault().Date.Value.ToString("MMMM") 
+    
+        </h3>
+        </th>
+    </tr> 
+    <tr>  
+        @{  int x = 0; int dd = 0; }
+        @foreach (var item1 in Model)
+        {
+            if (dd == 7){ break; };
+            @:<th>  
+            @item1.Date.Value.ToString("dddd");
+            @:   </th>
+            dd = dd + 1;
+        }
+    </tr>
+    <tr>
+    @if (Request.IsAuthenticated)
+    {
+        foreach (var item in Model) 
+        {
+            if (x == 7) { x = 0;
+                @:</tr> <tr>
+            }
+            if (item.Date.Value.Day+1 < DateTime.Now.Day && item.Month == DateTime.Now.Month)
+            {
+                @:<td>
+                    @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)
+                @:close </ td >
+
+                    @*@:<td><h3> @item.Day </h3> close</td>*@
+            }
+            else {
+                <td>
+                  @*  <h3> @item.Day </h3>*@       
+                  <h3>  @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)
+                    </h3>
+         
+                    @if (item.TotalBooks == null || item.TotalBooks ==0)
+                    {
+                        @:<font color="Green" >                                            
+                        @item.MaxNumber;                         
+                        @: Libres</font>
+                        <br />
+                        @Html.ActionLink("Charter", "Charter",  new { id = item.Id, CategoryProductId = item.CategoryProductId, month = item.Month }, null)
+                        <br />
+                         @Html.ActionLink("NoSalir", "NoSalir",  new { id = item.Id, CategoryProductId = item.CategoryProductId, month = item.Month }, null)
+                    }
+                    else
+                    {
+                        if (item.TotalBooks >= item.MaxNumber || item.Lock == true)
+                        {
+                           
+                            if (item.Lock == true)
+                            {
+                                @: No salimos
+                                <br />
+                                @Html.ActionLink("Salir", "Salir",  new { id = item.Id, CategoryProductId = item.CategoryProductId, month = item.Month }, null)
+                            }
+                            else
+                            {
+                                @:<font color="Red"> 16
+                                    @*@(item.MaxNumber - item.TotalBooks);*@
+                                    @: Full </font>
+
+                            }
+                        }else
+                        {
+                            @:<font color="Green" >
+                            @(item.MaxNumber - item.TotalBooks);
+                            @: Libres </font>
+                         }
+                    }
+                    <br />
+                    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)
+
+
+                </td>
+            }
+            x = x + 1;
+        }
+    }
+    @*todo publico  *@
+    else
+    {
+        TimeZoneInfo tz = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+        int hour = TimeZoneInfo.ConvertTimeToUtc(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day), tz).Hour;
+
+        foreach (var item in Model)
+        {
+            if (x == 7) { x = 0;
+                @:</tr> <tr>
+            }
+            if (item.Date.Value.Day < DateTime.Now.Day && item.Month == DateTime.Now.Month && hour < 9)
+            {
+                   @:<td><h3> @item.Day </h3> close</td>
+            }
+            else {
+                <td>
+                 <h4> @item.Day </h4>                  
+         
+                    @if (item.TotalBooks == null)
+                    {
+                        @:<font color="Green" > 4+      
+                        @*@item.MaxNumber;*@
+                        @: Libres</font>
+                    }
+                    else
+                    {
+                        if (item.TotalBooks >= item.MaxNumber || item.Lock == true)
+                        {
+                            @:<font color="Red">
+                            @*@(item.MaxNumber - item.TotalBooks);*@
+                            @: Full </font>
+                        }
+                        else
+                        {
+                            @:<font color="Green" >
+                             if ((item.MaxNumber - item.TotalBooks) <= 4)
+                            {
+                                @(item.MaxNumber - item.TotalBooks);
+                            }
+                            else
+                            {
+                                @: 4+ 
+                            }
+                            @: Libres </font>
+                        }
+                    }
+                    <br />
+                    @*//DEBUG
+                    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)*@
+   
+                </td>
+            }
+            x = x + 1;
+        }
+    }
+   
+    </tr>
+</table>
+
+
+

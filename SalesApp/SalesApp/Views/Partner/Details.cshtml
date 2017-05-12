@@ -1,0 +1,50 @@
+﻿@model SalesApp.Models.PARTNER
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PARTNER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TourID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TourID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdresseID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdresseID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

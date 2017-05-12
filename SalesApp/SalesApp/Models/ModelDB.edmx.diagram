@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3edd8674dc2c493f9563ef9b0f970fec" Name="Diagram1">
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.ACCT_CAJACHICA" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.ACCT_CAJACHICA_OWNER" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.ACCT_CAJACHICA_RESERVATION" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.ACCT_PAYMENT" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.ACCT_PAYMENT_STATUS" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.ADRESS" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.AGENCY" Width="1.5" PointX="3.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.AGENT" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.CATEGORY" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.CATEGORY_PRODUCT" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.COUNTRY" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.GASTOS_OPERATION" Width="2.25" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.GASTOS_TYPE" Width="1.5" PointX="6" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.GASTOS_TYPE_PROVIDER" Width="2.5" PointX="8.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.HR_Roles_Anticipos" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.HR_Roles_DateRole" Width="1.5" PointX="11.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.HR_Roles_TypoPago" Width="1.5" PointX="14.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.HR_Roles_Worker" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.HR_Worker_Detail" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.PARTNER" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.PAX" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.PAYMENT_TYPE" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.PRODUCT_CALENDER" Width="2.25" PointX="4.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.PRODUCT_CALENDERHOUR" Width="2.375" PointX="5.25" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.PRODUCT_RESERVATION" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.PROVIDER" Width="1.5" PointX="6" PointY="28.125" IsExpanded="true" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_Adresse_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_Agency_Adresse" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_Partner_Adresse" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_Vendedor_Adresse" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_AGENCY" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_AGENT" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_CATEGORYPRODUCT_CATEGORYPRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_GASTOS_TYPE_PROVIDER_CATEGORY_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCTCALENDER_CATEGORYPRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_GASTOS_TYPE_PROVIDER_GASTOS_TYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_GASTOS_TYPE_PROVIDER_PROVIDER" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_PAX" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_PAYMENT_TYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_CALENDERHOUR_PRODUCTCALENDER" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_TBL_PRODUCTRESERVATION_TBL_PRODUCTCALENDER" ManuallyRouted="false" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_PRODUCT_CALENDERHOUR" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.PAYMENT_STATUS" Width="1.5" PointX="7.375" PointY="12.875" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_PAYMENTSTATUS" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_GASTOSOPERATION_TYPE_PROVIDER" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.PRODUCT_RESERVATION_TYPE" Width="1.5" PointX="5.625" PointY="0.75" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.TOUR_DAYS" Width="1.5" PointX="0.75" PointY="15.125" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_TourDaysId" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.DIVE" Width="1.5" PointX="14.375" PointY="11.875" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_DiveId" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

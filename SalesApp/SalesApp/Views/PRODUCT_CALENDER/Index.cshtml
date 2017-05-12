@@ -1,0 +1,168 @@
+﻿@model IEnumerable<SalesApp.Models.PRODUCT_CALENDER>
+
+@{ ViewBag.Title = "Index"; }
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        @for (int ii = DateTime.Now.Month; ii < 13; ii++)
+        {
+            @:<li>
+                @Html.ActionLink(DateTime.Now.AddMonths((ii - DateTime.Now.Month)).Date.ToString("MMMM"), "Index", "PRODUCT_CALENDER", new { id = Model.FirstOrDefault().CATEGORY_PRODUCT.Id, month = ii }, null)
+            @: </li>
+        }
+    </ul>
+</div>
+
+
+<table class="table">
+    <tr>
+        <th style="background-color:cornflowerblue; color:white" colspan="6">
+            <h2>
+                @Model.FirstOrDefault().CATEGORY_PRODUCT.Name
+            </h2>
+        </th>
+        <th style="background-color: darkblue; color:white; font-variant:small-caps">
+            <h2>  @Model.FirstOrDefault().Date.Value.ToString("MMMM") </h2>
+        </th>
+    </tr>
+    <tr>
+        @{  int x = 0; int dd = 0; }
+        @foreach (var item1 in Model)
+        {
+            if (dd == 7) { break; };
+            @:<th>
+                @item1.Date.Value.ToString("dddd");
+            @:</th>
+            dd = dd + 1;
+        }
+    </tr>
+    <tr>
+        @foreach (var item in Model) //.Where(s => s.Month == 4 & s.Year == 2017 ))
+        {
+            if (x == 7)
+            {
+                x = 0;
+                @:</tr><tr>
+           }
+            <td>
+                <h3>
+                    @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { id = item.Id, tourdays = item.Tourdays }, null)
+                </h3>
+                    @if (item.TotalBooks == null)
+                {
+                        @:<font color="Green">
+                            @item.MaxNumber;
+                        @: Libres </font>
+                }
+                else
+                {
+                    if (item.MaxNumber == item.TotalBooks)
+                    {
+                            @:<font color="Red">
+                                @(item.MaxNumber - item.TotalBooks);
+                            @: Full </font>
+                    }
+                    else
+                    {
+                            @:<font color="Green">
+                                @(item.MaxNumber - item.TotalBooks);
+                            @: Libres </font>
+                    }
+                }
+                 @if (item.Lock == true)
+                     {   
+                         @: No salir
+                        <br />
+                        @Html.ActionLink("Salir", "Salir", "PRODUCT_CALENDER", new { id = item.Id, CategoryProductId = item.CategoryProductId, month = item.Month }, null)
+                     }
+                     else
+                     {
+                    <br />
+                    @Html.ActionLink("Charter", "Charter", "PRODUCT_CALENDER", new { id = item.Id, CategoryProductId = item.CategoryProductId, month = item.Month }, null)
+
+                    <br />
+                    @Html.ActionLink("NoSalir", "NoSalir", "PRODUCT_CALENDER", new { id = item.Id, CategoryProductId = item.CategoryProductId, month = item.Month }, null)
+                     }
+                <br />
+                @Html.ActionLink("Gastos", "SetGastos", "GASTOS_OPERATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)
+
+               </td>
+            x = x + 1;
+        }
+    </tr>
+
+</table>
+
+
+
+
+
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Day)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalBooks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Month)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CATEGORY_PRODUCT.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Day)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalBooks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Month)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CATEGORY_PRODUCT.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>*@

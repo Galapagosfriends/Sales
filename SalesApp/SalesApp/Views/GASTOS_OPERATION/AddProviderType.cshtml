@@ -1,0 +1,69 @@
+﻿@model IEnumerable<SalesApp.Models.GASTOS_TYPE_PROVIDER>
+
+@{
+    ViewBag.Title = "Add Provider type to Operation";
+}
+
+<h2>Add Provider type to Operation</h2>
+<p>
+    @Html.ActionLink("Create New", "NewProviderType", "GASTOS_OPERATION", new {    
+    ProductCalenderId = Model.First().CATEGORY_PRODUCT.PRODUCT_CALENDER.First().Id
+    , CategoryProductId = Model.First().CATEGORY_PRODUCT.Id }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Populate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CATEGORY_PRODUCT.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GASTOS_TYPE.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PROVIDER.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Populate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CATEGORY_PRODUCT.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GASTOS_TYPE.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PROVIDER.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Add", "Add", new { id = item.Id
+               , ProductCalenderId = int.Parse(Request["ProductCalenderId"])
+                ,Comment = item.Comment
+               , Price = item.Price
+                    ,
+               GastosTypeProviderId = item.Id
+           })             
+            </td>         
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,2082 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Galadventure_TrabajosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACCT_CAJACHICA">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PerDate" Type="datetime" Nullable="false" />
+          <Property Name="NrFactura" Type="int" />
+          <Property Name="Provider" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="SubTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IVA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RetencionProcent" Type="int" />
+          <Property Name="TotalRetencion" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPaid" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PeriodId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACCT_CAJACHICA_OWNER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ACCT_CAJACHICA_RESERVATION">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OwnerId" Type="int" Nullable="false" />
+          <Property Name="TypePaymentId" Type="int" />
+          <Property Name="NrPayment" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AmountLastMonth" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CloseDate" Type="datetime" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActualAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="smallint" />
+          <Property Name="Note" Type="nvarchar" MaxLength="250" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="TotalPaid" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ACCT_PAYMENT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentTypeId" Type="int" Nullable="false" />
+          <Property Name="AccountNumberId" Type="int" />
+          <Property Name="PaidDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="ParcialAmount" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+          <Property Name="ReservationId" Type="int" Nullable="false" />
+          <Property Name="PaymentStatusId" Type="int" Nullable="false" />
+          <Property Name="VendedorId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ACCT_PAYMENT_STATUS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LangId" Type="int" Nullable="false" />
+          <Property Name="PaymentStatusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ADRESS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="450" />
+          <Property Name="Post" Type="nchar" MaxLength="10" />
+          <Property Name="City" Type="nvarchar" MaxLength="450" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+          <Property Name="Cel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryID" Type="int" />
+        </EntityType>
+        <EntityType Name="AGENCY">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdresseId" Type="int" />
+        </EntityType>
+        <EntityType Name="AGENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdresseID" Type="int" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="CATEGORY_PRODUCT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Lock" Type="bit" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="continent" Type="nvarchar" MaxLength="150" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="capital" Type="nvarchar" MaxLength="150" />
+          <Property Name="iso2" Type="nvarchar" MaxLength="10" />
+          <Property Name="iso3" Type="nvarchar" MaxLength="10" />
+          <Property Name="ioc" Type="nvarchar" MaxLength="10" />
+          <Property Name="tld" Type="nvarchar" MaxLength="10" />
+          <Property Name="currency" Type="nvarchar" MaxLength="10" />
+          <Property Name="phone" Type="nvarchar" MaxLength="10" />
+          <Property Name="Lang_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="DIVE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="GASTOS_OPERATION">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductCalenderId" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="GastosTypeProviderId" Type="int" />
+          <Property Name="PayDate" Type="datetime" />
+          <Property Name="BillingPath" Type="nvarchar" MaxLength="250" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Deleted" Type="bit" />
+          <Property Name="Closed" Type="bit" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="GASTOS_TYPE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GASTOS_TYPE_PROVIDER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GastosTypeId" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ProviderId" Type="int" Nullable="false" />
+          <Property Name="CategoryProductId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Populate" Type="bit" />
+        </EntityType>
+        <EntityType Name="HR_Roles_Anticipos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RollDateId" Type="int" Nullable="false" />
+          <Property Name="PayTypeId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+          <Property Name="PayDate" Type="datetime" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="PayTypeNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HR_Roles_DateRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateMonth" Type="datetime" Nullable="false" />
+          <Property Name="WorkerId" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+          <Property Name="Autorizado_Por" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="CerradoPor" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Updated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HR_Roles_TypoPago">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HR_Roles_Worker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Sueldo_SBU" Type="float" />
+          <Property Name="Fondos_de_reserva" Type="float" />
+          <Property Name="Bonos" Type="float" />
+          <Property Name="Excedente" Type="float" />
+          <Property Name="Horas_Extras" Type="float" />
+          <Property Name="Otros_Ingresos" Type="float" />
+          <Property Name="Vacaciones" Type="float" />
+          <Property Name="Decimo_tercero" Type="float" />
+          <Property Name="Decimo_Cuarto" Type="float" />
+          <Property Name="IESS_empleador" Type="float" />
+          <Property Name="Total_ingresos" Type="float" />
+          <Property Name="IESS_trabajador" Type="float" />
+          <Property Name="Impuesto_a_la_Renta" Type="float" />
+          <Property Name="IESS_Prestamos" Type="float" />
+          <Property Name="Anticipos" Type="float" />
+          <Property Name="Prestamos_Internos" Type="float" />
+          <Property Name="Total_descuentos" Type="float" />
+          <Property Name="Total_a_pagar" Type="float" />
+          <Property Name="IsAdministracion" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="HR_Worker_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateMonthId" Type="int" />
+          <Property Name="Sueldo_SBU" Type="float" />
+          <Property Name="Fondos_de_reserva" Type="float" />
+          <Property Name="Bonos" Type="float" />
+          <Property Name="Excedente" Type="float" />
+          <Property Name="Horas_Extras" Type="float" />
+          <Property Name="Otros_Ingresos" Type="float" />
+          <Property Name="Vacaciones" Type="float" />
+          <Property Name="Decimo_tercero" Type="float" />
+          <Property Name="Decimo_Cuarto" Type="float" />
+          <Property Name="IESS_empleador" Type="float" />
+          <Property Name="Total_ingresos" Type="float" />
+          <Property Name="IESS_trabajador" Type="float" />
+          <Property Name="Impuesto_a_la_Renta" Type="float" />
+          <Property Name="IESS_Prestamos" Type="float" />
+          <Property Name="Anticipos" Type="float" />
+          <Property Name="Prestamos_Internos" Type="float" />
+          <Property Name="Total_descuentos" Type="float" />
+          <Property Name="Total_a_pagar" Type="float" />
+          <Property Name="created" Type="datetime" />
+          <Property Name="Attachment" Type="nvarchar" MaxLength="500" />
+          <Property Name="ArchiveAttachment" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PARTNER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="TourID" Type="int" />
+          <Property Name="AdresseID" Type="int" />
+          <Property Name="PriceID" Type="int" />
+        </EntityType>
+        <EntityType Name="PAX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Birthdate" Type="datetime" />
+          <Property Name="Passport" Type="nvarchar" MaxLength="150" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="AdressId" Type="int" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="PaxCategory" Type="int" />
+          <Property Name="Created" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PAYMENT_STATUS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="PAYMENT_TYPE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="PRODUCT_CALENDER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryProductId" Type="int" />
+          <Property Name="Day" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="MaxNumber" Type="int" />
+          <Property Name="TotalBooks" Type="int" />
+          <Property Name="Lock" Type="bit" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Tourdays" Type="int" />
+        </EntityType>
+        <EntityType Name="PRODUCT_CALENDERHOUR">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductCalenderId" Type="int" />
+          <Property Name="MaxNumber" Type="int" />
+          <Property Name="TotalBooks" Type="int" />
+          <Property Name="Lock" Type="bit" />
+          <Property Name="Times" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="PRODUCT_RESERVATION">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductCalenderId" Type="int" />
+          <Property Name="AgentId" Type="int" />
+          <Property Name="PaymentTypeId" Type="int" />
+          <Property Name="AgencyId" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="PaxId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="PaymentStatusId" Type="int" />
+          <Property Name="ProductReservationTypeId" Type="int" />
+          <Property Name="BloqueoDate" Type="datetime" />
+          <Property Name="TourDaysId" Type="int" />
+          <Property Name="DivePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DiveId" Type="int" />
+          <Property Name="PickUp" Type="nvarchar" MaxLength="200" />
+          <Property Name="DropOff" Type="nvarchar" MaxLength="200" />
+          <Property Name="Restrictions" Type="nvarchar" MaxLength="400" />
+          <Property Name="Continua" Type="bit" />
+        </EntityType>
+        <EntityType Name="PRODUCT_RESERVATION_TYPE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="PROVIDER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="TOUR_DAYS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="TourDaysId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Adresse_Country">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="0..1" />
+          <End Role="ADRESS" Type="Self.ADRESS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ADRESS">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agency_Adresse">
+          <End Role="ADRESS" Type="Self.ADRESS" Multiplicity="0..1" />
+          <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADRESS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AGENCY">
+              <PropertyRef Name="AdresseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORYPRODUCT_CATEGORYPRODUCT">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="CATEGORY_PRODUCT" Type="Self.CATEGORY_PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CATEGORY_PRODUCT">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GASTOS_TYPE_PROVIDER_CATEGORY_PRODUCT">
+          <End Role="CATEGORY_PRODUCT" Type="Self.CATEGORY_PRODUCT" Multiplicity="1" />
+          <End Role="GASTOS_TYPE_PROVIDER" Type="Self.GASTOS_TYPE_PROVIDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY_PRODUCT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GASTOS_TYPE_PROVIDER">
+              <PropertyRef Name="CategoryProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GASTOS_TYPE_PROVIDER_GASTOS_TYPE">
+          <End Role="GASTOS_TYPE" Type="Self.GASTOS_TYPE" Multiplicity="1" />
+          <End Role="GASTOS_TYPE_PROVIDER" Type="Self.GASTOS_TYPE_PROVIDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GASTOS_TYPE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GASTOS_TYPE_PROVIDER">
+              <PropertyRef Name="GastosTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GASTOS_TYPE_PROVIDER_PROVIDER">
+          <End Role="PROVIDER" Type="Self.PROVIDER" Multiplicity="1" />
+          <End Role="GASTOS_TYPE_PROVIDER" Type="Self.GASTOS_TYPE_PROVIDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVIDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GASTOS_TYPE_PROVIDER">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GASTOSOPERATION_TYPE_PROVIDER">
+          <End Role="GASTOS_TYPE_PROVIDER" Type="Self.GASTOS_TYPE_PROVIDER" Multiplicity="0..1" />
+          <End Role="GASTOS_OPERATION" Type="Self.GASTOS_OPERATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GASTOS_TYPE_PROVIDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GASTOS_OPERATION">
+              <PropertyRef Name="GastosTypeProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_Adresse">
+          <End Role="ADRESS" Type="Self.ADRESS" Multiplicity="0..1" />
+          <End Role="PARTNER" Type="Self.PARTNER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADRESS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PARTNER">
+              <PropertyRef Name="AdresseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_CALENDERHOUR_PRODUCTCALENDER">
+          <End Role="PRODUCT_CALENDER" Type="Self.PRODUCT_CALENDER" Multiplicity="0..1" />
+          <End Role="PRODUCT_CALENDERHOUR" Type="Self.PRODUCT_CALENDERHOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT_CALENDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_CALENDERHOUR">
+              <PropertyRef Name="ProductCalenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION">
+          <End Role="PRODUCT_RESERVATION_TYPE" Type="Self.PRODUCT_RESERVATION_TYPE" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT_RESERVATION_TYPE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="ProductReservationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_AGENCY">
+          <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGENCY">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="AgencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_AGENT">
+          <End Role="AGENT" Type="Self.AGENT" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_DiveId">
+          <End Role="DIVE" Type="Self.DIVE" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIVE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="DiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_PAX">
+          <End Role="PAX" Type="Self.PAX" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAX">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="PaxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_PAYMENT_TYPE">
+          <End Role="PAYMENT_TYPE" Type="Self.PAYMENT_TYPE" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYMENT_TYPE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_PAYMENTSTATUS">
+          <End Role="PAYMENT_STATUS" Type="Self.PAYMENT_STATUS" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYMENT_STATUS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="PaymentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_PRODUCT_CALENDERHOUR">
+          <End Role="PRODUCT_CALENDERHOUR" Type="Self.PRODUCT_CALENDERHOUR" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT_CALENDERHOUR">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="ProductCalenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_TourDaysId">
+          <End Role="TOUR_DAYS" Type="Self.TOUR_DAYS" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOUR_DAYS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="TourDaysId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTCALENDER_CATEGORYPRODUCT">
+          <End Role="CATEGORY_PRODUCT" Type="Self.CATEGORY_PRODUCT" Multiplicity="0..1" />
+          <End Role="PRODUCT_CALENDER" Type="Self.PRODUCT_CALENDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY_PRODUCT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_CALENDER">
+              <PropertyRef Name="CategoryProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PRODUCTRESERVATION_TBL_PRODUCTCALENDER">
+          <End Role="PRODUCT_CALENDER" Type="Self.PRODUCT_CALENDER" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT_CALENDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="ProductCalenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vendedor_Adresse">
+          <End Role="ADRESS" Type="Self.ADRESS" Multiplicity="0..1" />
+          <End Role="AGENT" Type="Self.AGENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADRESS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AGENT">
+              <PropertyRef Name="AdresseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_Delete_PaxDefault" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GET_PAXLIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pcaId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Insert_CountReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductCalenderId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Insert_PaxDefault" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Mover_AllPaxs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductCalenderId" Type="int" Mode="In" />
+          <Parameter Name="TargetcategoryProductId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_SetCharter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductCalenderId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_SetGastos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductCalenderId" Type="int" Mode="In" />
+          <Parameter Name="CategoryProductId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_SetNoSalir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductCalenderId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_SetSalir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductCalenderId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Galadventure_TrabajosModelStoreContainer">
+          <EntitySet Name="ACCT_CAJACHICA" EntityType="Self.ACCT_CAJACHICA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACCT_CAJACHICA_OWNER" EntityType="Self.ACCT_CAJACHICA_OWNER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACCT_CAJACHICA_RESERVATION" EntityType="Self.ACCT_CAJACHICA_RESERVATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACCT_PAYMENT" EntityType="Self.ACCT_PAYMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ACCT_PAYMENT_STATUS" EntityType="Self.ACCT_PAYMENT_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ADRESS" EntityType="Self.ADRESS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AGENCY" EntityType="Self.AGENCY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AGENT" EntityType="Self.AGENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORY_PRODUCT" EntityType="Self.CATEGORY_PRODUCT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIVE" EntityType="Self.DIVE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GASTOS_OPERATION" EntityType="Self.GASTOS_OPERATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GASTOS_TYPE" EntityType="Self.GASTOS_TYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GASTOS_TYPE_PROVIDER" EntityType="Self.GASTOS_TYPE_PROVIDER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_Roles_Anticipos" EntityType="Self.HR_Roles_Anticipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_Roles_DateRole" EntityType="Self.HR_Roles_DateRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_Roles_TypoPago" EntityType="Self.HR_Roles_TypoPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_Roles_Worker" EntityType="Self.HR_Roles_Worker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HR_Worker_Detail" EntityType="Self.HR_Worker_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PARTNER" EntityType="Self.PARTNER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAX" EntityType="Self.PAX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAYMENT_STATUS" EntityType="Self.PAYMENT_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAYMENT_TYPE" EntityType="Self.PAYMENT_TYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT_CALENDER" EntityType="Self.PRODUCT_CALENDER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT_CALENDERHOUR" EntityType="Self.PRODUCT_CALENDERHOUR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT_RESERVATION" EntityType="Self.PRODUCT_RESERVATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT_RESERVATION_TYPE" EntityType="Self.PRODUCT_RESERVATION_TYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVIDER" EntityType="Self.PROVIDER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TOUR_DAYS" EntityType="Self.TOUR_DAYS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Adresse_Country" Association="Self.FK_Adresse_Country">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="ADRESS" EntitySet="ADRESS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agency_Adresse" Association="Self.FK_Agency_Adresse">
+            <End Role="ADRESS" EntitySet="ADRESS" />
+            <End Role="AGENCY" EntitySet="AGENCY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORYPRODUCT_CATEGORYPRODUCT" Association="Self.FK_CATEGORYPRODUCT_CATEGORYPRODUCT">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="CATEGORY_PRODUCT" EntitySet="CATEGORY_PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GASTOS_TYPE_PROVIDER_CATEGORY_PRODUCT" Association="Self.FK_GASTOS_TYPE_PROVIDER_CATEGORY_PRODUCT">
+            <End Role="CATEGORY_PRODUCT" EntitySet="CATEGORY_PRODUCT" />
+            <End Role="GASTOS_TYPE_PROVIDER" EntitySet="GASTOS_TYPE_PROVIDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GASTOS_TYPE_PROVIDER_GASTOS_TYPE" Association="Self.FK_GASTOS_TYPE_PROVIDER_GASTOS_TYPE">
+            <End Role="GASTOS_TYPE" EntitySet="GASTOS_TYPE" />
+            <End Role="GASTOS_TYPE_PROVIDER" EntitySet="GASTOS_TYPE_PROVIDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GASTOS_TYPE_PROVIDER_PROVIDER" Association="Self.FK_GASTOS_TYPE_PROVIDER_PROVIDER">
+            <End Role="PROVIDER" EntitySet="PROVIDER" />
+            <End Role="GASTOS_TYPE_PROVIDER" EntitySet="GASTOS_TYPE_PROVIDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GASTOSOPERATION_TYPE_PROVIDER" Association="Self.FK_GASTOSOPERATION_TYPE_PROVIDER">
+            <End Role="GASTOS_TYPE_PROVIDER" EntitySet="GASTOS_TYPE_PROVIDER" />
+            <End Role="GASTOS_OPERATION" EntitySet="GASTOS_OPERATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_Adresse" Association="Self.FK_Partner_Adresse">
+            <End Role="ADRESS" EntitySet="ADRESS" />
+            <End Role="PARTNER" EntitySet="PARTNER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_CALENDERHOUR_PRODUCTCALENDER" Association="Self.FK_PRODUCT_CALENDERHOUR_PRODUCTCALENDER">
+            <End Role="PRODUCT_CALENDER" EntitySet="PRODUCT_CALENDER" />
+            <End Role="PRODUCT_CALENDERHOUR" EntitySet="PRODUCT_CALENDERHOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION" Association="Self.FK_PRODUCT_RESERVATION">
+            <End Role="PRODUCT_RESERVATION_TYPE" EntitySet="PRODUCT_RESERVATION_TYPE" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_AGENCY" Association="Self.FK_PRODUCT_RESERVATION_AGENCY">
+            <End Role="AGENCY" EntitySet="AGENCY" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_AGENT" Association="Self.FK_PRODUCT_RESERVATION_AGENT">
+            <End Role="AGENT" EntitySet="AGENT" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_DiveId" Association="Self.FK_PRODUCT_RESERVATION_DiveId">
+            <End Role="DIVE" EntitySet="DIVE" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_PAX" Association="Self.FK_PRODUCT_RESERVATION_PAX">
+            <End Role="PAX" EntitySet="PAX" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_PAYMENT_TYPE" Association="Self.FK_PRODUCT_RESERVATION_PAYMENT_TYPE">
+            <End Role="PAYMENT_TYPE" EntitySet="PAYMENT_TYPE" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_PAYMENTSTATUS" Association="Self.FK_PRODUCT_RESERVATION_PAYMENTSTATUS">
+            <End Role="PAYMENT_STATUS" EntitySet="PAYMENT_STATUS" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_PRODUCT_CALENDERHOUR" Association="Self.FK_PRODUCT_RESERVATION_PRODUCT_CALENDERHOUR">
+            <End Role="PRODUCT_CALENDERHOUR" EntitySet="PRODUCT_CALENDERHOUR" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_TourDaysId" Association="Self.FK_PRODUCT_RESERVATION_TourDaysId">
+            <End Role="TOUR_DAYS" EntitySet="TOUR_DAYS" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTCALENDER_CATEGORYPRODUCT" Association="Self.FK_PRODUCTCALENDER_CATEGORYPRODUCT">
+            <End Role="CATEGORY_PRODUCT" EntitySet="CATEGORY_PRODUCT" />
+            <End Role="PRODUCT_CALENDER" EntitySet="PRODUCT_CALENDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PRODUCTRESERVATION_TBL_PRODUCTCALENDER" Association="Self.FK_TBL_PRODUCTRESERVATION_TBL_PRODUCTCALENDER">
+            <End Role="PRODUCT_CALENDER" EntitySet="PRODUCT_CALENDER" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vendedor_Adresse" Association="Self.FK_Vendedor_Adresse">
+            <End Role="ADRESS" EntitySet="ADRESS" />
+            <End Role="AGENT" EntitySet="AGENT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Galadventure_TrabajosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACCT_CAJACHICA">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PerDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NrFactura" Type="Int32" />
+          <Property Name="Provider" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SubTotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IVA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RetencionProcent" Type="Int32" />
+          <Property Name="TotalRetencion" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPaid" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PeriodId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ACCT_CAJACHICA_OWNER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ACCT_CAJACHICA_RESERVATION">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="TypePaymentId" Type="Int32" />
+          <Property Name="NrPayment" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AmountLastMonth" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CloseDate" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActualAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Status" Type="Int16" />
+          <Property Name="Note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="TotalPaid" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ACCT_PAYMENT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="AccountNumberId" Type="Int32" />
+          <Property Name="PaidDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="ParcialAmount" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReservationId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentStatusId" Type="Int32" Nullable="false" />
+          <Property Name="VendedorId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ACCT_PAYMENT_STATUS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LangId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentStatusId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ADRESS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Street" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Post" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Cel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryID" Type="Int32" />
+          <NavigationProperty Name="COUNTRY" Relationship="Self.FK_Adresse_Country" FromRole="ADRESS" ToRole="COUNTRY" />
+          <NavigationProperty Name="AGENCY" Relationship="Self.FK_Agency_Adresse" FromRole="ADRESS" ToRole="AGENCY" />
+          <NavigationProperty Name="PARTNER" Relationship="Self.FK_Partner_Adresse" FromRole="ADRESS" ToRole="PARTNER" />
+          <NavigationProperty Name="AGENT" Relationship="Self.FK_Vendedor_Adresse" FromRole="ADRESS" ToRole="AGENT" />
+        </EntityType>
+        <EntityType Name="AGENCY">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdresseId" Type="Int32" />
+          <NavigationProperty Name="ADRESS" Relationship="Self.FK_Agency_Adresse" FromRole="AGENCY" ToRole="ADRESS" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Self.FK_PRODUCT_RESERVATION_AGENCY" FromRole="AGENCY" ToRole="PRODUCT_RESERVATION" />
+        </EntityType>
+        <EntityType Name="AGENT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdresseID" Type="Int32" />
+          <NavigationProperty Name="ADRESS" Relationship="Self.FK_Vendedor_Adresse" FromRole="AGENT" ToRole="ADRESS" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Self.FK_PRODUCT_RESERVATION_AGENT" FromRole="AGENT" ToRole="PRODUCT_RESERVATION" />
+        </EntityType>
+        <EntityType Name="CATEGORY">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CATEGORY_PRODUCT" Relationship="Self.FK_CATEGORYPRODUCT_CATEGORYPRODUCT" FromRole="CATEGORY" ToRole="CATEGORY_PRODUCT" />
+        </EntityType>
+        <EntityType Name="CATEGORY_PRODUCT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Lock" Type="Boolean" />
+          <NavigationProperty Name="CATEGORY" Relationship="Self.FK_CATEGORYPRODUCT_CATEGORYPRODUCT" FromRole="CATEGORY_PRODUCT" ToRole="CATEGORY" />
+          <NavigationProperty Name="GASTOS_TYPE_PROVIDER" Relationship="Self.FK_GASTOS_TYPE_PROVIDER_CATEGORY_PRODUCT" FromRole="CATEGORY_PRODUCT" ToRole="GASTOS_TYPE_PROVIDER" />
+          <NavigationProperty Name="PRODUCT_CALENDER" Relationship="Self.FK_PRODUCTCALENDER_CATEGORYPRODUCT" FromRole="CATEGORY_PRODUCT" ToRole="PRODUCT_CALENDER" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="continent" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="capital" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="iso2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="iso3" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ioc" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="tld" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="currency" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Lang_Id" Type="Int32" />
+          <NavigationProperty Name="ADRESS" Relationship="Self.FK_Adresse_Country" FromRole="COUNTRY" ToRole="ADRESS" />
+        </EntityType>
+        <EntityType Name="GASTOS_OPERATION">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductCalenderId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GastosTypeProviderId" Type="Int32" />
+          <Property Name="PayDate" Type="DateTime" Precision="3" />
+          <Property Name="BillingPath" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Deleted" Type="Boolean" />
+          <Property Name="Closed" Type="Boolean" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="GASTOS_TYPE_PROVIDER" Relationship="Galadventure_TrabajosModel.FK_GASTOSOPERATION_TYPE_PROVIDER" FromRole="GASTOS_OPERATION" ToRole="GASTOS_TYPE_PROVIDER" />
+        </EntityType>
+        <EntityType Name="GASTOS_TYPE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GASTOS_TYPE_PROVIDER" Relationship="Self.FK_GASTOS_TYPE_PROVIDER_GASTOS_TYPE" FromRole="GASTOS_TYPE" ToRole="GASTOS_TYPE_PROVIDER" />
+        </EntityType>
+        <EntityType Name="GASTOS_TYPE_PROVIDER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GastosTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CATEGORY_PRODUCT" Relationship="Self.FK_GASTOS_TYPE_PROVIDER_CATEGORY_PRODUCT" FromRole="GASTOS_TYPE_PROVIDER" ToRole="CATEGORY_PRODUCT" />
+          <NavigationProperty Name="GASTOS_TYPE" Relationship="Self.FK_GASTOS_TYPE_PROVIDER_GASTOS_TYPE" FromRole="GASTOS_TYPE_PROVIDER" ToRole="GASTOS_TYPE" />
+          <NavigationProperty Name="PROVIDER" Relationship="Self.FK_GASTOS_TYPE_PROVIDER_PROVIDER" FromRole="GASTOS_TYPE_PROVIDER" ToRole="PROVIDER" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="GASTOS_OPERATION" Relationship="Galadventure_TrabajosModel.FK_GASTOSOPERATION_TYPE_PROVIDER" FromRole="GASTOS_TYPE_PROVIDER" ToRole="GASTOS_OPERATION" />
+          <Property Name="Populate" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="HR_Roles_Anticipos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RollDateId" Type="Int32" Nullable="false" />
+          <Property Name="PayTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PayDate" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="PayTypeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HR_Roles_DateRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateMonth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WorkerId" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <Property Name="Autorizado_Por" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CerradoPor" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="HR_Roles_TypoPago">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HR_Roles_Worker">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sueldo_SBU" Type="Double" />
+          <Property Name="Fondos_de_reserva" Type="Double" />
+          <Property Name="Bonos" Type="Double" />
+          <Property Name="Excedente" Type="Double" />
+          <Property Name="Horas_Extras" Type="Double" />
+          <Property Name="Otros_Ingresos" Type="Double" />
+          <Property Name="Vacaciones" Type="Double" />
+          <Property Name="Decimo_tercero" Type="Double" />
+          <Property Name="Decimo_Cuarto" Type="Double" />
+          <Property Name="IESS_empleador" Type="Double" />
+          <Property Name="Total_ingresos" Type="Double" />
+          <Property Name="IESS_trabajador" Type="Double" />
+          <Property Name="Impuesto_a_la_Renta" Type="Double" />
+          <Property Name="IESS_Prestamos" Type="Double" />
+          <Property Name="Anticipos" Type="Double" />
+          <Property Name="Prestamos_Internos" Type="Double" />
+          <Property Name="Total_descuentos" Type="Double" />
+          <Property Name="Total_a_pagar" Type="Double" />
+          <Property Name="IsAdministracion" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="HR_Worker_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateMonthId" Type="Int32" />
+          <Property Name="Sueldo_SBU" Type="Double" />
+          <Property Name="Fondos_de_reserva" Type="Double" />
+          <Property Name="Bonos" Type="Double" />
+          <Property Name="Excedente" Type="Double" />
+          <Property Name="Horas_Extras" Type="Double" />
+          <Property Name="Otros_Ingresos" Type="Double" />
+          <Property Name="Vacaciones" Type="Double" />
+          <Property Name="Decimo_tercero" Type="Double" />
+          <Property Name="Decimo_Cuarto" Type="Double" />
+          <Property Name="IESS_empleador" Type="Double" />
+          <Property Name="Total_ingresos" Type="Double" />
+          <Property Name="IESS_trabajador" Type="Double" />
+          <Property Name="Impuesto_a_la_Renta" Type="Double" />
+          <Property Name="IESS_Prestamos" Type="Double" />
+          <Property Name="Anticipos" Type="Double" />
+          <Property Name="Prestamos_Internos" Type="Double" />
+          <Property Name="Total_descuentos" Type="Double" />
+          <Property Name="Total_a_pagar" Type="Double" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+          <Property Name="Attachment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ArchiveAttachment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PARTNER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TourID" Type="Int32" />
+          <Property Name="AdresseID" Type="Int32" />
+          <Property Name="PriceID" Type="Int32" />
+          <NavigationProperty Name="ADRESS" Relationship="Self.FK_Partner_Adresse" FromRole="PARTNER" ToRole="ADRESS" />
+        </EntityType>
+        <EntityType Name="PAX">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Birthdate" Type="DateTime" Precision="3" />
+          <Property Name="Passport" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="AdressId" Type="Int32" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PaxCategory" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Self.FK_PRODUCT_RESERVATION_PAX" FromRole="PAX" ToRole="PRODUCT_RESERVATION" />
+        </EntityType>
+        <EntityType Name="PAYMENT_TYPE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Self.FK_PRODUCT_RESERVATION_PAYMENT_TYPE" FromRole="PAYMENT_TYPE" ToRole="PRODUCT_RESERVATION" />
+        </EntityType>
+        <EntityType Name="PRODUCT_CALENDER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryProductId" Type="Int32" />
+          <Property Name="Day" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="MaxNumber" Type="Int32" />
+          <Property Name="TotalBooks" Type="Int32" />
+          <Property Name="Lock" Type="Boolean" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CATEGORY_PRODUCT" Relationship="Self.FK_PRODUCTCALENDER_CATEGORYPRODUCT" FromRole="PRODUCT_CALENDER" ToRole="CATEGORY_PRODUCT" />
+          <NavigationProperty Name="PRODUCT_CALENDERHOUR" Relationship="Self.FK_PRODUCT_CALENDERHOUR_PRODUCTCALENDER" FromRole="PRODUCT_CALENDER" ToRole="PRODUCT_CALENDERHOUR" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Self.FK_TBL_PRODUCTRESERVATION_TBL_PRODUCTCALENDER" FromRole="PRODUCT_CALENDER" ToRole="PRODUCT_RESERVATION" />
+          <Property Name="Tourdays" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PRODUCT_CALENDERHOUR">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductCalenderId" Type="Int32" />
+          <Property Name="MaxNumber" Type="Int32" />
+          <Property Name="TotalBooks" Type="Int32" />
+          <Property Name="Lock" Type="Boolean" />
+          <NavigationProperty Name="PRODUCT_CALENDER" Relationship="Self.FK_PRODUCT_CALENDERHOUR_PRODUCTCALENDER" FromRole="PRODUCT_CALENDERHOUR" ToRole="PRODUCT_CALENDER" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Self.FK_PRODUCT_RESERVATION_PRODUCT_CALENDERHOUR" FromRole="PRODUCT_CALENDERHOUR" ToRole="PRODUCT_RESERVATION" />
+          <Property Name="Times" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PRODUCT_RESERVATION">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductCalenderId" Type="Int32" />
+          <Property Name="AgentId" Type="Int32" />
+          <Property Name="PaymentTypeId" Type="Int32" />
+          <Property Name="AgencyId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PaxId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AGENCY" Relationship="Self.FK_PRODUCT_RESERVATION_AGENCY" FromRole="PRODUCT_RESERVATION" ToRole="AGENCY" />
+          <NavigationProperty Name="AGENT" Relationship="Self.FK_PRODUCT_RESERVATION_AGENT" FromRole="PRODUCT_RESERVATION" ToRole="AGENT" />
+          <NavigationProperty Name="PAX" Relationship="Self.FK_PRODUCT_RESERVATION_PAX" FromRole="PRODUCT_RESERVATION" ToRole="PAX" />
+          <NavigationProperty Name="PAYMENT_TYPE" Relationship="Self.FK_PRODUCT_RESERVATION_PAYMENT_TYPE" FromRole="PRODUCT_RESERVATION" ToRole="PAYMENT_TYPE" />
+          <NavigationProperty Name="PRODUCT_CALENDER" Relationship="Self.FK_TBL_PRODUCTRESERVATION_TBL_PRODUCTCALENDER" FromRole="PRODUCT_RESERVATION" ToRole="PRODUCT_CALENDER" />
+          <NavigationProperty Name="PRODUCT_CALENDERHOUR" Relationship="Self.FK_PRODUCT_RESERVATION_PRODUCT_CALENDERHOUR" FromRole="PRODUCT_RESERVATION" ToRole="PRODUCT_CALENDERHOUR" />
+          <Property Name="PaymentStatusId" Type="Int32" />
+          <NavigationProperty Name="PAYMENT_STATUS" Relationship="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_PAYMENTSTATUS" FromRole="PRODUCT_RESERVATION" ToRole="PAYMENT_STATUS" />
+          <Property Name="ProductReservationTypeId" Type="Int32" />
+          <Property Name="BloqueoDate" Type="DateTime" Precision="3" />
+          <Property Name="TourDaysId" Type="Int32" />
+          <NavigationProperty Name="PRODUCT_RESERVATION_TYPE" Relationship="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION" FromRole="PRODUCT_RESERVATION" ToRole="PRODUCT_RESERVATION_TYPE" />
+          <NavigationProperty Name="TOUR_DAYS" Relationship="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_TourDaysId" FromRole="PRODUCT_RESERVATION" ToRole="TOUR_DAYS" />
+          <Property Name="DivePrice" Type="Int32" />
+          <Property Name="DiveId" Type="Int32" />
+          <NavigationProperty Name="DIVE" Relationship="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_DiveId" FromRole="PRODUCT_RESERVATION" ToRole="DIVE" />
+          <Property Name="PickUp" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DropOff" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Restrictions" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Continua" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PROVIDER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GASTOS_TYPE_PROVIDER" Relationship="Self.FK_GASTOS_TYPE_PROVIDER_PROVIDER" FromRole="PROVIDER" ToRole="GASTOS_TYPE_PROVIDER" />
+        </EntityType>
+        <Association Name="FK_Adresse_Country">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="0..1" />
+          <End Role="ADRESS" Type="Self.ADRESS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ADRESS">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agency_Adresse">
+          <End Role="ADRESS" Type="Self.ADRESS" Multiplicity="0..1" />
+          <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADRESS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AGENCY">
+              <PropertyRef Name="AdresseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_Adresse">
+          <End Role="ADRESS" Type="Self.ADRESS" Multiplicity="0..1" />
+          <End Role="PARTNER" Type="Self.PARTNER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADRESS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PARTNER">
+              <PropertyRef Name="AdresseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vendedor_Adresse">
+          <End Role="ADRESS" Type="Self.ADRESS" Multiplicity="0..1" />
+          <End Role="AGENT" Type="Self.AGENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADRESS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AGENT">
+              <PropertyRef Name="AdresseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_AGENCY">
+          <End Role="AGENCY" Type="Self.AGENCY" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGENCY">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="AgencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_AGENT">
+          <End Role="AGENT" Type="Self.AGENT" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGENT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORYPRODUCT_CATEGORYPRODUCT">
+          <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="1" />
+          <End Role="CATEGORY_PRODUCT" Type="Self.CATEGORY_PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CATEGORY_PRODUCT">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GASTOS_TYPE_PROVIDER_CATEGORY_PRODUCT">
+          <End Role="CATEGORY_PRODUCT" Type="Self.CATEGORY_PRODUCT" Multiplicity="1" />
+          <End Role="GASTOS_TYPE_PROVIDER" Type="Self.GASTOS_TYPE_PROVIDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY_PRODUCT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GASTOS_TYPE_PROVIDER">
+              <PropertyRef Name="CategoryProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTCALENDER_CATEGORYPRODUCT">
+          <End Role="CATEGORY_PRODUCT" Type="Self.CATEGORY_PRODUCT" Multiplicity="0..1" />
+          <End Role="PRODUCT_CALENDER" Type="Self.PRODUCT_CALENDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY_PRODUCT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_CALENDER">
+              <PropertyRef Name="CategoryProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GASTOS_TYPE_PROVIDER_GASTOS_TYPE">
+          <End Role="GASTOS_TYPE" Type="Self.GASTOS_TYPE" Multiplicity="1" />
+          <End Role="GASTOS_TYPE_PROVIDER" Type="Self.GASTOS_TYPE_PROVIDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GASTOS_TYPE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GASTOS_TYPE_PROVIDER">
+              <PropertyRef Name="GastosTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GASTOS_TYPE_PROVIDER_PROVIDER">
+          <End Role="PROVIDER" Type="Self.PROVIDER" Multiplicity="1" />
+          <End Role="GASTOS_TYPE_PROVIDER" Type="Self.GASTOS_TYPE_PROVIDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVIDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GASTOS_TYPE_PROVIDER">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_PAX">
+          <End Role="PAX" Type="Self.PAX" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAX">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="PaxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_PAYMENT_TYPE">
+          <End Role="PAYMENT_TYPE" Type="Self.PAYMENT_TYPE" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYMENT_TYPE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="PaymentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_CALENDERHOUR_PRODUCTCALENDER">
+          <End Role="PRODUCT_CALENDER" Type="Self.PRODUCT_CALENDER" Multiplicity="0..1" />
+          <End Role="PRODUCT_CALENDERHOUR" Type="Self.PRODUCT_CALENDERHOUR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT_CALENDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_CALENDERHOUR">
+              <PropertyRef Name="ProductCalenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PRODUCTRESERVATION_TBL_PRODUCTCALENDER">
+          <End Role="PRODUCT_CALENDER" Type="Self.PRODUCT_CALENDER" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT_CALENDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="ProductCalenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_PRODUCT_CALENDERHOUR">
+          <End Role="PRODUCT_CALENDERHOUR" Type="Self.PRODUCT_CALENDERHOUR" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT_CALENDERHOUR">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="ProductCalenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Galadventure_TrabajosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACCT_CAJACHICA" EntityType="Self.ACCT_CAJACHICA" />
+          <EntitySet Name="ACCT_CAJACHICA_OWNER" EntityType="Self.ACCT_CAJACHICA_OWNER" />
+          <EntitySet Name="ACCT_CAJACHICA_RESERVATION" EntityType="Self.ACCT_CAJACHICA_RESERVATION" />
+          <EntitySet Name="ACCT_PAYMENT" EntityType="Self.ACCT_PAYMENT" />
+          <EntitySet Name="ACCT_PAYMENT_STATUS" EntityType="Self.ACCT_PAYMENT_STATUS" />
+          <EntitySet Name="ADRESS" EntityType="Self.ADRESS" />
+          <EntitySet Name="AGENCY" EntityType="Self.AGENCY" />
+          <EntitySet Name="AGENT" EntityType="Self.AGENT" />
+          <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" />
+          <EntitySet Name="CATEGORY_PRODUCT" EntityType="Self.CATEGORY_PRODUCT" />
+          <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" />
+          <EntitySet Name="GASTOS_OPERATION" EntityType="Self.GASTOS_OPERATION" />
+          <EntitySet Name="GASTOS_TYPE" EntityType="Self.GASTOS_TYPE" />
+          <EntitySet Name="GASTOS_TYPE_PROVIDER" EntityType="Self.GASTOS_TYPE_PROVIDER" />
+          <EntitySet Name="HR_Roles_Anticipos" EntityType="Self.HR_Roles_Anticipos" />
+          <EntitySet Name="HR_Roles_DateRole" EntityType="Self.HR_Roles_DateRole" />
+          <EntitySet Name="HR_Roles_TypoPago" EntityType="Self.HR_Roles_TypoPago" />
+          <EntitySet Name="HR_Roles_Worker" EntityType="Self.HR_Roles_Worker" />
+          <EntitySet Name="HR_Worker_Detail" EntityType="Self.HR_Worker_Detail" />
+          <EntitySet Name="PARTNER" EntityType="Self.PARTNER" />
+          <EntitySet Name="PAX" EntityType="Self.PAX" />
+          <EntitySet Name="PAYMENT_TYPE" EntityType="Self.PAYMENT_TYPE" />
+          <EntitySet Name="PRODUCT_CALENDER" EntityType="Self.PRODUCT_CALENDER" />
+          <EntitySet Name="PRODUCT_CALENDERHOUR" EntityType="Self.PRODUCT_CALENDERHOUR" />
+          <EntitySet Name="PRODUCT_RESERVATION" EntityType="Self.PRODUCT_RESERVATION" />
+          <EntitySet Name="PROVIDER" EntityType="Self.PROVIDER" />
+          <AssociationSet Name="FK_Adresse_Country" Association="Self.FK_Adresse_Country">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="ADRESS" EntitySet="ADRESS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agency_Adresse" Association="Self.FK_Agency_Adresse">
+            <End Role="ADRESS" EntitySet="ADRESS" />
+            <End Role="AGENCY" EntitySet="AGENCY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_Adresse" Association="Self.FK_Partner_Adresse">
+            <End Role="ADRESS" EntitySet="ADRESS" />
+            <End Role="PARTNER" EntitySet="PARTNER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vendedor_Adresse" Association="Self.FK_Vendedor_Adresse">
+            <End Role="ADRESS" EntitySet="ADRESS" />
+            <End Role="AGENT" EntitySet="AGENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_AGENCY" Association="Self.FK_PRODUCT_RESERVATION_AGENCY">
+            <End Role="AGENCY" EntitySet="AGENCY" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_AGENT" Association="Self.FK_PRODUCT_RESERVATION_AGENT">
+            <End Role="AGENT" EntitySet="AGENT" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORYPRODUCT_CATEGORYPRODUCT" Association="Self.FK_CATEGORYPRODUCT_CATEGORYPRODUCT">
+            <End Role="CATEGORY" EntitySet="CATEGORY" />
+            <End Role="CATEGORY_PRODUCT" EntitySet="CATEGORY_PRODUCT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GASTOS_TYPE_PROVIDER_CATEGORY_PRODUCT" Association="Self.FK_GASTOS_TYPE_PROVIDER_CATEGORY_PRODUCT">
+            <End Role="CATEGORY_PRODUCT" EntitySet="CATEGORY_PRODUCT" />
+            <End Role="GASTOS_TYPE_PROVIDER" EntitySet="GASTOS_TYPE_PROVIDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTCALENDER_CATEGORYPRODUCT" Association="Self.FK_PRODUCTCALENDER_CATEGORYPRODUCT">
+            <End Role="CATEGORY_PRODUCT" EntitySet="CATEGORY_PRODUCT" />
+            <End Role="PRODUCT_CALENDER" EntitySet="PRODUCT_CALENDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GASTOS_TYPE_PROVIDER_GASTOS_TYPE" Association="Self.FK_GASTOS_TYPE_PROVIDER_GASTOS_TYPE">
+            <End Role="GASTOS_TYPE" EntitySet="GASTOS_TYPE" />
+            <End Role="GASTOS_TYPE_PROVIDER" EntitySet="GASTOS_TYPE_PROVIDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GASTOS_TYPE_PROVIDER_PROVIDER" Association="Self.FK_GASTOS_TYPE_PROVIDER_PROVIDER">
+            <End Role="PROVIDER" EntitySet="PROVIDER" />
+            <End Role="GASTOS_TYPE_PROVIDER" EntitySet="GASTOS_TYPE_PROVIDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_PAX" Association="Self.FK_PRODUCT_RESERVATION_PAX">
+            <End Role="PAX" EntitySet="PAX" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_PAYMENT_TYPE" Association="Self.FK_PRODUCT_RESERVATION_PAYMENT_TYPE">
+            <End Role="PAYMENT_TYPE" EntitySet="PAYMENT_TYPE" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_CALENDERHOUR_PRODUCTCALENDER" Association="Self.FK_PRODUCT_CALENDERHOUR_PRODUCTCALENDER">
+            <End Role="PRODUCT_CALENDER" EntitySet="PRODUCT_CALENDER" />
+            <End Role="PRODUCT_CALENDERHOUR" EntitySet="PRODUCT_CALENDERHOUR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PRODUCTRESERVATION_TBL_PRODUCTCALENDER" Association="Self.FK_TBL_PRODUCTRESERVATION_TBL_PRODUCTCALENDER">
+            <End Role="PRODUCT_CALENDER" EntitySet="PRODUCT_CALENDER" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_PRODUCT_CALENDERHOUR" Association="Self.FK_PRODUCT_RESERVATION_PRODUCT_CALENDERHOUR">
+            <End Role="PRODUCT_CALENDERHOUR" EntitySet="PRODUCT_CALENDERHOUR" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <FunctionImport Name="SP_Delete_PaxDefault">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Insert_CountReservation">
+          <Parameter Name="ProductCalenderId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Insert_PaxDefault" ReturnType="Collection(Galadventure_TrabajosModel.SP_Insert_PaxDefault_Result)">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Mover_AllPaxs" ReturnType="Collection(Int32)">
+            <Parameter Name="ProductCalenderId" Mode="In" Type="Int32" />
+            <Parameter Name="TargetcategoryProductId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SetCharter" ReturnType="Collection(Int32)">
+          <Parameter Name="ProductCalenderId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SetNoSalir" ReturnType="Collection(Int32)">
+          <Parameter Name="ProductCalenderId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SetSalir" ReturnType="Collection(Int32)">
+          <Parameter Name="ProductCalenderId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="PAYMENT_STATUS" EntityType="Galadventure_TrabajosModel.PAYMENT_STATUS" />
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_PAYMENTSTATUS" Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_PAYMENTSTATUS">
+            <End Role="PAYMENT_STATUS" EntitySet="PAYMENT_STATUS" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <FunctionImport Name="SP_GET_PAXLIST" ReturnType="Collection(Galadventure_TrabajosModel.SP_GET_PAXLIST_Result)">
+          <Parameter Name="pcaId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_SetGastos" ReturnType="Collection(Int32)">
+            <Parameter Name="ProductCalenderId" Mode="In" Type="Int32" />
+            <Parameter Name="CategoryProductId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="FK_GASTOSOPERATION_TYPE_PROVIDER" Association="Galadventure_TrabajosModel.FK_GASTOSOPERATION_TYPE_PROVIDER">
+            <End Role="GASTOS_TYPE_PROVIDER" EntitySet="GASTOS_TYPE_PROVIDER" />
+            <End Role="GASTOS_OPERATION" EntitySet="GASTOS_OPERATION" />
+          </AssociationSet>
+          <EntitySet Name="PRODUCT_RESERVATION_TYPE" EntityType="Galadventure_TrabajosModel.PRODUCT_RESERVATION_TYPE" />
+          <EntitySet Name="TOUR_DAYS" EntityType="Galadventure_TrabajosModel.TOUR_DAYS" />
+          <AssociationSet Name="FK_PRODUCT_RESERVATION" Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION">
+            <End Role="PRODUCT_RESERVATION_TYPE" EntitySet="PRODUCT_RESERVATION_TYPE" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_TourDaysId" Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_TourDaysId">
+            <End Role="TOUR_DAYS" EntitySet="TOUR_DAYS" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <EntitySet Name="DIVE" EntityType="Galadventure_TrabajosModel.DIVE" />
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_DiveId" Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_DiveId">
+            <End Role="DIVE" EntitySet="DIVE" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="SP_Insert_PaxDefault_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="First_Name" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="Birthdate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Passport" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="CountryId" Nullable="true" />
+          <Property Type="Int32" Name="AdressId" Nullable="true" />
+          <Property Type="Int32" Name="Gender" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="PaxCategory" Nullable="true" />
+          <Property Type="DateTime" Name="Created" Nullable="true" Precision="23" />
+        </ComplexType>
+        <EntityType Name="PAYMENT_STATUS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_PAYMENTSTATUS" FromRole="PAYMENT_STATUS" ToRole="PRODUCT_RESERVATION" />
+        </EntityType>
+        <Association Name="FK_PRODUCT_RESERVATION_PAYMENTSTATUS">
+          <End Type="Galadventure_TrabajosModel.PAYMENT_STATUS" Role="PAYMENT_STATUS" Multiplicity="0..1" />
+          <End Type="Galadventure_TrabajosModel.PRODUCT_RESERVATION" Role="PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYMENT_STATUS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="PaymentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_GET_PAXLIST_Result">
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="First_Name" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Passport" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Agencia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Agente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PAGO" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <Association Name="FK_GASTOSOPERATION_TYPE_PROVIDER">
+          <End Type="Galadventure_TrabajosModel.GASTOS_TYPE_PROVIDER" Role="GASTOS_TYPE_PROVIDER" Multiplicity="0..1" />
+          <End Type="Galadventure_TrabajosModel.GASTOS_OPERATION" Role="GASTOS_OPERATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GASTOS_TYPE_PROVIDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GASTOS_OPERATION">
+              <PropertyRef Name="GastosTypeProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PRODUCT_RESERVATION_TYPE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION" FromRole="PRODUCT_RESERVATION_TYPE" ToRole="PRODUCT_RESERVATION" />
+        </EntityType>
+        <EntityType Name="TOUR_DAYS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TourDaysId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_TourDaysId" FromRole="TOUR_DAYS" ToRole="PRODUCT_RESERVATION" />
+        </EntityType>
+        <Association Name="FK_PRODUCT_RESERVATION">
+          <End Type="Galadventure_TrabajosModel.PRODUCT_RESERVATION_TYPE" Role="PRODUCT_RESERVATION_TYPE" Multiplicity="0..1" />
+          <End Type="Galadventure_TrabajosModel.PRODUCT_RESERVATION" Role="PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT_RESERVATION_TYPE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="ProductReservationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_TourDaysId">
+          <End Type="Galadventure_TrabajosModel.TOUR_DAYS" Role="TOUR_DAYS" Multiplicity="0..1" />
+          <End Type="Galadventure_TrabajosModel.PRODUCT_RESERVATION" Role="PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TOUR_DAYS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="TourDaysId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DIVE">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_DiveId" FromRole="DIVE" ToRole="PRODUCT_RESERVATION" />
+        </EntityType>
+        <Association Name="FK_PRODUCT_RESERVATION_DiveId">
+          <End Type="Galadventure_TrabajosModel.DIVE" Role="DIVE" Multiplicity="0..1" />
+          <End Type="Galadventure_TrabajosModel.PRODUCT_RESERVATION" Role="PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIVE">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="DiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Galadventure_TrabajosModelStoreContainer" CdmEntityContainer="Galadventure_TrabajosEntities">
+          <EntitySetMapping Name="ACCT_CAJACHICA">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.ACCT_CAJACHICA">
+              <MappingFragment StoreEntitySet="ACCT_CAJACHICA">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PerDate" ColumnName="PerDate" />
+                <ScalarProperty Name="NrFactura" ColumnName="NrFactura" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="RetencionProcent" ColumnName="RetencionProcent" />
+                <ScalarProperty Name="TotalRetencion" ColumnName="TotalRetencion" />
+                <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACCT_CAJACHICA_OWNER">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.ACCT_CAJACHICA_OWNER">
+              <MappingFragment StoreEntitySet="ACCT_CAJACHICA_OWNER">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACCT_CAJACHICA_RESERVATION">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.ACCT_CAJACHICA_RESERVATION">
+              <MappingFragment StoreEntitySet="ACCT_CAJACHICA_RESERVATION">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="TypePaymentId" ColumnName="TypePaymentId" />
+                <ScalarProperty Name="NrPayment" ColumnName="NrPayment" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="AmountLastMonth" ColumnName="AmountLastMonth" />
+                <ScalarProperty Name="CloseDate" ColumnName="CloseDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ActualAmount" ColumnName="ActualAmount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACCT_PAYMENT">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.ACCT_PAYMENT">
+              <MappingFragment StoreEntitySet="ACCT_PAYMENT">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="AccountNumberId" ColumnName="AccountNumberId" />
+                <ScalarProperty Name="PaidDate" ColumnName="PaidDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ParcialAmount" ColumnName="ParcialAmount" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+                <ScalarProperty Name="PaymentStatusId" ColumnName="PaymentStatusId" />
+                <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ACCT_PAYMENT_STATUS">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.ACCT_PAYMENT_STATUS">
+              <MappingFragment StoreEntitySet="ACCT_PAYMENT_STATUS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LangId" ColumnName="LangId" />
+                <ScalarProperty Name="PaymentStatusId" ColumnName="PaymentStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ADRESS">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.ADRESS">
+              <MappingFragment StoreEntitySet="ADRESS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Cel" ColumnName="Cel" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AGENCY">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.AGENCY">
+              <MappingFragment StoreEntitySet="AGENCY">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AdresseId" ColumnName="AdresseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AGENT">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.AGENT">
+              <MappingFragment StoreEntitySet="AGENT">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="AdresseID" ColumnName="AdresseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORY">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.CATEGORY">
+              <MappingFragment StoreEntitySet="CATEGORY">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORY_PRODUCT">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.CATEGORY_PRODUCT">
+              <MappingFragment StoreEntitySet="CATEGORY_PRODUCT">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COUNTRY">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.COUNTRY">
+              <MappingFragment StoreEntitySet="COUNTRY">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="continent" ColumnName="continent" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="capital" ColumnName="capital" />
+                <ScalarProperty Name="iso2" ColumnName="iso2" />
+                <ScalarProperty Name="iso3" ColumnName="iso3" />
+                <ScalarProperty Name="ioc" ColumnName="ioc" />
+                <ScalarProperty Name="tld" ColumnName="tld" />
+                <ScalarProperty Name="currency" ColumnName="currency" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="Lang_Id" ColumnName="Lang_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GASTOS_OPERATION">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.GASTOS_OPERATION">
+              <MappingFragment StoreEntitySet="GASTOS_OPERATION">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductCalenderId" ColumnName="ProductCalenderId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="GastosTypeProviderId" ColumnName="GastosTypeProviderId" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="BillingPath" ColumnName="BillingPath" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GASTOS_TYPE">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.GASTOS_TYPE">
+              <MappingFragment StoreEntitySet="GASTOS_TYPE">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GASTOS_TYPE_PROVIDER">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.GASTOS_TYPE_PROVIDER">
+              <MappingFragment StoreEntitySet="GASTOS_TYPE_PROVIDER">
+                <ScalarProperty Name="Populate" ColumnName="Populate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GastosTypeId" ColumnName="GastosTypeId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="CategoryProductId" ColumnName="CategoryProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_Roles_Anticipos">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.HR_Roles_Anticipos">
+              <MappingFragment StoreEntitySet="HR_Roles_Anticipos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RollDateId" ColumnName="RollDateId" />
+                <ScalarProperty Name="PayTypeId" ColumnName="PayTypeId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="PayTypeNumber" ColumnName="PayTypeNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_Roles_DateRole">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.HR_Roles_DateRole">
+              <MappingFragment StoreEntitySet="HR_Roles_DateRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateMonth" ColumnName="DateMonth" />
+                <ScalarProperty Name="WorkerId" ColumnName="WorkerId" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Autorizado_Por" ColumnName="Autorizado_Por" />
+                <ScalarProperty Name="CerradoPor" ColumnName="CerradoPor" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_Roles_TypoPago">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.HR_Roles_TypoPago">
+              <MappingFragment StoreEntitySet="HR_Roles_TypoPago">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_Roles_Worker">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.HR_Roles_Worker">
+              <MappingFragment StoreEntitySet="HR_Roles_Worker">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Sueldo_SBU" ColumnName="Sueldo_SBU" />
+                <ScalarProperty Name="Fondos_de_reserva" ColumnName="Fondos_de_reserva" />
+                <ScalarProperty Name="Bonos" ColumnName="Bonos" />
+                <ScalarProperty Name="Excedente" ColumnName="Excedente" />
+                <ScalarProperty Name="Horas_Extras" ColumnName="Horas_Extras" />
+                <ScalarProperty Name="Otros_Ingresos" ColumnName="Otros_Ingresos" />
+                <ScalarProperty Name="Vacaciones" ColumnName="Vacaciones" />
+                <ScalarProperty Name="Decimo_tercero" ColumnName="Decimo_tercero" />
+                <ScalarProperty Name="Decimo_Cuarto" ColumnName="Decimo_Cuarto" />
+                <ScalarProperty Name="IESS_empleador" ColumnName="IESS_empleador" />
+                <ScalarProperty Name="Total_ingresos" ColumnName="Total_ingresos" />
+                <ScalarProperty Name="IESS_trabajador" ColumnName="IESS_trabajador" />
+                <ScalarProperty Name="Impuesto_a_la_Renta" ColumnName="Impuesto_a_la_Renta" />
+                <ScalarProperty Name="IESS_Prestamos" ColumnName="IESS_Prestamos" />
+                <ScalarProperty Name="Anticipos" ColumnName="Anticipos" />
+                <ScalarProperty Name="Prestamos_Internos" ColumnName="Prestamos_Internos" />
+                <ScalarProperty Name="Total_descuentos" ColumnName="Total_descuentos" />
+                <ScalarProperty Name="Total_a_pagar" ColumnName="Total_a_pagar" />
+                <ScalarProperty Name="IsAdministracion" ColumnName="IsAdministracion" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HR_Worker_Detail">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.HR_Worker_Detail">
+              <MappingFragment StoreEntitySet="HR_Worker_Detail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateMonthId" ColumnName="DateMonthId" />
+                <ScalarProperty Name="Sueldo_SBU" ColumnName="Sueldo_SBU" />
+                <ScalarProperty Name="Fondos_de_reserva" ColumnName="Fondos_de_reserva" />
+                <ScalarProperty Name="Bonos" ColumnName="Bonos" />
+                <ScalarProperty Name="Excedente" ColumnName="Excedente" />
+                <ScalarProperty Name="Horas_Extras" ColumnName="Horas_Extras" />
+                <ScalarProperty Name="Otros_Ingresos" ColumnName="Otros_Ingresos" />
+                <ScalarProperty Name="Vacaciones" ColumnName="Vacaciones" />
+                <ScalarProperty Name="Decimo_tercero" ColumnName="Decimo_tercero" />
+                <ScalarProperty Name="Decimo_Cuarto" ColumnName="Decimo_Cuarto" />
+                <ScalarProperty Name="IESS_empleador" ColumnName="IESS_empleador" />
+                <ScalarProperty Name="Total_ingresos" ColumnName="Total_ingresos" />
+                <ScalarProperty Name="IESS_trabajador" ColumnName="IESS_trabajador" />
+                <ScalarProperty Name="Impuesto_a_la_Renta" ColumnName="Impuesto_a_la_Renta" />
+                <ScalarProperty Name="IESS_Prestamos" ColumnName="IESS_Prestamos" />
+                <ScalarProperty Name="Anticipos" ColumnName="Anticipos" />
+                <ScalarProperty Name="Prestamos_Internos" ColumnName="Prestamos_Internos" />
+                <ScalarProperty Name="Total_descuentos" ColumnName="Total_descuentos" />
+                <ScalarProperty Name="Total_a_pagar" ColumnName="Total_a_pagar" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+                <ScalarProperty Name="ArchiveAttachment" ColumnName="ArchiveAttachment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARTNER">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.PARTNER">
+              <MappingFragment StoreEntitySet="PARTNER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TourID" ColumnName="TourID" />
+                <ScalarProperty Name="AdresseID" ColumnName="AdresseID" />
+                <ScalarProperty Name="PriceID" ColumnName="PriceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAX">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.PAX">
+              <MappingFragment StoreEntitySet="PAX">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="AdressId" ColumnName="AdressId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PaxCategory" ColumnName="PaxCategory" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAYMENT_TYPE">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.PAYMENT_TYPE">
+              <MappingFragment StoreEntitySet="PAYMENT_TYPE">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCT_CALENDER">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.PRODUCT_CALENDER">
+              <MappingFragment StoreEntitySet="PRODUCT_CALENDER">
+                <ScalarProperty Name="Tourdays" ColumnName="Tourdays" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryProductId" ColumnName="CategoryProductId" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="MaxNumber" ColumnName="MaxNumber" />
+                <ScalarProperty Name="TotalBooks" ColumnName="TotalBooks" />
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCT_CALENDERHOUR">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.PRODUCT_CALENDERHOUR">
+              <MappingFragment StoreEntitySet="PRODUCT_CALENDERHOUR">
+                <ScalarProperty Name="Times" ColumnName="Times" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductCalenderId" ColumnName="ProductCalenderId" />
+                <ScalarProperty Name="MaxNumber" ColumnName="MaxNumber" />
+                <ScalarProperty Name="TotalBooks" ColumnName="TotalBooks" />
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCT_RESERVATION">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.PRODUCT_RESERVATION">
+              <MappingFragment StoreEntitySet="PRODUCT_RESERVATION">
+                <ScalarProperty Name="Continua" ColumnName="Continua" />
+                <ScalarProperty Name="Restrictions" ColumnName="Restrictions" />
+                <ScalarProperty Name="DropOff" ColumnName="DropOff" />
+                <ScalarProperty Name="PickUp" ColumnName="PickUp" />
+                <ScalarProperty Name="DiveId" ColumnName="DiveId" />
+                <ScalarProperty Name="DivePrice" ColumnName="DivePrice" />
+                <ScalarProperty Name="TourDaysId" ColumnName="TourDaysId" />
+                <ScalarProperty Name="BloqueoDate" ColumnName="BloqueoDate" />
+                <ScalarProperty Name="ProductReservationTypeId" ColumnName="ProductReservationTypeId" />
+                <ScalarProperty Name="PaymentStatusId" ColumnName="PaymentStatusId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductCalenderId" ColumnName="ProductCalenderId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="AgencyId" ColumnName="AgencyId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PaxId" ColumnName="PaxId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVIDER">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.PROVIDER">
+              <MappingFragment StoreEntitySet="PROVIDER">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Delete_PaxDefault" FunctionName="Galadventure_TrabajosModel.Store.SP_Delete_PaxDefault" />
+          <FunctionImportMapping FunctionImportName="SP_Insert_CountReservation" FunctionName="Galadventure_TrabajosModel.Store.SP_Insert_CountReservation" />
+          <FunctionImportMapping FunctionImportName="SP_Insert_PaxDefault" FunctionName="Galadventure_TrabajosModel.Store.SP_Insert_PaxDefault">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Galadventure_TrabajosModel.SP_Insert_PaxDefault_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="AdressId" ColumnName="AdressId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PaxCategory" ColumnName="PaxCategory" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Mover_AllPaxs" FunctionName="Galadventure_TrabajosModel.Store.SP_Mover_AllPaxs" />
+          <FunctionImportMapping FunctionImportName="SP_SetCharter" FunctionName="Galadventure_TrabajosModel.Store.SP_SetCharter" />
+          <FunctionImportMapping FunctionImportName="SP_SetNoSalir" FunctionName="Galadventure_TrabajosModel.Store.SP_SetNoSalir" />
+          <FunctionImportMapping FunctionImportName="SP_SetSalir" FunctionName="Galadventure_TrabajosModel.Store.SP_SetSalir" />
+          <EntitySetMapping Name="PAYMENT_STATUS">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.PAYMENT_STATUS">
+              <MappingFragment StoreEntitySet="PAYMENT_STATUS">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GET_PAXLIST" FunctionName="Galadventure_TrabajosModel.Store.SP_GET_PAXLIST">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Galadventure_TrabajosModel.SP_GET_PAXLIST_Result">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="Agencia" ColumnName="Agencia" />
+                <ScalarProperty Name="Agente" ColumnName="Agente" />
+                <ScalarProperty Name="PAGO" ColumnName="PAGO" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SetGastos" FunctionName="Galadventure_TrabajosModel.Store.SP_SetGastos" />
+          <EntitySetMapping Name="PRODUCT_RESERVATION_TYPE">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.PRODUCT_RESERVATION_TYPE">
+              <MappingFragment StoreEntitySet="PRODUCT_RESERVATION_TYPE">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TOUR_DAYS">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.TOUR_DAYS">
+              <MappingFragment StoreEntitySet="TOUR_DAYS">
+                <ScalarProperty Name="TourDaysId" ColumnName="TourDaysId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIVE">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.DIVE">
+              <MappingFragment StoreEntitySet="DIVE">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,98 @@
+﻿@model web.Models.COUNTRY
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>COUNTRY</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.continent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.continent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.capital)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.capital)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iso3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iso3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ioc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ioc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tld)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tld)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.currency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.currency)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lang_Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lang_Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

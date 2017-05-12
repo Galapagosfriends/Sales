@@ -1,0 +1,96 @@
+﻿@model IEnumerable<SalesApp.Models.GASTOS_OPERATION>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3 style="background-color:cornflowerblue; color:white; padding:10px">
+    Gastos:
+    @if (Model.Count() == 0)
+    {
+        @:"";
+          }
+    else
+    {
+        @Model.FirstOrDefault().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.Name;
+        @:  => FECHA: 
+       
+        @Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER.Where(c => c.Id == Model.First().ProductCalenderId).First().Day@:.@Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER.Where(c => c.Id == Model.First().ProductCalenderId).FirstOrDefault().Month.@Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER.Where(c => c.Id == Model.First().ProductCalenderId).First().Year
+    }
+
+</h3>
+
+<p>
+    @Html.ActionLink("Add New", "AddProviderType", "GASTOS_OPERATION", new { ProductCalenderId = Model.First().ProductCalenderId, CategoryProductId = Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.Id }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("")
+        </th>
+        <th>
+            @Html.DisplayName("Proveedor")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayDate)
+        </th>
+        <th>
+            @Html.DisplayName("EgresoNr:")
+        </th>
+      
+        <th>
+            @Html.DisplayName("Pagado")
+        </th>
+     
+   
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr >
+        <td>
+            @if (item.Closed != true)
+            {
+                @:   <p style="background-color:red">   &nbsp; </p>
+           }
+            else
+            {
+                @:   <p style="background-color:lawngreen">   &nbsp; </p>
+           }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GASTOS_TYPE_PROVIDER.PROVIDER.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BillingPath)
+        </td>      
+        <td>
+            @Html.DisplayFor(modelItem => item.Closed)
+        </td>
+       
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id, ProductCalenderId = item.ProductCalenderId, CategoryProductId = item.GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.Id }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

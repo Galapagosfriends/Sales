@@ -1,0 +1,98 @@
+﻿@model SalesApp.Models.PRODUCT_RESERVATION
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PRODUCT_RESERVATION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AGENCY.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AGENCY.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AGENT.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AGENT.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PAX.First_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PAX.First_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PAYMENT_TYPE.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PAYMENT_TYPE.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCT_CALENDER.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCT_CALENDER.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCT_CALENDERHOUR.Times)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCT_CALENDERHOUR.Times)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> 
+            | 
+            @Html.ActionLink("Back to List", "BacktoList", new { ProductCalenderId = Request.Params["ProductCalenderId"] })
+
+        </div>
+    }
+</div>

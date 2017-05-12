@@ -1,0 +1,58 @@
+﻿@model SalesApp.Models.PRODUCT_CALENDERHOUR
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PRODUCT_CALENDERHOUR</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalBooks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalBooks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PRODUCT_CALENDER.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRODUCT_CALENDER.Id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

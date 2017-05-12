@@ -1,0 +1,82 @@
+﻿@model SalesApp.Models.PRODUCT_CALENDER
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PRODUCT_CALENDER</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Day)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Day)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalBooks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalBooks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Month)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Month)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CATEGORY_PRODUCT.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CATEGORY_PRODUCT.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
