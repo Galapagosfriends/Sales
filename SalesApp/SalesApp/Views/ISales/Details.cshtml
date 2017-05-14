@@ -1,0 +1,98 @@
+﻿@model SalesApp.Models.Entities.I_Sales
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>I_Sales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlightIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FlightOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FlightOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dates)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dates)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioNett)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioNett)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioNettTotalPax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioNettTotalPax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.I_Agent.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.I_Agent.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.I_Itinerary.MeetingPoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.I_Itinerary.MeetingPoint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.I_SalesGroup.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.I_SalesGroup.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PAX.First_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PAX.First_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

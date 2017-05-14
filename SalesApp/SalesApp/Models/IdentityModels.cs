@@ -11,6 +11,7 @@ namespace SalesApp.Models
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
+           
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
@@ -36,7 +37,5 @@ namespace SalesApp.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<SalesApp.Models.GASTOS_OPERATION> GASTOS_OPERATION { get; set; }
     }
 }

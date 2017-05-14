@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers
 {

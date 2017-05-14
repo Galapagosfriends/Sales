@@ -6,111 +6,112 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using web.Models;
+using SalesApp.Models.Entities;
 
-namespace web.Controllers.Admin
+namespace SalesApp.Controllers.IPax
 {
-    [Authorize]
-    public class TBL_HORARIOController : Controller
+    [Authorize(Roles = "Admin,IPax")]
+    public class ICategoryController : Controller
     {
         private Galadventure_TrabajosEntities db = new Galadventure_TrabajosEntities();
-        // GET: TBL_HORARIO
+
+        // GET: ICategory
         public ActionResult Index()
         {
-            return View(db.TBL_HORARIO.ToList());
+            return View(db.I_Category.ToList().OrderByDescending(o => o.Name));
         }
 
-        // GET: TBL_HORARIO/Details/5
+        // GET: ICategory/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TBL_HORARIO tBL_HORARIO = db.TBL_HORARIO.Find(id);
-            if (tBL_HORARIO == null)
+            I_Category i_Category = db.I_Category.Find(id);
+            if (i_Category == null)
             {
                 return HttpNotFound();
             }
-            return View(tBL_HORARIO);
+            return View(i_Category);
         }
 
-        // GET: TBL_HORARIO/Create
+        // GET: ICategory/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TBL_HORARIO/Create
+        // POST: ICategory/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Username,DAY,Month,MorFrom,MorTo,AftFrom,AftTo,Inserted,Updated,UpdatedUser,HouTotal,HouMonthTotal")] TBL_HORARIO tBL_HORARIO)
+        public ActionResult Create([Bind(Include = "Id,Name")] I_Category i_Category)
         {
             if (ModelState.IsValid)
             {
-                db.TBL_HORARIO.Add(tBL_HORARIO);
+                db.I_Category.Add(i_Category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tBL_HORARIO);
+            return View(i_Category);
         }
 
-        // GET: TBL_HORARIO/Edit/5
+        // GET: ICategory/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TBL_HORARIO tBL_HORARIO = db.TBL_HORARIO.Find(id);
-            if (tBL_HORARIO == null)
+            I_Category i_Category = db.I_Category.Find(id);
+            if (i_Category == null)
             {
                 return HttpNotFound();
             }
-            return View(tBL_HORARIO);
+            return View(i_Category);
         }
 
-        // POST: TBL_HORARIO/Edit/5
+        // POST: ICategory/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Username,DAY,Month,MorFrom,MorTo,AftFrom,AftTo,Inserted,Updated,UpdatedUser,HouTotal,HouMonthTotal")] TBL_HORARIO tBL_HORARIO)
+        public ActionResult Edit([Bind(Include = "Id,Name")] I_Category i_Category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tBL_HORARIO).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(i_Category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tBL_HORARIO);
+            return View(i_Category);
         }
 
-        // GET: TBL_HORARIO/Delete/5
+        // GET: ICategory/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TBL_HORARIO tBL_HORARIO = db.TBL_HORARIO.Find(id);
-            if (tBL_HORARIO == null)
+            I_Category i_Category = db.I_Category.Find(id);
+            if (i_Category == null)
             {
                 return HttpNotFound();
             }
-            return View(tBL_HORARIO);
+            return View(i_Category);
         }
 
-        // POST: TBL_HORARIO/Delete/5
+        // POST: ICategory/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TBL_HORARIO tBL_HORARIO = db.TBL_HORARIO.Find(id);
-            db.TBL_HORARIO.Remove(tBL_HORARIO);
+            I_Category i_Category = db.I_Category.Find(id);
+            db.I_Category.Remove(i_Category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

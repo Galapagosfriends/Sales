@@ -218,6 +218,19 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Models\ModelDB.Context.tt">
+      <DependentUpon>ModelDB.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelDB.edmx.diagram">
+      <DependentUpon>ModelDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\ModelDB.tt">
+      <DependentUpon>ModelDB.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelDB.cs</LastGenOutput>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -271,6 +284,56 @@
     <Content Include="Views\GASTOS_TYPE_PROVIDER\Index.cshtml" />
     <Content Include="Views\GASTOS_OPERATION\NewProviderType.cshtml" />
     <Content Include="Views\Home\Terms.cshtml" />
+    <Content Include="Views\ICategory\Create.cshtml" />
+    <Content Include="Views\ICategory\Delete.cshtml" />
+    <Content Include="Views\ICategory\Details.cshtml" />
+    <Content Include="Views\ICategory\Edit.cshtml" />
+    <Content Include="Views\ICategory\Index.cshtml" />
+    <Content Include="Views\IAgent\Create.cshtml" />
+    <Content Include="Views\IAgent\Delete.cshtml" />
+    <Content Include="Views\IAgent\Details.cshtml" />
+    <Content Include="Views\IAgent\Edit.cshtml" />
+    <Content Include="Views\IAgent\Index.cshtml" />
+    <Content Include="Views\ICategoryPlace\Create.cshtml" />
+    <Content Include="Views\ICategoryPlace\Delete.cshtml" />
+    <Content Include="Views\ICategoryPlace\Details.cshtml" />
+    <Content Include="Views\ICategoryPlace\Edit.cshtml" />
+    <Content Include="Views\ICategoryPlace\Index.cshtml" />
+    <Content Include="Views\IDays\Create.cshtml" />
+    <Content Include="Views\IDays\Delete.cshtml" />
+    <Content Include="Views\IDays\Details.cshtml" />
+    <Content Include="Views\IDays\Edit.cshtml" />
+    <Content Include="Views\IDays\Index.cshtml" />
+    <Content Include="Views\IItinerary\Create.cshtml" />
+    <Content Include="Views\IItinerary\Delete.cshtml" />
+    <Content Include="Views\IItinerary\Details.cshtml" />
+    <Content Include="Views\IItinerary\Edit.cshtml" />
+    <Content Include="Views\IItinerary\Index.cshtml" />
+    <Content Include="Views\IMembersNumber\Create.cshtml" />
+    <Content Include="Views\IMembersNumber\Delete.cshtml" />
+    <Content Include="Views\IMembersNumber\Details.cshtml" />
+    <Content Include="Views\IMembersNumber\Edit.cshtml" />
+    <Content Include="Views\IMembersNumber\Index.cshtml" />
+    <Content Include="Views\IPax\Create.cshtml" />
+    <Content Include="Views\IPax\Delete.cshtml" />
+    <Content Include="Views\IPax\Details.cshtml" />
+    <Content Include="Views\IPax\Edit.cshtml" />
+    <Content Include="Views\IPax\Index.cshtml" />
+    <Content Include="Views\IProveedor\Create.cshtml" />
+    <Content Include="Views\IProveedor\Delete.cshtml" />
+    <Content Include="Views\IProveedor\Details.cshtml" />
+    <Content Include="Views\IProveedor\Edit.cshtml" />
+    <Content Include="Views\IProveedor\Index.cshtml" />
+    <Content Include="Views\ISales\Create.cshtml" />
+    <Content Include="Views\ISales\Delete.cshtml" />
+    <Content Include="Views\ISales\Details.cshtml" />
+    <Content Include="Views\ISales\Edit.cshtml" />
+    <Content Include="Views\ISales\Index.cshtml" />
+    <Content Include="Views\ISalesGroup\Create.cshtml" />
+    <Content Include="Views\ISalesGroup\Delete.cshtml" />
+    <Content Include="Views\ISalesGroup\Details.cshtml" />
+    <Content Include="Views\ISalesGroup\Edit.cshtml" />
+    <Content Include="Views\ISalesGroup\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -280,26 +343,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
-    <EntityDeploy Include="Models\ModelDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelDB.edmx.diagram">
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\sales.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Global.asax" />
-    <Content Include="Models\ModelDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-      <LastGenOutput>ModelDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ModelDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-      <LastGenOutput>ModelDB.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
@@ -426,6 +472,16 @@
     <Compile Include="Controllers\Admin\PRODUCT_RESERVATIONController.cs" />
     <Compile Include="Controllers\Admin\PROVIDERController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IPax\IAgentController.cs" />
+    <Compile Include="Controllers\IPax\ICategoryController.cs" />
+    <Compile Include="Controllers\IPax\IDaysController.cs" />
+    <Compile Include="Controllers\IPax\IItineraryController.cs" />
+    <Compile Include="Controllers\IPax\IMembersNumberController.cs" />
+    <Compile Include="Controllers\IPax\IPaxController.cs" />
+    <Compile Include="Controllers\IPax\IProveedorController.cs" />
+    <Compile Include="Controllers\IPax\ISalesController.cs" />
+    <Compile Include="Controllers\IPax\ICategoryPlaceController.cs" />
+    <Compile Include="Controllers\IPax\ISalesGroupController.cs" />
     <Compile Include="Controllers\LanchaController.cs" />
     <Compile Include="Controllers\BoatController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -480,6 +536,50 @@
     <Compile Include="Models\DIVE.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\BaseDataContext.cs" />
+    <Compile Include="Models\Entities\ACCT_CAJACHICA.cs" />
+    <Compile Include="Models\Entities\ACCT_CAJACHICA_OWNER.cs" />
+    <Compile Include="Models\Entities\ACCT_CAJACHICA_RESERVATION.cs" />
+    <Compile Include="Models\Entities\ACCT_PAYMENT.cs" />
+    <Compile Include="Models\Entities\ACCT_PAYMENT_STATUS.cs" />
+    <Compile Include="Models\Entities\ADRESS.cs" />
+    <Compile Include="Models\Entities\AGENCY.cs" />
+    <Compile Include="Models\Entities\AGENT.cs" />
+    <Compile Include="Models\Entities\CATEGORY.cs" />
+    <Compile Include="Models\Entities\CATEGORY_PRODUCT.cs" />
+    <Compile Include="Models\Entities\COUNTRY.cs" />
+    <Compile Include="Models\Entities\DIVE.cs" />
+    <Compile Include="Models\Entities\GASTOS_OPERATION.cs" />
+    <Compile Include="Models\Entities\GASTOS_TYPE.cs" />
+    <Compile Include="Models\Entities\GASTOS_TYPE_PROVIDER.cs" />
+    <Compile Include="Models\Entities\HR_Roles_Anticipos.cs" />
+    <Compile Include="Models\Entities\HR_Roles_DateRole.cs" />
+    <Compile Include="Models\Entities\HR_Roles_TypoPago.cs" />
+    <Compile Include="Models\Entities\HR_Roles_Worker.cs" />
+    <Compile Include="Models\Entities\HR_Worker_Detail.cs" />
+    <Compile Include="Models\Entities\I_Agent.cs" />
+    <Compile Include="Models\Entities\I_Category.cs" />
+    <Compile Include="Models\Entities\I_CategoryPlace.cs" />
+    <Compile Include="Models\Entities\I_Days.cs" />
+    <Compile Include="Models\Entities\I_Itinerary.cs" />
+    <Compile Include="Models\Entities\I_MembersNumber.cs" />
+    <Compile Include="Models\Entities\I_Pax.cs" />
+    <Compile Include="Models\Entities\I_Proveedor.cs" />
+    <Compile Include="Models\Entities\I_Sales.cs" />
+    <Compile Include="Models\Entities\I_SalesGroup.cs" />
+    <Compile Include="Models\Entities\PARTNER.cs" />
+    <Compile Include="Models\Entities\PAX.cs" />
+    <Compile Include="Models\Entities\PAYMENT_STATUS.cs" />
+    <Compile Include="Models\Entities\PAYMENT_TYPE.cs" />
+    <Compile Include="Models\Entities\PRODUCT_CALENDER.cs" />
+    <Compile Include="Models\Entities\PRODUCT_CALENDERHOUR.cs" />
+    <Compile Include="Models\Entities\PRODUCT_RESERVATION.cs" />
+    <Compile Include="Models\Entities\PRODUCT_RESERVATION_TYPE.cs" />
+    <Compile Include="Models\Entities\PROVIDER.cs" />
+    <Compile Include="Models\Entities\SP_GET_PAXLIST_Result.cs" />
+    <Compile Include="Models\Entities\SP_Insert_PaxDefault_Result.cs" />
+    <Compile Include="Models\Entities\TOUR_DAYS.cs" />
+    <Compile Include="Models\Entities\V_GetPaxList.cs" />
     <Compile Include="Models\FormattedDbEntityValidationException.cs" />
     <Compile Include="Models\GASTOS_OPERATION.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
@@ -506,21 +606,51 @@
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ModelDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModelDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
+    <Compile Include="Models\I_Agent.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelDB.Designer.cs">
-      <AutoGen>True</AutoGen>
+    <Compile Include="Models\I_Category.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\I_CategoryPlace.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\I_Days.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\I_Itinerary.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\I_MembersNumber.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\I_Pax.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\I_Proveedor.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\I_Sales.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\I_SalesGroup.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModelDB.Context.cs">
+      <DependentUpon>ModelDB.Context.tt</DependentUpon>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\ModelDB.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\ModelDB.Designer.cs">
       <DependentUpon>ModelDB.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Models\PARTNER.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
@@ -558,6 +688,9 @@
     <Compile Include="Models\TOUR_DAYS.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\V_GetPaxList.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -568,6 +701,12 @@
     <Folder Include="Models\Shared\" />
     <Folder Include="Views\Adress\" />
     <Folder Include="Views\Country\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\ModelDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

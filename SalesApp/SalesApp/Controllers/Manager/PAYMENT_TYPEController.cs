@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers
 {
@@ -15,7 +15,7 @@ namespace SalesApp.Controllers
         // GET: PAYMENT_TYPE
         public ActionResult Index()
         {
-            return View(db.PAYMENT_TYPE.ToList());
+            return View(db.PAYMENT_TYPE.ToList().OrderByDescending(o => o.Description));
         }
 
         // GET: PAYMENT_TYPE/Details/5

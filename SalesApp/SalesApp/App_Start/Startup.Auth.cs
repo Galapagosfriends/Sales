@@ -2,9 +2,10 @@
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 using Owin;
 using System;
+using SalesApp.Models;
 
 namespace SalesApp
 {

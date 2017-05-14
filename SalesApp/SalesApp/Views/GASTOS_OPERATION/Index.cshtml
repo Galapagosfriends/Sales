@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SalesApp.Models.GASTOS_OPERATION>
+﻿@model IEnumerable<SalesApp.Models.Entities.GASTOS_OPERATION>
 
 
 @{
@@ -13,7 +13,7 @@
           }
     else
     {
-        @Model.FirstOrDefault().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.Name;
+        @Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.Name;
         @:  => FECHA: 
        
         @Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER.Where(c => c.Id == Model.First().ProductCalenderId).First().Day@:.@Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER.Where(c => c.Id == Model.First().ProductCalenderId).FirstOrDefault().Month.@Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER.Where(c => c.Id == Model.First().ProductCalenderId).First().Year

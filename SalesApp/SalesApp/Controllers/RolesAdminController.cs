@@ -1,4 +1,4 @@
-﻿using SalesApp.Models;
+﻿using SalesApp.Models.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using SalesApp.Models;
 
 namespace SalesApp.Controllers
 {
@@ -71,7 +72,7 @@ namespace SalesApp.Controllers
             var users = new List<ApplicationUser>();
 
             // Get the list of Users in this Role
-            foreach (var user in UserManager.Users.ToList())
+            foreach (var user in UserManager.Users.ToList().OrderByDescending(o => o.UserName))
             {
                 if (await UserManager.IsInRoleAsync(user.Id, role.Name))
                 {

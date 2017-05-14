@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers
 {
@@ -18,7 +18,7 @@ namespace SalesApp.Controllers
         //public ActionResult Index()
         //{
         //    var pRODUCT_CALENDER = db.PRODUCT_CALENDER.Include(p => p.CATEGORY_PRODUCT);
-        //    return View(pRODUCT_CALENDER.ToList());
+        //    return View(pRODUCT_CALENDER.ToList().OrderByDescending(o => o.Name));
         //}
 
         public ActionResult Index(int? id, int? month)

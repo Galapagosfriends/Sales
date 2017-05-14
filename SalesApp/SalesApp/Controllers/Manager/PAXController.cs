@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers
 {
@@ -15,7 +15,7 @@ namespace SalesApp.Controllers
         // GET: PAXes
         public ActionResult Index()
         {
-            return View(db.PAX.ToList());
+            return View(db.PAX.ToList().OrderByDescending(o => o.First_Name));
         }
 
         // GET: PAXes/Details/5
@@ -25,7 +25,7 @@ namespace SalesApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PAX pAX = db.PAX.Find(id);
+            Pax pAX = db.PAX.Find(id);
             if (pAX == null)
             {
                 return HttpNotFound();
@@ -44,7 +44,7 @@ namespace SalesApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,First_Name,Last_Name,Birthdate,Passport,CountryId,AdressId,Gender,Email,PaxCategory,Created")] PAX pAX)
+        public ActionResult Create([Bind(Include = "Id,First_Name,Last_Name,Birthdate,Passport,CountryId,AdressId,Gender,Email,PaxCategory,Created")] Pax pAX)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace SalesApp.Controllers
         //    {
         //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //    }
-        //    PAX pAX = db.PAX.Find(id);
+        //    Pax pAX = db.Pax.Find(id);
         //    if (pAX == null)
         //    {
         //        return HttpNotFound();
@@ -80,7 +80,7 @@ namespace SalesApp.Controllers
             PRODUCT_RESERVATION pRODUCT_RESERVATION = db.PRODUCT_RESERVATION.Find(id);
             ViewBag.ProductCalenderId = id;
             ViewBag.ProductCalenderId = resvId;
-            PAX pAX = db.PAX.Include(prp => prp.PRODUCT_RESERVATION).Where(p=> p.Id == id).SingleOrDefault();
+            Pax pAX = db.PAX.Include(prp => prp.PRODUCT_RESERVATION).Where(p=> p.Id == id).SingleOrDefault();
             
             if (pAX == null)
             {
@@ -99,7 +99,7 @@ namespace SalesApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,First_Name,Last_Name,Birthdate,Passport,CountryId,AdressId,Gender,Email,PaxCategory,Created")] PAX pAX)
+        public ActionResult Edit([Bind(Include = "Id,First_Name,Last_Name,Birthdate,Passport,CountryId,AdressId,Gender,Email,PaxCategory,Created")] Pax pAX)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +122,7 @@ namespace SalesApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PAX pAX = db.PAX.Find(id);
+            Pax pAX = db.PAX.Find(id);
             if (pAX == null)
             {
                 return HttpNotFound();
@@ -136,7 +136,7 @@ namespace SalesApp.Controllers
          [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
-            PAX pAX = db.PAX.Find(id);
+            Pax pAX = db.PAX.Find(id);
             db.PAX.Remove(pAX);
             db.SaveChanges();
             return RedirectToAction("Index");

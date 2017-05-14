@@ -179,6 +179,7 @@ textarea {
 optgroup {
   font-weight: bold;
 }
+
 table {
   border-spacing: 0;
   border-collapse: collapse;
@@ -2263,7 +2264,8 @@ th {
 .table {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  font-size: 12px;
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,

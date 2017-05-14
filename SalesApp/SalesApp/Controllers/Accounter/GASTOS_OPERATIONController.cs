@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers.Accounter
 {
@@ -18,14 +18,14 @@ namespace SalesApp.Controllers.Accounter
         // GET: GASTOS_OPERATION
         public ActionResult Index(int Id, int CategoryProductId)
         {
-            var pGASTOS_OPERATION = db.GASTOS_OPERATION.Include(m => m.GASTOS_TYPE_PROVIDER).Where(d => d.ProductCalenderId == Id).OrderByDescending(s => s.GASTOS_TYPE_PROVIDER.PROVIDER.Name);
+            var pGASTOS_OPERATION = db.GASTOS_OPERATION.Include(m => m.GASTOS_TYPE_PROVIDER).Include(s=>s.GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT).Include(s=> s.GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER).Where(d => d.ProductCalenderId == Id).OrderByDescending(s => s.GASTOS_TYPE_PROVIDER.PROVIDER.Name);
 
             if (pGASTOS_OPERATION.ToList().Count < 1)
             {
                 return RedirectToAction("Create", new { ProductCalenderId = Id });
             }
 
-            return View(pGASTOS_OPERATION.ToList());
+            return View(pGASTOS_OPERATION.ToList().OrderByDescending(o => o.GASTOS_TYPE_PROVIDER.Comment));
         }
 
          [Authorize(Roles = "Admin,Manager,Contador")]
@@ -43,7 +43,7 @@ namespace SalesApp.Controllers.Accounter
                 .Include(g => g.CATEGORY_PRODUCT)
                 .Include(g => g.GASTOS_TYPE)
                 .Include(g => g.PROVIDER).Where(n => n.CategoryProductId == CategoryProductId && (n.Populate == false || n.Populate == null));
-            return View(gASTOS_TYPE_PROVIDER.ToList());
+            return View(gASTOS_TYPE_PROVIDER.ToList().OrderByDescending(o => o.PROVIDER.Name));
 
             //ViewBag.CategoryProductId = new SelectList(db.CATEGORY_PRODUCT, "Id", "Name");
             //ViewBag.GastosTypeId = new SelectList(db.GASTOS_TYPE, "Id", "Name");

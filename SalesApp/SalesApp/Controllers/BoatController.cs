@@ -1,10 +1,12 @@
-﻿
-using System;
-using System.Data;
+﻿using System;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
-using SalesApp.Models;
+using System.Web.UI;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers
 {  
@@ -20,10 +22,11 @@ namespace SalesApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var tBL_PRODUCTCALENDER = db.PRODUCT_CALENDER.Where(pd =>
+            var tBL_PRODUCTCALENDER = db.PRODUCT_CALENDER.Include(p => p.CATEGORY_PRODUCT).Where(pd =>
             (pd.CategoryProductId == id) && (pd.Month == month) && (pd.Year == DateTime.Now.Year));
+
             ViewBag.ParentCategoyProduct = id;
-            if (tBL_PRODUCTCALENDER == null || tBL_PRODUCTCALENDER.Count() == 0)
+           if (tBL_PRODUCTCALENDER == null || tBL_PRODUCTCALENDER.Count() == 0)
             {
                 return HttpNotFound();
             }

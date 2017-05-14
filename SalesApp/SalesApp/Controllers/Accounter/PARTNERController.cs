@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers.Accounter
 {
@@ -15,7 +15,7 @@ namespace SalesApp.Controllers.Accounter
         // GET: PARTNER
         public ActionResult Index()
         {
-            return View(db.PARTNER.ToList());
+            return View(db.PARTNER.ToList().OrderByDescending(o => o.Name));
         }
 
         // GET: PARTNER/Details/5

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers
 {
@@ -13,13 +13,13 @@ namespace SalesApp.Controllers
     {
         private Galadventure_TrabajosEntities db = new Galadventure_TrabajosEntities();
 
-        // GET: CATEGORies
+       
         public ActionResult Index()
         {
-            return View(db.CATEGORY.ToList());
+            return View(db.CATEGORY.ToList().OrderByDescending(o => o.Name));
         }
 
-        // GET: CATEGORies/Details/5
+       
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -34,14 +34,14 @@ namespace SalesApp.Controllers
             return View(cATEGORY);
         }
 
-        // GET: CATEGORies/Create
+     
          [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CATEGORies/Create
+      
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -59,7 +59,7 @@ namespace SalesApp.Controllers
             return View(cATEGORY);
         }
 
-        // GET: CATEGORies/Edit/5
+    
          [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
@@ -75,7 +75,7 @@ namespace SalesApp.Controllers
             return View(cATEGORY);
         }
 
-        // POST: CATEGORies/Edit/5
+      
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -92,7 +92,7 @@ namespace SalesApp.Controllers
             return View(cATEGORY);
         }
 
-        // GET: CATEGORies/Delete/5
+   
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,7 +107,7 @@ namespace SalesApp.Controllers
             return View(cATEGORY);
         }
 
-        // POST: CATEGORies/Delete/5
+     
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
          [Authorize(Roles = "Admin")]

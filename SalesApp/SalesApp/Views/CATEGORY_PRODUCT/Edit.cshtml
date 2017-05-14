@@ -1,4 +1,4 @@
-﻿@model SalesApp.Models.CATEGORY_PRODUCT
+﻿@model SalesApp.Models.Entities.CATEGORY_PRODUCT
 
 @{
     ViewBag.Title = "Edit";
@@ -19,7 +19,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div  class="col-md-7">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
@@ -27,7 +27,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div  class="col-md-7">
                 @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
             </div>
@@ -35,7 +35,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Lock, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div  class="col-md-7">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.Lock)
                     @Html.ValidationMessageFor(model => model.Lock, "", new { @class = "text-danger" })

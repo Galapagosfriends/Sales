@@ -57,6 +57,17 @@ namespace SalesApp.Models
         public virtual DbSet<PRODUCT_RESERVATION_TYPE> PRODUCT_RESERVATION_TYPE { get; set; }
         public virtual DbSet<TOUR_DAYS> TOUR_DAYS { get; set; }
         public virtual DbSet<DIVE> DIVE { get; set; }
+        public virtual DbSet<I_Agent> I_Agent { get; set; }
+        public virtual DbSet<I_Category> I_Category { get; set; }
+        public virtual DbSet<I_CategoryPlace> I_CategoryPlace { get; set; }
+        public virtual DbSet<I_Days> I_Days { get; set; }
+        public virtual DbSet<I_Itinerary> I_Itinerary { get; set; }
+        public virtual DbSet<I_MembersNumber> I_MembersNumber { get; set; }
+        public virtual DbSet<I_Pax> I_Pax { get; set; }
+        public virtual DbSet<I_Proveedor> I_Proveedor { get; set; }
+        public virtual DbSet<I_Sales> I_Sales { get; set; }
+        public virtual DbSet<I_SalesGroup> I_SalesGroup { get; set; }
+        public virtual DbSet<V_GetPaxList> V_GetPaxList { get; set; }
     
         public virtual int SP_Delete_PaxDefault(Nullable<int> id)
         {

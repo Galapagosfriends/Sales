@@ -1,4 +1,4 @@
-﻿using SalesApp.Models;
+﻿using SalesApp.Models.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using SalesApp.Models;
 
 namespace SalesApp.Controllers
 {
@@ -140,7 +141,7 @@ namespace SalesApp.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
-                RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
+                RolesList = RoleManager.Roles.ToList().OrderByDescending(o => o.Name).Select(x => new SelectListItem()
                 {
                     Selected = userRoles.Contains(x.Name),
                     Text = x.Name,

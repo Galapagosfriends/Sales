@@ -6,114 +6,112 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using web.Models;
+using SalesApp.Models.Entities;
 
-namespace web.Controllers.Admin
+namespace SalesApp.Controllers.IPax
 {
-    [Authorize]
-    public class TBL_CATEGORYController : Controller
+    [Authorize(Roles = "Admin,IPax")]
+    public class IMembersNumberController : Controller
     {
         private Galadventure_TrabajosEntities db = new Galadventure_TrabajosEntities();
 
-        // GET: TBL_CATEGORY
+        // GET: IMembersNumber
         public ActionResult Index()
         {
-            return View(db.TBL_CATEGORY.ToList());
+            return View(db.I_MembersNumber.ToList().OrderByDescending(o => o.Name));
         }
 
-        // GET: TBL_CATEGORY/Details/5
+        // GET: IMembersNumber/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TBL_CATEGORY tBL_CATEGORY = db.TBL_CATEGORY.Find(id);
-            if (tBL_CATEGORY == null)
+            I_MembersNumber i_MembersNumber = db.I_MembersNumber.Find(id);
+            if (i_MembersNumber == null)
             {
                 return HttpNotFound();
             }
-            return View(tBL_CATEGORY);
+            return View(i_MembersNumber);
         }
 
-        [Authorize(Roles = "Admin")]
-        // GET: TBL_CATEGORY/Create
+        // GET: IMembersNumber/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TBL_CATEGORY/Create
+        // POST: IMembersNumber/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "CA_CATEGORY_ID,CA_CATEGORYNAME")] TBL_CATEGORY tBL_CATEGORY)
+        public ActionResult Create([Bind(Include = "Id,Name")] I_MembersNumber i_MembersNumber)
         {
             if (ModelState.IsValid)
             {
-                db.TBL_CATEGORY.Add(tBL_CATEGORY);
+                db.I_MembersNumber.Add(i_MembersNumber);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tBL_CATEGORY);
+            return View(i_MembersNumber);
         }
-        [Authorize(Roles = "Admin")]
-        // GET: TBL_CATEGORY/Edit/5
+
+        // GET: IMembersNumber/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TBL_CATEGORY tBL_CATEGORY = db.TBL_CATEGORY.Find(id);
-            if (tBL_CATEGORY == null)
+            I_MembersNumber i_MembersNumber = db.I_MembersNumber.Find(id);
+            if (i_MembersNumber == null)
             {
                 return HttpNotFound();
             }
-            return View(tBL_CATEGORY);
+            return View(i_MembersNumber);
         }
 
-        // POST: TBL_CATEGORY/Edit/5
+        // POST: IMembersNumber/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CA_CATEGORY_ID,CA_CATEGORYNAME")] TBL_CATEGORY tBL_CATEGORY)
+        public ActionResult Edit([Bind(Include = "Id,Name")] I_MembersNumber i_MembersNumber)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tBL_CATEGORY).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(i_MembersNumber).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tBL_CATEGORY);
+            return View(i_MembersNumber);
         }
 
-        // GET: TBL_CATEGORY/Delete/5
+        // GET: IMembersNumber/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TBL_CATEGORY tBL_CATEGORY = db.TBL_CATEGORY.Find(id);
-            if (tBL_CATEGORY == null)
+            I_MembersNumber i_MembersNumber = db.I_MembersNumber.Find(id);
+            if (i_MembersNumber == null)
             {
                 return HttpNotFound();
             }
-            return View(tBL_CATEGORY);
+            return View(i_MembersNumber);
         }
 
-        // POST: TBL_CATEGORY/Delete/5
+        // POST: IMembersNumber/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TBL_CATEGORY tBL_CATEGORY = db.TBL_CATEGORY.Find(id);
-            db.TBL_CATEGORY.Remove(tBL_CATEGORY);
+            I_MembersNumber i_MembersNumber = db.I_MembersNumber.Find(id);
+            db.I_MembersNumber.Remove(i_MembersNumber);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

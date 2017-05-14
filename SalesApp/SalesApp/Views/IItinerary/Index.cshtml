@@ -1,0 +1,108 @@
+﻿@model IEnumerable<SalesApp.Models.Entities.I_Itinerary>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Day")
+        </th>
+        <th>
+            @Html.DisplayName("PlaceName")
+        </th>
+        <th>
+            @Html.DisplayName("ProveedorName")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingPoint)
+        </th>
+        <th>
+            @Html.DisplayName("StartTour")
+        </th>
+        <th>
+            @Html.DisplayName("EndTour")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Included)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifyDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifyBy)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.I_Days.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.I_CategoryPlace.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.I_Proveedor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingPoint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTourTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTourTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Included)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifyDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifyBy)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Deleted)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

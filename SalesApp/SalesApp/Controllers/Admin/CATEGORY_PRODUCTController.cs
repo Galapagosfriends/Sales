@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers
 {
@@ -16,7 +16,7 @@ namespace SalesApp.Controllers
         //public ActionResult Index()
         //{
         //    var cATEGORY_PRODUCT = db.CATEGORY_PRODUCT.Include(c => c.CATEGORY);
-        //    return View(cATEGORY_PRODUCT.ToList());
+        //    return View(cATEGORY_PRODUCT.ToList().OrderByDescending(o => o.Name));
         //}
 
 
@@ -39,7 +39,7 @@ namespace SalesApp.Controllers
             }
 
             ViewBag.ParentCategoy = Id;
-            return View(tBL_CATEGORYPRODUCT.ToList());
+            return View(tBL_CATEGORYPRODUCT.ToList().OrderByDescending(o => o.Name));
         }
 
         // GET: TBL_CATEGORYPRODUCT
@@ -57,7 +57,7 @@ namespace SalesApp.Controllers
         //    }
 
         //    ViewBag.ParentCategoy = Id;
-        //    return View(tBL_CATEGORYPRODUCT.ToList());
+        //    return View(tBL_CATEGORYPRODUCT.ToList().OrderByDescending(o => o.Name));
         //}
 
 

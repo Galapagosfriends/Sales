@@ -18,6 +18,7 @@ namespace SalesApp.Models
         public PAX()
         {
             this.PRODUCT_RESERVATION = new HashSet<PRODUCT_RESERVATION>();
+            this.I_Sales = new HashSet<I_Sales>();
         }
     
         public int Id { get; set; }
@@ -34,5 +35,7 @@ namespace SalesApp.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCT_RESERVATION> PRODUCT_RESERVATION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<I_Sales> I_Sales { get; set; }
     }
 }

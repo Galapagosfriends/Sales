@@ -1,4 +1,4 @@
-﻿@model SalesApp.Models.PRODUCT_RESERVATION
+﻿@model SalesApp.Models.Entities.PRODUCT_RESERVATION
 
 @{
     ViewBag.Title = "Create";
@@ -23,7 +23,7 @@
         @*</div>
             </div>*@
 
-        <table class="table-condensed">
+        <table class="table">
             <tr>
                 <td>
                     <div class="form-group">
@@ -75,7 +75,7 @@
                     </div>
                 </td>
 
-                <td width="50%">
+                <td>
                
 
                     @if (Request["CategoryProductId"] == "5")

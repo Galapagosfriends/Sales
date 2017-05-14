@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SalesApp.Models.PRODUCT_CALENDER>
+﻿@model IEnumerable<SalesApp.Models.Entities.PRODUCT_CALENDER>
    
 @{
     ViewBag.Title = "Boat";
@@ -22,20 +22,19 @@
 <table class="table">
     <tr>
   <th style="background-color:cornflowerblue; color:white" colspan="6">
-      <h3>
+      <h4>
           @if(Model.Count() == 0){
              @:"";
           }
           else
-          { @Model.FirstOrDefault().CATEGORY_PRODUCT.Name }      
-      </h3>
+          { @Model.First().CATEGORY_PRODUCT.Name }      
+      </h4>
 </th>  
     <th style="background-color: darkblue; color:white; font-variant:small-caps"> 
-        <h3> 
-           
+        <h4> 
           @Model.FirstOrDefault().Date.Value.ToString("MMMM") 
     
-        </h3>
+        </h4>
         </th>
     </tr> 
     <tr>  

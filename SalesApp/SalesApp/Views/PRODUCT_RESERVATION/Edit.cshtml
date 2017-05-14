@@ -1,4 +1,4 @@
-﻿@model SalesApp.Models.PRODUCT_RESERVATION
+﻿@model SalesApp.Models.Entities.PRODUCT_RESERVATION
 
 @{
     ViewBag.Title = "Edit";
@@ -30,12 +30,10 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.ProductCalenderId)
-
-        <table class="table-condensed">
+        <table class="table">
             <tr >
                 <td >
                     <div class="form-group">
@@ -126,7 +124,7 @@
 
                 </td>
            
-                <td width="55%">
+                <td >
 
                     @if (Model.PRODUCT_CALENDER.CategoryProductId == 5)
                     {

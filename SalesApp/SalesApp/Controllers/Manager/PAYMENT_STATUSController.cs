@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers.Manager
 {
@@ -17,7 +17,7 @@ namespace SalesApp.Controllers.Manager
         // GET: PAYMENT_STATUS
         public ActionResult Index()
         {
-            return View(db.PAYMENT_STATUS.ToList());
+            return View(db.PAYMENT_STATUS.ToList().OrderByDescending(o => o.Description));
         }
 
         // GET: PAYMENT_STATUS/Details/5

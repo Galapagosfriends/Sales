@@ -1,4 +1,4 @@
-﻿@model SalesApp.Models.GASTOS_TYPE_PROVIDER
+﻿@model SalesApp.Models.Entities.GASTOS_TYPE_PROVIDER
 
 @{
     ViewBag.Title = "Edit";
@@ -19,7 +19,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.GastosTypeId, "GastosTypeId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div  class="col-md-7">
                 @Html.DropDownList("GastosTypeId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.GastosTypeId, "", new { @class = "text-danger" })
             </div>
@@ -27,7 +27,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div  class="col-md-7">
                 @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
             </div>
@@ -35,7 +35,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.ProviderId, "ProviderId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div  class="col-md-7">
                 @Html.DropDownList("ProviderId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ProviderId, "", new { @class = "text-danger" })
             </div>
@@ -43,7 +43,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryProductId, "CategoryProductId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div  class="col-md-7">
                 @Html.DropDownList("CategoryProductId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryProductId, "", new { @class = "text-danger" })
             </div>
@@ -51,7 +51,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div  class="col-md-7">
                 @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
@@ -59,7 +59,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Populate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div  class="col-md-7">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.Populate)
                     @Html.ValidationMessageFor(model => model.Populate, "", new { @class = "text-danger" })

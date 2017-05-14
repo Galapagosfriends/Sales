@@ -1,9 +1,9 @@
-﻿@model IEnumerable<SalesApp.Models.PRODUCT_CALENDER>
+﻿@model IEnumerable<SalesApp.Models.Entities.PRODUCT_CALENDER>
    
 @{
     ViewBag.Title = "Lancha";
 }
-
+@*//1406?ProductCalenderId=1406&CategoryProductId=5&tourdays=58*@
     <table id="tableMonths" width="100%" cellpadding="6">
         <tr>            
             @{  int startMonth = startMonth = DateTime.Now.Month; }
@@ -27,7 +27,7 @@
              @:"";
           }
           else
-          { @Model.FirstOrDefault().CATEGORY_PRODUCT.Name }      
+          { @Model.First().CATEGORY_PRODUCT.Name }      
       </h3>
 </th>  
     <th style="background-color: darkblue; color:white; font-variant:small-caps"> 

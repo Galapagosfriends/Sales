@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers
 {
@@ -15,7 +15,7 @@ namespace SalesApp.Controllers
         // GET: PROVIDER
         public ActionResult Index()
         {
-            return View(db.PROVIDER.ToList());
+            return View(db.PROVIDER.ToList().OrderByDescending(o => o.Name).OrderBy(o => o.Name));
         }
 
         // GET: PROVIDER/Details/5

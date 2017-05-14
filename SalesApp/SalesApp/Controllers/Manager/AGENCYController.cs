@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers
 {
@@ -16,7 +16,7 @@ namespace SalesApp.Controllers
         public ActionResult Index()
         {
             var aGENCY = db.AGENCY.Include(a => a.ADRESS);
-            return View(aGENCY.ToList());
+            return View(aGENCY.ToList().OrderByDescending(o => o.Name));
         }
 
         // GET: AGENCies/Details/5

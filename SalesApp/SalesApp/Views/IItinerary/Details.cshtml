@@ -1,0 +1,122 @@
+﻿@model SalesApp.Models.Entities.I_Itinerary
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>I_Itinerary</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MeetingPoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeetingPoint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTourTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTourTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTourTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTourTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Included)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Included)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifyDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifyDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifyBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifyBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.I_CategoryPlace.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.I_CategoryPlace.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.I_Days.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.I_Days.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.I_Proveedor.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.I_Proveedor.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -38,6 +38,7 @@
                         @Html.ActionLink("Home", "Index", "Home", null, new { @class = "navbar-brand" })
                         @Html.ActionLink("About", "About", "Home", null, new { @class = "navbar-brand" })
                         @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Terms", "Terms", "Home", null, new { @class = "navbar-brand" })
                     }
 
                     @if (Request.IsAuthenticated && (User.IsInRole("Manager") || User.IsInRole("Contador")))
@@ -50,10 +51,10 @@
 
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Categoría", "Index", "CATEGORY")</li>
-                        <li> @Html.ActionLink("Provider", "Index", "PROVIDER") </li>
-                        <li>@Html.ActionLink("Agencia", "Index", "AGENCY")</li>
-                        <li>@Html.ActionLink("Agente", "Index", "AGENT")</li>
+                        <li>@Html.ActionLink("A-C", "Index", "CATEGORY")</li>
+                        <li> @Html.ActionLink("A-P", "Index", "PROVIDER") </li>
+                        <li>@Html.ActionLink("A-Ag", "Index", "AGENCY")</li>
+                        <li>@Html.ActionLink("A-Agt", "Index", "AGENT")</li>
                         <li>@Html.ActionLink("G-T-P", "Index", "GASTOS_TYPE_PROVIDER")</li>
                         <li>@Html.ActionLink("G-T", "Index", "GASTOS_TYPE")</li>
                         <li>@Html.ActionLink("G-OP", "Index", "GASTOS_OPERATION")</li>
@@ -61,6 +62,18 @@
                         <li>@Html.ActionLink("Users", "Index", "UsersAdmin")</li>
                     }
                 
+                    @if (Request.IsAuthenticated && (User.IsInRole("IPax") || User.IsInRole("Admin")))
+                    {
+                        <li>@Html.ActionLink("Category", "Index", "ICategory")</li>
+                        <li> @Html.ActionLink("C-Place", "Index", "ICategoryPlace") </li>
+                        <li>@Html.ActionLink("Proveedor", "Index", "IProveedor")</li>
+                        <li>@Html.ActionLink("Itinerary", "Index", "IItinerary")</li>
+                        <li>@Html.ActionLink("SalesGroup", "Index", "ISalesGroup")</li>
+                        <li>@Html.ActionLink("Sales", "Index", "ISales")</li>                      
+                        <li>@Html.ActionLink("Paxs", "Index", "IPax")</li>
+                        <li>@Html.ActionLink("Agents", "Index", "IAgent")</li>
+                    }
+
                 </ul>
              
             </div>
@@ -72,7 +85,10 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - Julian Jaya's ASP.NET Application</p>
             <br />
-            @Html.Partial("_LoginPartial")
+            <div style="text-align:right">
+                @Html.Partial("_LoginPartial")
+            </div>
+          
         </footer>
    
     </div>

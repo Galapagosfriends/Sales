@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers.Admin
 {
@@ -19,8 +19,7 @@ namespace SalesApp.Controllers.Admin
         public ActionResult Index()
         {
             var gASTOS_TYPE_PROVIDER = db.GASTOS_TYPE_PROVIDER.Include(g => g.CATEGORY_PRODUCT).Include(g => g.GASTOS_TYPE).Include(g => g.PROVIDER);
-            return View(gASTOS_TYPE_PROVIDER.ToList());
-        }
+            return View(gASTOS_TYPE_PROVIDER.ToList().OrderByDescending(o => o.PROVIDER.Name));        }
 
         // GET: GASTOS_TYPE_PROVIDER/Details/5
         public ActionResult Details(int? id)

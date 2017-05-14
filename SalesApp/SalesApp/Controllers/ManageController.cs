@@ -1,4 +1,4 @@
-﻿using SalesApp.Models;
+﻿using SalesApp.Models.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using SalesApp.Models;
 
 namespace SalesApp.Controllers
 {

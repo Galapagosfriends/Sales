@@ -1,13 +1,14 @@
 ﻿
 using System;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using SalesApp.Models;
+using SalesApp.Models.Entities;
 
 namespace SalesApp.Controllers
 {
@@ -20,14 +21,14 @@ namespace SalesApp.Controllers
         [Authorize(Roles = "Admin,Manager,Contador")]
         public ActionResult Index(int Id, int? CategoryProductId)
         {
-            var pRODUCT_RESERVATION = db.PRODUCT_RESERVATION.Include(p => p.AGENCY).Include(p => p.AGENT).Include(p => p.PAX).Include(p => p.PAYMENT_TYPE).Include(p => p.PRODUCT_CALENDER).Include(p => p.PRODUCT_CALENDERHOUR).Include(p => p.PRODUCT_RESERVATION_TYPE).Include(p => p.TOUR_DAYS).Include(p => p.DIVE).Where(d => d.ProductCalenderId == Id);
-
+            var pRODUCT_RESERVATION = db.PRODUCT_RESERVATION.Include(p => p.AGENCY).Include(p => p.AGENT).Include(p => p.PAX).Include(p => p.PAYMENT_TYPE).Include(p => p.PRODUCT_CALENDER).Include(p => p.PRODUCT_CALENDERHOUR).Include(p => p.PRODUCT_RESERVATION_TYPE).Include(p => p.TOUR_DAYS).Include(p => p.DIVE).Include(p => p.PRODUCT_CALENDER.CATEGORY_PRODUCT).Where(d => d.ProductCalenderId == Id);
+          
             if (pRODUCT_RESERVATION.ToList().Count < 1)
             {
                 return RedirectToAction("Create", new { ProductCalenderId = Id, CategoryProductId = CategoryProductId });
             }
 
-            return View(pRODUCT_RESERVATION.ToList());
+            return View(pRODUCT_RESERVATION.ToList().OrderBy(o => o.PAX.First_Name));
         }
 
         [Authorize(Roles = "Admin,Manager,Contador")]
@@ -90,7 +91,7 @@ namespace SalesApp.Controllers
             {
                 return RedirectToAction("Create", new { ProductCalenderId = id });
             }
-            return View(pRODUCT_RESERVATION.ToList());
+            return View(pRODUCT_RESERVATION.ToList().OrderByDescending(o => o.PAX.First_Name));
         }
 
 
@@ -160,9 +161,9 @@ namespace SalesApp.Controllers
                   
                     for(int i = 0; i < cuantas; i++)
                     {
-                        
-                       var pax = db.SP_Insert_PaxDefault((i+1).ToString() + "pax " ).SingleOrDefault();
-                       pRODUCT_RESERVATION.PaxId = pax.Id;
+                       // SET @ID = SCOPE_IDENTITY()
+                        int paxId = db.SP_Insert_PaxDefault((i+1).ToString() + "pax " );
+                       pRODUCT_RESERVATION.PaxId = paxId;
                       
                         pRODUCT_RESERVATION.CreateDate = DateTime.Now;
                         pRODUCT_RESERVATION.ProductCalenderId = db.PRODUCT_CALENDER.Find(cid).Id;
@@ -199,6 +200,9 @@ namespace SalesApp.Controllers
             }
         }
 
+
+
+
         // GET: PRODUCT_RESERVATION/Edit/5
         [Authorize(Roles = "Admin,Manager,Contador")]
         public ActionResult Edit(int? id, int? ProductCalenderId, int? CategoryProductId, int? tourdays)
@@ -208,7 +212,7 @@ namespace SalesApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRODUCT_RESERVATION pRODUCT_RESERVATION = db.PRODUCT_RESERVATION.Find(id);
+            PRODUCT_RESERVATION pRODUCT_RESERVATION = db.PRODUCT_RESERVATION.Include(a => a.PRODUCT_CALENDER).Include(a=> a.PRODUCT_CALENDER.CATEGORY_PRODUCT).Where(a=> a.Id == id).First();
             if (pRODUCT_RESERVATION == null)
             {
                 return HttpNotFound();
@@ -352,7 +356,7 @@ namespace SalesApp.Controllers
 
         public void Excel(int pcaId)
         {
-            var model = db.SP_GET_PAXLIST(pcaId).ToList();
+            var model = db.V_GetPaxList.Where(s=> s.ProductCalenderId == pcaId).ToList().OrderByDescending(o => o.First_Name);
             Export export = new Export();
             export.ToExcel(Response, model);
         }
