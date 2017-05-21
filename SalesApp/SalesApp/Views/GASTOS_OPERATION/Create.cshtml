@@ -103,7 +103,7 @@
 
 <div>
   
-    @Html.ActionLink("Back to List", "Index", new { id = Model.ProductCalenderId, CategoryProductId = Model.GASTOS_TYPE_PROVIDER.CategoryProductId  })
+    @Html.ActionLink("Back to List", "Index", new { ProductCalenderId = Model.ProductCalenderId, CategoryProductId = Model.GASTOS_TYPE_PROVIDER.CategoryProductId  } , new { @class="LinkButton"})
 </div>
 
 @section Scripts {

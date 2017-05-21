@@ -1,14 +1,17 @@
 ﻿@model IEnumerable<SalesApp.Models.Entities.GASTOS_TYPE_PROVIDER>
 
 @{
-    ViewBag.Title = "Add Provider type to Operation";
+    ViewBag.Title = "Add provider type to operation";
 }
 
 <h2>Add Provider type to Operation</h2>
+
+@Html.ActionLink("Back to List", "Index", "GASTOS_OPERATION", new { ProductCalenderId = Request["ProductCalenderId"], CategoryProductId = Model.First().CategoryProductId }, new { @class = "LinkButton" })
+
 <p>
-    @Html.ActionLink("Create New", "NewProviderType", "GASTOS_OPERATION", new {    
-    ProductCalenderId = Model.First().CATEGORY_PRODUCT.PRODUCT_CALENDER.First().Id
-    , CategoryProductId = Model.First().CATEGORY_PRODUCT.Id }, null)
+    @Html.ActionLink("Create New", "NewProviderType", "GASTOS_OPERATION", new {
+    ProductCalenderId =Request["ProductCalenderId"]
+    , CategoryProductId = Model.First().CATEGORY_PRODUCT.Id }, new { @class="LinkButton"})
 </p>
 <table class="table">
     <tr>

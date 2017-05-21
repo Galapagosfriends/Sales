@@ -19,6 +19,7 @@ namespace SalesApp.Models
         {
             this.GASTOS_TYPE_PROVIDER = new HashSet<GASTOS_TYPE_PROVIDER>();
             this.PRODUCT_CALENDER = new HashSet<PRODUCT_CALENDER>();
+            this.Cabin = new HashSet<Cabin>();
         }
     
         public int Id { get; set; }
@@ -31,5 +32,7 @@ namespace SalesApp.Models
         public virtual ICollection<GASTOS_TYPE_PROVIDER> GASTOS_TYPE_PROVIDER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCT_CALENDER> PRODUCT_CALENDER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cabin> Cabin { get; set; }
     }
 }

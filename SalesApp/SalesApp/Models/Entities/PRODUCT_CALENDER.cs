@@ -20,7 +20,7 @@ namespace SalesApp.Models.Entities
         {
             this.PRODUCT_CALENDERHOUR = new HashSet<PRODUCT_CALENDERHOUR>();
             this.PRODUCT_RESERVATION = new HashSet<PRODUCT_RESERVATION>();
-          //  this.CATEGORY_PRODUCT = new HashSet<CATEGORY_PRODUCT>();
+        //    this.CATEGORY_PRODUCTS = new HashSet<CATEGORY_PRODUCT>();
         }
 
         public int Id { get; set; }
@@ -37,7 +37,9 @@ namespace SalesApp.Models.Entities
         [ForeignKey("CategoryProductId")]
         public virtual CATEGORY_PRODUCT CATEGORY_PRODUCT { get; set; }
 
-         public virtual ICollection<PRODUCT_CALENDERHOUR> PRODUCT_CALENDERHOUR { get; set; }
+        public virtual ICollection<PRODUCT_CALENDERHOUR> PRODUCT_CALENDERHOUR { get; set; }
+
+    //    public virtual ICollection<CATEGORY_PRODUCT> CATEGORY_PRODUCTS { get; set; }
 
         public virtual ICollection<PRODUCT_RESERVATION> PRODUCT_RESERVATION { get; set; }
     }

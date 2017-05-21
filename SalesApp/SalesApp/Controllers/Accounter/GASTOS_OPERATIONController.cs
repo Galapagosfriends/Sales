@@ -16,23 +16,23 @@ namespace SalesApp.Controllers.Accounter
         private Galadventure_TrabajosEntities db = new Galadventure_TrabajosEntities();
 
         // GET: GASTOS_OPERATION
-        public ActionResult Index(int Id, int CategoryProductId)
+        public ActionResult Index(int ProductCalenderId, int CategoryProductId)
         {
-            var pGASTOS_OPERATION = db.GASTOS_OPERATION.Include(m => m.GASTOS_TYPE_PROVIDER).Include(s=>s.GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT).Include(s=> s.GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER).Where(d => d.ProductCalenderId == Id).OrderByDescending(s => s.GASTOS_TYPE_PROVIDER.PROVIDER.Name);
+            var pGASTOS_OPERATION = db.GASTOS_OPERATION.Include(m => m.GASTOS_TYPE_PROVIDER).Include(s=>s.GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT).Where(d => d.ProductCalenderId == ProductCalenderId).OrderByDescending(s => s.GASTOS_TYPE_PROVIDER.PROVIDER.Name);
 
             if (pGASTOS_OPERATION.ToList().Count < 1)
             {
-                return RedirectToAction("Create", new { ProductCalenderId = Id });
+                return RedirectToAction("Create", new { ProductCalenderId = ProductCalenderId });
             }
 
             return View(pGASTOS_OPERATION.ToList().OrderByDescending(o => o.GASTOS_TYPE_PROVIDER.Comment));
         }
 
          [Authorize(Roles = "Admin,Manager,Contador")]
-        public ActionResult SetGastos(int? Id, int? CategoryProductId)
+        public ActionResult SetGastos(int? ProductCalenderId, int? CategoryProductId)
         {
-            db.SP_SetGastos(Id, CategoryProductId);
-            return RedirectToAction("Index", new { Id = Id, CategoryProductId = CategoryProductId });
+            db.SP_SetGastos(ProductCalenderId, CategoryProductId);
+            return RedirectToAction("Index", new { ProductCalenderId = ProductCalenderId, CategoryProductId = CategoryProductId });
         }
 
 
@@ -163,7 +163,7 @@ namespace SalesApp.Controllers.Accounter
             {
                 db.GASTOS_OPERATION.Add(gASTOS_OPERATION);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { ProductCalenderId = gASTOS_OPERATION.ProductCalenderId });
             }
 
             return View(gASTOS_OPERATION);
@@ -206,7 +206,7 @@ namespace SalesApp.Controllers.Accounter
         public ActionResult GoBack(GASTOS_OPERATION gASTOS_OPERATION)
         {
             GASTOS_OPERATION ls = db.GASTOS_OPERATION.Include(m => m.GASTOS_TYPE_PROVIDER).Where(m => m.Id == gASTOS_OPERATION.Id).FirstOrDefault();
-            return RedirectToAction("Index", new { Id = ls.ProductCalenderId, CategoryProductId = ls.GASTOS_TYPE_PROVIDER.CategoryProductId });
+            return RedirectToAction("Index", new { ProductCalenderId = ls.ProductCalenderId, CategoryProductId = ls.GASTOS_TYPE_PROVIDER.CategoryProductId });
 
         }
 
@@ -236,7 +236,7 @@ namespace SalesApp.Controllers.Accounter
 
             db.GASTOS_OPERATION.Remove(gASTOS_OPERATION);
             db.SaveChanges();
-            return RedirectToAction("Index", new { Id = ProductCalenderId, CategoryProductId = CategoryProductId });
+            return RedirectToAction("Index", new { ProductCalenderId = ProductCalenderId, CategoryProductId = CategoryProductId });
 
            
         }

@@ -5,12 +5,13 @@
 }
 
 
-<h3 style="background-color:cornflowerblue; color:white; padding:10px">
+
+<h4 style="background-color:cornflowerblue; color:white; padding:5px">
     Reservas:
     @if (Model.Count() == 0)
     {
         @:"";
-          }
+    }
     else
     {
         @Model.First().PRODUCT_CALENDER.CATEGORY_PRODUCT.Name;
@@ -20,142 +21,155 @@
         @:
         @Model.FirstOrDefault().PRODUCT_CALENDER.Day@:.@Model.FirstOrDefault().PRODUCT_CALENDER.Month.@Model.FirstOrDefault().PRODUCT_CALENDER.Year
         @:  )
-
     }
 
-</h3>
+</h4>
+@Html.ActionLink("Back to List", "Index", Model.First().PRODUCT_CALENDER.CategoryProductId == 5 ? "Boat" : "Lancha", new { id = Model.First().PRODUCT_CALENDER.CategoryProductId, month = Model.First().PRODUCT_CALENDER.Month, ProductCalenderId = Model.First().ProductCalenderId }, new { @class = "LinkButton" })
 
 
-<p>
-    @Html.ActionLink("Create New", "Create", new { Id = Model.First().ProductCalenderId, ProductCalenderId = Model.First().ProductCalenderId , CategoryProductId = Model.First().PRODUCT_CALENDER.CategoryProductId, tourdays = Model.First().PRODUCT_CALENDER.Tourdays}, new { @class = "navbar-brand" })
- 
-    
+    @Html.ActionLink("Create New", "Create", new { Id = Model.First().ProductCalenderId, ProductCalenderId = Model.First().ProductCalenderId , CategoryProductId = Model.First().PRODUCT_CALENDER.CategoryProductId, tourdays = Model.First().PRODUCT_CALENDER.Tourdays}, new { @class = "LinkButton" })
+     
        @if (Model.First().PRODUCT_CALENDER.CATEGORY_PRODUCT.Id == 4)
         {
-        @Html.ActionLink("Mover All a Angreju ", "MoveAll", new { productCalenderId = Model.FirstOrDefault().ProductCalenderId, categoryProductId = 3 }, new { @class = "navbar-brand" })
+        @Html.ActionLink("Mover All a Angreju ", "MoveAll", new { ProductCalenderId = Model.FirstOrDefault().ProductCalenderId, categoryProductId = 3 }, new { @class = "LinkButton" })
 
        }
        @if (Model.First().PRODUCT_CALENDER.CATEGORY_PRODUCT.Id == 3)
-       {   @Html.ActionLink("Mover All a Magic ", "MoveAll", new { productCalenderId = Model.FirstOrDefault().ProductCalenderId, categoryProductId = 4 }, new { @class = "navbar-brand" })
+       {   @Html.ActionLink("Mover All a Magic ", "MoveAll", new { ProductCalenderId = Model.FirstOrDefault().ProductCalenderId, categoryProductId = 4 }, new { @class = "LinkButton" })
 
        }
-    
 
+@Html.ActionLink("Get Pax-List", "Excel", new { pcaId = Model.First().ProductCalenderId }, new { @class = "LinkButton" })
+    <table class="tableColor">
+        <thead>
+            <tr>
+                <th> Nr </th>
+                <th>
+                    @Html.DisplayName("Nombre Pax")
+                </th>
+                <th>
+                    @Html.DisplayName("Description")
+                </th>
 
-    @Html.ActionLink("Get Pax-List", "Excel", new { pcaId = Model.First().ProductCalenderId }, new { @class = "navbar-brand" })
-
-
-</p>
-<table class="table"  >
-    <tr>
-        <th> Nr </th>
-        <th>
-            @Html.DisplayName("Nombre Pax")
-        </th>
-        <th>
-            @Html.DisplayName("Description")
-        </th>
-        <th>
-            @Html.DisplayName("Precio")
-        </th>       
-        <th>
-            @Html.DisplayName("Agencia")
-        </th>
-        <th>
-            @Html.DisplayName("Agente")
-        </th>       
-        <th>
-            @Html.DisplayName("Pago en")
-        </th>
-        <th>
-            @Html.DisplayName("Pa. Status")
-        </th>
-        <th>
-            @Html.DisplayName("PickUp")
-        </th>
-        <th>
-            @Html.DisplayName("DropOff")
-        </th>
-        <th>
-            @Html.DisplayName("Restrictions")
-        </th>
-
-         @if (Model.First().PRODUCT_CALENDER.CategoryProductId == 5)
-         {
-            <th>
-                @Html.DisplayName("Rese.Type")             
-            </th>
-
-            <th>
-                @Html.DisplayName("Días")
-            </th>
-
-            <th>
-                @Html.DisplayName("Buceos")
-            </th>
-            <th>
-                @Html.DisplayName("Continuá")
-            </th>
-
-         }
-        
-        <th></th>
-    </tr>
-    @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i}))
-    {
-        <tr>
-            <td>
-                @(item.Index + 1)
-            </td>
-            <td>
-               @if (item.Data.PAX == null)
-               { 
-                   @Html.Display("No hay :- (")
-               }
-               else {
-                    @Html.ActionLink(item.Data.PAX.First_Name + " " + item.Data.PAX.Last_Name, "Edit", "PAX", new { Id = item.Data.PAX.Id, resvId = item.Data.ProductCalenderId }, null)
+                <th>
+                    @Html.DisplayName("Días")
+                </th>
+                @if (Model.First().PRODUCT_CALENDER.CategoryProductId == 5)
+            {
+                    <th>
+                        @Html.DisplayName("Cabina")
+                    </th>
                 }
-            </td>
+                <th>
+                    @Html.DisplayName("Agencia")
+                </th>
+                <th>
+                    @Html.DisplayName("Agente")
+                </th>
+                <th>
+                    @Html.DisplayName("Pago en")
+                </th>
+                <th>
+                    @Html.DisplayName("Pa-Status")
+                </th>
+                <th>
+                    @Html.DisplayName("PickUp/Flight")
+                </th>
+                <th>
+                    @Html.DisplayName("DropOff/Flight")
+                </th>
+                <th>
+                    @Html.DisplayName("Restrictions")
+                </th>
+                <th>
+                    @Html.DisplayName("Precio")
+                </th>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Data.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data.Price)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.Data.AGENCY.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data.AGENT.FirstName)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.Data.PAYMENT_TYPE.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data.PAYMENT_STATUS.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data.PickUp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data.DropOff)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data.Restrictions)
-            </td>
+                @if (Model.First().PRODUCT_CALENDER.CategoryProductId == 5)
+            {
 
-           
-               @if (item.Data.PRODUCT_CALENDER.CategoryProductId == 5)
-               {
+                    @*<th>
+                        @Html.DisplayName("Rese.Type")
+                    </th>*@
+
+
+                    <th>
+                        @Html.DisplayName("Buceos")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Continuá")
+                    </th>
+
+                }
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(s => s.PRODUCT_RESERVATION_TYPE.Id <= 1).Select((x, i) => new { Data = x, Index = i }))
+            {
+                <tr>
+                    <td>
+                        @(item.Index + 1)
+                    </td>
+                    <td>
+                        @if (item.Data.PAX == null)
+                {
+                    @Html.Display("No hay :- (")
+                    }
+                    else
+                    {
+                    @Html.ActionLink(item.Data.PAX.First_Name + " " + item.Data.PAX.Last_Name, "Edit", "PAX", new { ReservationId = item.Data.Id, ProductCalenderId = item.Data.ProductCalenderId, PaxId = item.Data.PAX.Id }, null)
+                    }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.Description)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.TOUR_DAYS.Name)
+                    </td>
+                    @if (item.Data.PRODUCT_CALENDER.CategoryProductId == 5)
+                {
                 <td>
+                    @Html.DisplayFor(modelItem => item.Data.CABIN.Name)
+                </td>
+                }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.AGENCY.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.AGENT.FirstName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.PAYMENT_TYPE.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.PAYMENT_STATUS.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.PickUp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.DropOff)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.Restrictions)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.Price)
+                    </td>
+
+                    @if (item.Data.PRODUCT_CALENDER.CategoryProductId == 5)
+                {
+
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Data.PRODUCT_RESERVATION_TYPE.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data.TOUR_DAYS.Name)
-                </td>
+                </td>*@
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Data.DIVE.Name)
                 </td>
@@ -163,16 +177,204 @@
                     @Html.LabelFor(modelItem => item.Data.Continua, string.Format("{0}", item.Data.Continua == true ? "Si" : "No"), null)
 
                 </td>
-               }           
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Data.Id, productCalenderId = item.Data.ProductCalenderId, tourdays= item.Data.PRODUCT_CALENDER.Tourdays }) |
-                @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
-                @Html.ActionLink("Delete", "Delete", new { id = item.Data.Id })
-            </td>
+                }
+                    <td>
+                        <div class="TdLinkButton">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Data.Id, ProductCalenderId = item.Data.ProductCalenderId, tourdays = item.Data.PRODUCT_CALENDER.Tourdays })
+                        </div>
 
-        </tr>
-    }
+                        <div class="TdLinkButton">
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Data.Id })
+                        </div>
+                    </td>
 
-</table>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
 
-@Html.ActionLink("Back to List", "Index", "Lancha", new { id =  Model.First().PRODUCT_CALENDER.CategoryProductId, month = Model.First().PRODUCT_CALENDER.Month, ProductCalenderId = Model.First().ProductCalenderId },null)
+                <td style="background-color:cornflowerblue; color:white; padding:3px">Total: <b> @Model.Sum(item => item.Price)</b> </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <fieldset name="Blockeo" >
+        <h4 style="background-color:cornflowerblue; color:white; padding:5px">Bloqueos</h4>
+        @if (@Model.Where(s => s.PRODUCT_RESERVATION_TYPE.Id == 2).ToList().Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th> Nr </th>
+                        <th>
+                            @Html.DisplayName("Nombre Pax")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Description")
+                        </th>
+
+                        <th>
+                            @Html.DisplayName("Días")
+                        </th>
+                        @if (Model.First().PRODUCT_CALENDER.CategoryProductId == 5)
+                    {
+                            <th>
+                                @Html.DisplayName("Cabina")
+                            </th>
+                    }
+                        <th>
+                            @Html.DisplayName("Agencia")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Agente")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Pago en")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Pa-Status")
+                        </th>
+                        <th>
+                            @Html.DisplayName("PickUp/Flight")
+                        </th>
+                        <th>
+                            @Html.DisplayName("DropOff/Flight")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Restrictions")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Bloqueo")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Precio")
+                        </th>
+
+                        @if (Model.First().PRODUCT_CALENDER.CategoryProductId == 5)
+                    {
+
+                            @*<th>
+                        @Html.DisplayName("Rese.Type")
+                    </th>*@
+
+
+                            <th>
+                                @Html.DisplayName("Buceos")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Continuá")
+                            </th>
+
+                    }
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Where(s => s.PRODUCT_RESERVATION_TYPE.Id == 2).Select((x, i) => new { Data = x, Index = i }))
+                {
+                        <tr>
+                            <td>
+                                @(item.Index + 1)
+                            </td>
+                            <td>
+                                @if (item.Data.PAX == null)
+                            {
+                            @Html.Display("No hay :- (")
+                            }
+                            else
+                            {
+                            @Html.ActionLink(item.Data.PAX.First_Name + " " + item.Data.PAX.Last_Name, "Edit", "PAX", new { ReservationId = item.Data.Id, ProductCalenderId = item.Data.ProductCalenderId, PaxId = item.Data.PAX.Id }, null)
+                            }
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.Description)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.TOUR_DAYS.Name)
+                            </td>
+                            @if (item.Data.PRODUCT_CALENDER.CategoryProductId == 5)
+                        {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data.CABIN.Name)
+                        </td>
+                        }
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.AGENCY.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.AGENT.FirstName)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.PAYMENT_TYPE.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.PAYMENT_STATUS.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.PickUp)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.DropOff)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.Restrictions)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.BloqueoDate)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data.Price)
+                            </td>
+
+                            @if (item.Data.PRODUCT_CALENDER.CategoryProductId == 5)
+                        {
+
+                        @*<td>
+                    @Html.DisplayFor(modelItem => item.Data.PRODUCT_RESERVATION_TYPE.Name)
+                </td>*@
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data.DIVE.Name)
+                        </td>
+                        <td>
+                            @Html.LabelFor(modelItem => item.Data.Continua, string.Format("{0}", item.Data.Continua == true ? "Si" : "No"), null)
+
+                        </td>
+                        }
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Data.Id, ProductCalenderId = item.Data.ProductCalenderId, tourdays = item.Data.PRODUCT_CALENDER.Tourdays }, new { @class = "LinkButton" }) |
+                                @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Data.Id }, new { @class = "LinkButton" })
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            @: ---- Ninguno ----
+  }
+
+    </fieldset>
+    <br />

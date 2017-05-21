@@ -12,10 +12,13 @@ namespace SalesApp.Models.Entities
     {
         [Key]
         public int Id { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
         public string Passport { get; set; }
+        public string NrDays { get; set; }
+        public string NrCabin { get; set; }      
+        public string Restrictions { get; set; }
         public string Agencia { get; set; }
         public string Agente { get; set; }
         public string PAGO { get; set; }

@@ -12,7 +12,6 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
-using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.SqlClient;
 
 namespace SalesApp.Models.Entities
@@ -25,9 +24,9 @@ namespace SalesApp.Models.Entities
         {
             base.Configuration.ProxyCreationEnabled = false;
             base.Configuration.LazyLoadingEnabled = false;
-         
+
         }
-       
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //or configure all DateTime Preperties globally(EF 6 and Above)
@@ -38,8 +37,6 @@ namespace SalesApp.Models.Entities
             //modelBuilder.Entity<PRODUCT_CALENDER>()
             //.HasOptional(rack => rack.CATEGORY_PRODUCT)
             //.WithRequired(relay => relay.PRODUCT_CALENDER);
-
-
         }
 
         public virtual DbSet<ACCT_CAJACHICA> ACCT_CAJACHICA { get; set; }
@@ -83,7 +80,7 @@ namespace SalesApp.Models.Entities
         public virtual DbSet<I_Sales> I_Sales { get; set; }
         public virtual DbSet<I_SalesGroup> I_SalesGroup { get; set; }
         public virtual DbSet<V_GetPaxList> V_GetPaxList { get; set; }
-
+        public virtual DbSet<Cabin> Cabin { get; set; }
 
         public virtual int SP_Delete_PaxDefault(Nullable<int> id)
         {
@@ -92,28 +89,16 @@ namespace SalesApp.Models.Entities
                     new SqlParameter("Id", typeof(int));
 
             return this.Database.SqlQuery<int>("SP_Delete_PaxDefault @Id", customerIdParameter).SingleOrDefault();
-     }
+        }
 
         public virtual int SP_Insert_CountReservation(Nullable<int> productCalenderId)
         {
-           var customerIdParameter = productCalenderId.HasValue ?
-          new SqlParameter("ProductCalenderId", productCalenderId) :
-          new SqlParameter("ProductCalenderId", typeof(int));
+            var customerIdParameter = productCalenderId.HasValue ?
+           new SqlParameter("ProductCalenderId", productCalenderId) :
+           new SqlParameter("ProductCalenderId", typeof(int));
 
             return this.Database.SqlQuery<int>("SP_Insert_CountReservation @ProductCalenderId", customerIdParameter).SingleOrDefault();
-
-
         }
-
-        //public virtual ObjectResult<SP_Insert_PaxDefault_Result> SP_Insert_PaxDefault(string name)
-        //{
-        //    var nameParameter = name != null ?
-        //        new ObjectParameter("Name", name) :
-        //        new ObjectParameter("Name", typeof(string));
-
-        //    return ((IObjectContextAdapter)this)
-        //        .ObjectContext.ExecuteFunction<SP_Insert_PaxDefault_Result>("SP_Insert_PaxDefault", nameParameter);
-        //}
 
         public virtual int SP_Insert_PaxDefault(string name)
         {
@@ -138,15 +123,6 @@ namespace SalesApp.Models.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Mover_AllPaxs", productCalenderIdParameter, targetcategoryProductIdParameter);
         }
 
-        //public virtual ObjectResult<Nullable<int>> SP_SetCharter(Nullable<int> productCalenderId)
-        //{
-        //    var productCalenderIdParameter = productCalenderId.HasValue ?
-        //        new ObjectParameter("ProductCalenderId", productCalenderId) :
-        //        new ObjectParameter("ProductCalenderId", typeof(int));
-
-        //    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_SetCharter", productCalenderIdParameter);
-        //}
-
         public virtual int SP_SetCharter(int? productCalenderId)
         {
             var customerIdParameter = productCalenderId.HasValue ?
@@ -166,16 +142,6 @@ namespace SalesApp.Models.Entities
             return this.Database.SqlQuery<int>("SP_SetNoSalir @ProductCalenderId", customerIdParameter).SingleOrDefault();
         }
 
-        //public virtual ObjectResult<Nullable<int>> SP_SetNoSalir(Nullable<int> productCalenderId)
-        //{
-        //    var productCalenderIdParameter = productCalenderId.HasValue ?
-        //        new ObjectParameter("ProductCalenderId", productCalenderId) :
-        //        new ObjectParameter("ProductCalenderId", typeof(int));
-
-        //    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_SetNoSalir", productCalenderIdParameter);
-        //}
-
-
         public virtual int SP_SetSalir(int? productCalenderId)
         {
             var customerIdParameter = productCalenderId.HasValue ?
@@ -184,30 +150,6 @@ namespace SalesApp.Models.Entities
 
             return this.Database.SqlQuery<int>("SP_SetSalir @ProductCalenderId", customerIdParameter).SingleOrDefault();
         }
-
-
-
-        //public virtual ObjectResult<Nullable<int>> SP_SetSalir(Nullable<int> productCalenderId)
-        //{
-        //    var productCalenderIdParameter = productCalenderId.HasValue ?
-        //        new ObjectParameter("ProductCalenderId", productCalenderId) :
-        //        new ObjectParameter("ProductCalenderId", typeof(int));
-
-        //    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_SetSalir", productCalenderIdParameter);
-        //}
-
-        //public virtual ObjectResult<SP_GET_PAXLIST_Result> SP_GET_PAXLIST(Nullable<int> pcaId)
-        //{
-        //    var pcaIdParameter = pcaId.HasValue ?
-        //        new ObjectParameter("pcaId", pcaId) :
-        //        new ObjectParameter("pcaId", typeof(int));
-
-        // //   return Database.SqlQuery<SP_GET_PAXLIST_Result>("SP_GET_PAXLIST", pcaIdParameter).SingleOrDefault();
-
-        //    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GET_PAXLIST_Result>("SP_GET_PAXLIST", pcaIdParameter);
-        //}
-
-
 
         public virtual int SP_SetGastos(int? productCalenderId, int? categoryProductId)
         {
@@ -221,19 +163,5 @@ namespace SalesApp.Models.Entities
 
             return this.Database.SqlQuery<int>("SP_SetGastos @ProductCalenderId, @CategoryProductId", customerIdParameter, categoryProductIdParameter).SingleOrDefault();
         }
-
-        //public virtual ObjectResult<Nullable<int>> SP_SetGastos(Nullable<int> productCalenderId, Nullable<int> categoryProductId)
-        //{
-        //    var productCalenderIdParameter = productCalenderId.HasValue ?
-        //        new ObjectParameter("ProductCalenderId", productCalenderId) :
-        //        new ObjectParameter("ProductCalenderId", typeof(int));
-
-        //    var categoryProductIdParameter = categoryProductId.HasValue ?
-        //        new ObjectParameter("CategoryProductId", categoryProductId) :
-        //        new ObjectParameter("CategoryProductId", typeof(int));
-
-        //    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_SetGastos", productCalenderIdParameter, categoryProductIdParameter);
-        //}
-      
     }
 }

@@ -15,14 +15,15 @@
     {
         @Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.Name;
         @:  => FECHA: 
-       
-        @Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER.Where(c => c.Id == Model.First().ProductCalenderId).First().Day@:.@Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER.Where(c => c.Id == Model.First().ProductCalenderId).FirstOrDefault().Month.@Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.PRODUCT_CALENDER.Where(c => c.Id == Model.First().ProductCalenderId).First().Year
+        @Model.First().getProductCalender(Model.First().ProductCalenderId).Day@:.@Model.First().getProductCalender(Model.First().ProductCalenderId).Month.@Model.First().getProductCalender(Model.First().ProductCalenderId).Year
     }
 
 </h3>
 
 <p>
-    @Html.ActionLink("Add New", "AddProviderType", "GASTOS_OPERATION", new { ProductCalenderId = Model.First().ProductCalenderId, CategoryProductId = Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.Id }, null)
+    @Html.ActionLink("Back to List", "Index", Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.Id==5?"Boat":"Lancha", new { Id = Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.Id }, new { @class = "LinkButton" })
+
+    @Html.ActionLink("Add New", "AddProviderType", "GASTOS_OPERATION", new { ProductCalenderId = Model.First().ProductCalenderId, CategoryProductId = Model.First().GASTOS_TYPE_PROVIDER.CATEGORY_PRODUCT.Id }, new { @class = "LinkButton" })
 </p>
 <table class="table">
     <tr>

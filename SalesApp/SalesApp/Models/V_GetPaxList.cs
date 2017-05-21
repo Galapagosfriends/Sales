@@ -22,5 +22,6 @@ namespace SalesApp.Models
         public string Agente { get; set; }
         public string PAGO { get; set; }
         public Nullable<int> ProductCalenderId { get; set; }
+        public int Id { get; set; }
     }
 }

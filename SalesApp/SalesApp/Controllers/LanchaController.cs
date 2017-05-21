@@ -19,7 +19,7 @@ namespace SalesApp.Controllers
         {
             int startMonth =  DateTime.Now.Month; 
             if(Request.IsAuthenticated && (User.IsInRole("Contador") || User.IsInRole("Admin"))){
-                startMonth =4;
+                startMonth = 4;
             }
             month = month == null || month==0? startMonth : month;
 
@@ -28,6 +28,9 @@ namespace SalesApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //fix to abril sailfish
+            month = (id == 8 && month == 4 ) ?  5 : month;
+
             var tPRODUCTCALENDER = db.PRODUCT_CALENDER.Include(p => p.CATEGORY_PRODUCT).Where(pd =>
             (pd.CategoryProductId == id) && (pd.Month == month) && (pd.Year == DateTime.Now.Year));
 
@@ -66,7 +69,7 @@ namespace SalesApp.Controllers
         public ActionResult SetGastos(int? Id, int? CategoryProductId)
         {
             db.SP_SetGastos(Id, CategoryProductId);
-          return RedirectToAction("SetGastos", "GASTOS_OPERATION", new { Id = Id, CategoryProductId = CategoryProductId });
+          return RedirectToAction("SetGastos", "GASTOS_OPERATION", new { ProductCalenderId = Id, CategoryProductId = CategoryProductId });
         }
 
 

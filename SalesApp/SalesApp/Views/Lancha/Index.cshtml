@@ -4,46 +4,53 @@
     ViewBag.Title = "Lancha";
 }
 @*//1406?ProductCalenderId=1406&CategoryProductId=5&tourdays=58*@
-    <table id="tableMonths" width="100%" cellpadding="6">
-        <tr>            
-            @{  int startMonth = startMonth = DateTime.Now.Month; }
-            @if(Request.IsAuthenticated && (User.IsInRole("Contador") || User.IsInRole("Admin"))){
-                startMonth = 4;
-            }
+    <table class="tableColor" >
+        <thead>
+            <tr>
+                @{  int startMonth = startMonth = DateTime.Now.Month; }
+                @if (Request.IsAuthenticated && (User.IsInRole("Contador") || User.IsInRole("Admin")))
+                {
+                    startMonth = 4;
+                }
                 @for (int ii = startMonth; ii < 13; ii++)
                 {
-                    @:  <td > <h4>
-                        @Html.ActionLink(DateTime.Now.AddMonths((ii - DateTime.Now.Month)).Date.ToString("MMMM"), "Index", "Lancha", new { id = Model.First().CategoryProductId, month = ii }, null)                      
-                    @:  </h4></td >
+                    @: <td> <h4>
+                            @Html.ActionLink(DateTime.Now.AddMonths((ii - DateTime.Now.Month)).Date.ToString("MMMM"), "Index", "Lancha", new { id = Model.First().CategoryProductId, month = ii }, null)
+                    @: </h4> </td>
                 }
             </tr>
+        </thead>
         </table>
 
-<table class="table">
-    <tr>
-  <th style="background-color:cornflowerblue; color:white" colspan="6">
-      <h3>
-          @if(Model.Count() == 0){
-             @:"";
+<table class="tableColor">
+    <thead>
+        <tr>
+            <th style="background-color:cornflowerblue; color:white" colspan="6">
+                <h3>
+                    @if (Model.Count() == 0)
+                    {
+                        @:"";
           }
-          else
-          { @Model.First().CATEGORY_PRODUCT.Name }      
-      </h3>
-</th>  
-    <th style="background-color: darkblue; color:white; font-variant:small-caps"> 
-        <h3> 
-            @*@if (Model.Count() == 0)
-            {
-                @: 
-             }
-            else
-            {*@ 
-                @Model.FirstOrDefault().Date.Value.ToString("MMMM") 
-           @* }*@
+                    else
+                    { @Model.First().CATEGORY_PRODUCT.Name }
+                </h3>
+            </th>
+            <th style="background-color: darkblue; color:white; font-variant:small-caps">
+                <h3>
+                    @*@if (Model.Count() == 0)
+                        {
+                            @:
+                         }
+                        else
+                        {*@
+                    @Model.FirstOrDefault().Date.Value.ToString("MMMM")
+                    @* }*@
 
-        </h3>
-        </th>
-    </tr> 
+                </h3>
+            </th>
+        </tr>
+    </thead>
+    <tbody> 
     <tr>  
         @{  int x = 0; int dd = 0; }
         @foreach (var item1 in Model)
@@ -66,7 +73,7 @@
             if (item.Date.Value.Day+1 < DateTime.Now.Day && item.Month == DateTime.Now.Month)
             {
                 @:<td>
-                    @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { id = item.Id }, null)
+                    @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { ProductCalenderId = item.Id }, null)
                 @:close </ td >
 
                     @*@:<td><h3> @item.Day </h3> close</td>*@
@@ -74,7 +81,7 @@
             else {
                 <td>
                   @*  <h3> @item.Day </h3>*@       
-                  <h3>  @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { id = item.Id }, null)
+                  <h3>  @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { ProductCalenderId = item.Id }, null)
                     </h3>
          
                     @if (item.TotalBooks == null || item.TotalBooks ==0)
@@ -114,7 +121,7 @@
                          }
                     }
                     <br />
-                    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)
+                    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { ProductCalenderId = item.Id, CategoryProductId = item.CategoryProductId }, null)
 
 
                 </td>
@@ -162,7 +169,7 @@
                     }
                     <br />
                     @*//DEBUG
-                    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)*@
+    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { ProductCalenderId = item.Id, CategoryProductId = item.CategoryProductId }, null)*@
    
                 </td>
             }
@@ -171,9 +178,8 @@
     }
    
 
-
-
     </tr>
+        </tbody>
 </table>
 
 

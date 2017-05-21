@@ -46,7 +46,7 @@
            }
             <td>
                 <h3>
-                    @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { id = item.Id, tourdays = item.Tourdays }, null)
+                    @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { ProductCalenderId = item.Id, tourdays = item.Tourdays }, null)
                 </h3>
                     @if (item.TotalBooks == null)
                 {
@@ -84,7 +84,7 @@
                     @Html.ActionLink("NoSalir", "NoSalir", "PRODUCT_CALENDER", new { id = item.Id, CategoryProductId = item.CategoryProductId, month = item.Month }, null)
                      }
                 <br />
-                @Html.ActionLink("Gastos", "SetGastos", "GASTOS_OPERATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)
+                @Html.ActionLink("Gastos", "SetGastos", "GASTOS_OPERATION", new { ProductCalenderId = item.Id, CategoryProductId = item.CategoryProductId }, null)
 
                </td>
             x = x + 1;

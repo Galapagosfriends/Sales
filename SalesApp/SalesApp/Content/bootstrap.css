@@ -3,7 +3,12 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
+    new version
+
+*/
+
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -249,10 +254,17 @@ th {
   .label {
     border: 1px solid #000;
   }
+
   .table {
     border-collapse: collapse !important;
+
   }
-  .table td,
+
+  .table td
+  {
+    background-color: #fff !important;
+  }
+
   .table th {
     background-color: #fff !important;
   }
@@ -2249,6 +2261,7 @@ pre code {
     margin-left: 0;
   }
 }
+
 table {
   background-color: transparent;
 }
@@ -2261,41 +2274,47 @@ caption {
 th {
   text-align: left;
 }
-.table {
+
+.tableColor {
   width: 100%;
   max-width: 100%;
   margin-bottom: 10px;
-  font-size: 12px;
+  font-size: 11px;
+  background-color: #fff;
 }
-.table > thead > tr > th,
-.table > tbody > tr > th,
-.table > tfoot > tr > th,
-.table > thead > tr > td,
-.table > tbody > tr > td,
-.table > tfoot > tr > td {
+
+.tableColor > thead > tr > th,
+.tableColor > tbody > tr > th,
+.tableColor > tfoot > tr > th,
+.tableColor > thead > tr > td,
+.tableColor > tbody > tr > td,
+.tableColor > tfoot > tr > td {
   padding: 4px;
   line-height: 1.42857143;
   vertical-align: middle;
   border-top: 1px solid #ddd;
 }
-.table > thead > tr > th {
-  vertical-align: bottom;
-  border-bottom: 2px solid #ddd;
+
+.tableColor > thead > tr > th {
+  vertical-align: middle;
+  align-content: center;
+  border: 1px solid #fff;
+  background-color: skyblue;
+  font-size: 12px;
 }
-.table > caption + thead > tr:first-child > th,
-.table > colgroup + thead > tr:first-child > th,
-.table > thead:first-child > tr:first-child > th,
-.table > caption + thead > tr:first-child > td,
-.table > colgroup + thead > tr:first-child > td,
-.table > thead:first-child > tr:first-child > td {
+
+.tableColor > caption + thead > tr:first-child > th,
+.tableColor > colgroup + thead > tr:first-child > th,
+.tableColor > thead:first-child > tr:first-child > th,
+.tableColor > caption + thead > tr:first-child > td,
+.tableColor > colgroup + thead > tr:first-child > td,
+.tableColor > thead:first-child > tr:first-child > td {
   border-top: 0;
 }
-.table > tbody + tbody {
+.tableColor > tbody + tbody {
   border-top: 2px solid #ddd;
 }
-.table .table {
-  background-color: #fff;
-}
+
 .table-condensed > thead > tr > th,
 .table-condensed > tbody > tr > th,
 .table-condensed > tfoot > tr > th,
@@ -4275,12 +4294,49 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-bottom: 0;
   border-width: 1px 0 0;
 }
+
 .navbar-brand {
   float: left;
-  height: 50px;
-  padding: 15px 15px;
-  font-size: 18px;
-  line-height: 20px;
+  height: 45px;
+  padding: 12px 12px;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.LinkButton{
+    float: left;
+    color:#23527c; 
+    background-color: #e6e6e6; 
+    border-color:#adadad; 
+    cursor: pointer; 
+    margin-bottom: 11px; 
+    margin-left: 5px; 
+    margin-right: 5px; 
+    padding-top: 4px; 
+    padding-bottom: 4px; 
+    padding-right: 13px; 
+    padding-left: 13px; 
+    border-radius:8px;
+     line-height: 18px; 
+     font-size: 13px;
+}
+
+.TdLinkButton{
+    color:#23527c; 
+    background-color: #e6e6e6; 
+    border-color:#adadad; 
+    cursor: pointer; 
+    margin-top: 1px; 
+   margin-left: 2px; 
+   margin-right: 2px; 
+    padding-top: 4px; 
+    padding-bottom: 4px; 
+    padding-right: 4px; 
+    padding-left: 4px; 
+    border-radius:5px;
+     line-height: 13px; 
+     font-size: 11px;
+     float: left;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {

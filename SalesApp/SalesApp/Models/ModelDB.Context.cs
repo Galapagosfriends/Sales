@@ -68,6 +68,7 @@ namespace SalesApp.Models
         public virtual DbSet<I_Sales> I_Sales { get; set; }
         public virtual DbSet<I_SalesGroup> I_SalesGroup { get; set; }
         public virtual DbSet<V_GetPaxList> V_GetPaxList { get; set; }
+        public virtual DbSet<Cabin> Cabin { get; set; }
     
         public virtual int SP_Delete_PaxDefault(Nullable<int> id)
         {

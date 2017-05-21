@@ -524,6 +524,9 @@
     <Compile Include="Models\AGENT.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cabin.cs">
+      <DependentUpon>ModelDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CATEGORY.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
@@ -545,6 +548,7 @@
     <Compile Include="Models\Entities\ADRESS.cs" />
     <Compile Include="Models\Entities\AGENCY.cs" />
     <Compile Include="Models\Entities\AGENT.cs" />
+    <Compile Include="Models\Entities\Cabin.cs" />
     <Compile Include="Models\Entities\CATEGORY.cs" />
     <Compile Include="Models\Entities\CATEGORY_PRODUCT.cs" />
     <Compile Include="Models\Entities\COUNTRY.cs" />

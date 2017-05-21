@@ -12,6 +12,7 @@ namespace SalesApp.Models.Entities
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
     [Table("GASTOS_OPERATION")]
     public class GASTOS_OPERATION
@@ -29,5 +30,11 @@ namespace SalesApp.Models.Entities
 
         [ForeignKey("GastosTypeProviderId")]
         public virtual GASTOS_TYPE_PROVIDER GASTOS_TYPE_PROVIDER { get; set; }
+
+      
+        public PRODUCT_CALENDER getProductCalender( int? ProductCalenderId)
+        {
+            return new Galadventure_TrabajosEntities().PRODUCT_CALENDER.Where(s => s.Id == ProductCalenderId).First();
+        }
     }
 }

@@ -33,6 +33,7 @@ namespace SalesApp.Models
         public string DropOff { get; set; }
         public string Restrictions { get; set; }
         public Nullable<bool> Continua { get; set; }
+        public Nullable<int> CabinId { get; set; }
     
         public virtual AGENCY AGENCY { get; set; }
         public virtual AGENT AGENT { get; set; }
@@ -44,5 +45,6 @@ namespace SalesApp.Models
         public virtual PRODUCT_RESERVATION_TYPE PRODUCT_RESERVATION_TYPE { get; set; }
         public virtual TOUR_DAYS TOUR_DAYS { get; set; }
         public virtual DIVE DIVE { get; set; }
+        public virtual Cabin Cabin { get; set; }
     }
 }

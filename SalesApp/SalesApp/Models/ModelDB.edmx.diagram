@@ -77,6 +77,9 @@
         <AssociationConnector Association="Galadventure_TrabajosModel.FK_I_SalesGroup_MemberNumberId" />
         <AssociationConnector Association="Galadventure_TrabajosModel.FK_I_Sales_I_SalesGroup" />
         <EntityTypeShape EntityType="Galadventure_TrabajosModel.V_GetPaxList" Width="1.5" PointX="16.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Galadventure_TrabajosModel.Cabin" Width="1.5" PointX="5.25" PointY="40.75" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_Cabin_CATEGORY_PRODUCT" />
+        <AssociationConnector Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_CabinId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

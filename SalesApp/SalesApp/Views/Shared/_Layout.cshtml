@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+  
     <title>@ViewBag.Title - Galadventure S.A</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr") 
@@ -25,8 +25,9 @@
                 {
                     @Html.ActionLink("Angreju", "Index", "Lancha", new { id = 3 }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Magic", "Index", "Lancha", new { id = 4 }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("SailFish", "Index", "Lancha", new { id = 8 }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Solitario", "Index", "Boat", new { id = 5 }, new { @class = "navbar-brand" })
-               
+
                 }
                 @*     @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })*@
             </div>
@@ -43,9 +44,11 @@
 
                     @if (Request.IsAuthenticated && (User.IsInRole("Manager") || User.IsInRole("Contador")))
                     {
-                    <li>@Html.ActionLink("ReservaAngreju", "Index", "Lancha", new { id = 3 }, new { @class = "navbar-brand" })</li>
-                    <li>@Html.ActionLink("ReservaMagic", "Index", "Lancha", new { id = 4 }, new { @class = "navbar-brand" })</li>
-                    <li>@Html.ActionLink("ReservaSolitario", "Index", "Boat", new { id = 5 }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("R-Angreju", "Index", "Lancha", new { id = 3 }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("R-Magic", "Index", "Lancha", new { id = 4 }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("R-Magic", "Index", "Lancha", new { id = 4 }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("R-SailFish", "Index", "Lancha", new { id = 8 }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("R-Solitario", "Index", "Boat", new { id = 5 }, new { @class = "navbar-brand" })</li>
 
                     }
 

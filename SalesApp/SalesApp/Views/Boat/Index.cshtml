@@ -19,7 +19,7 @@
             </tr>
         </table>
 
-<table class="table">
+<table class="tableColor">
     <tr>
   <th style="background-color:cornflowerblue; color:white" colspan="6">
       <h4>
@@ -59,7 +59,7 @@
             if (item.Date.Value.Day+1 < DateTime.Now.Day && item.Month == DateTime.Now.Month)
             {
                 @:<td>
-                    @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)
+                    @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { ProductCalenderId = item.Id, CategoryProductId = item.CategoryProductId }, null)
                 @:close </ td >
 
                     @*@:<td><h3> @item.Day </h3> close</td>*@
@@ -67,7 +67,7 @@
             else {
                 <td>
                   @*  <h3> @item.Day </h3>*@       
-                  <h3>  @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)
+                  <h3>  @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { ProductCalenderId = item.Id, CategoryProductId = item.CategoryProductId }, null)
                     </h3>
          
                     @if (item.TotalBooks == null || item.TotalBooks ==0)
@@ -106,7 +106,7 @@
                          }
                     }
                     <br />
-                    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)
+                    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { ProductCalenderId = item.Id, CategoryProductId = item.CategoryProductId }, null)
 
 
                 </td>
@@ -135,7 +135,7 @@
          
                     @if (item.TotalBooks == null)
                     {
-                        @:<font color="Green" > 4+      
+                        @:<font color="Green" >+6      
                         @*@item.MaxNumber;*@
                         @: Libres</font>
                     }
@@ -150,20 +150,20 @@
                         else
                         {
                             @:<font color="Green" >
-                             if ((item.MaxNumber - item.TotalBooks) <= 4)
+                             if ((item.MaxNumber - item.TotalBooks) <= 6)
                             {
                                 @(item.MaxNumber - item.TotalBooks);
                             }
                             else
                             {
-                                @: 4+ 
+                                @:+6 
                             }
                             @: Libres </font>
                         }
                     }
                     <br />
                     @*//DEBUG
-                    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { id = item.Id, CategoryProductId = item.CategoryProductId }, null)*@
+    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { ProductCalenderId = item.Id, CategoryProductId = item.CategoryProductId }, null)*@
    
                 </td>
             }

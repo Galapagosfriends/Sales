@@ -71,16 +71,16 @@ namespace SalesApp.Controllers
         //    return View(pAX);
         //}
 
-        public ActionResult Edit(int? id, int? resvId)
+        public ActionResult Edit(int? ReservationId, int? ProductCalenderId, int? PaxId)
         {
-            if (id == null)
+            if (ReservationId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRODUCT_RESERVATION pRODUCT_RESERVATION = db.PRODUCT_RESERVATION.Find(id);
-            ViewBag.ProductCalenderId = id;
-            ViewBag.ProductCalenderId = resvId;
-            Pax pAX = db.PAX.Include(prp => prp.PRODUCT_RESERVATION).Where(p=> p.Id == id).SingleOrDefault();
+       
+              ViewBag.ProductCalenderId = ProductCalenderId;
+
+            Pax pAX = db.PAX.Include(prp => prp.PRODUCT_RESERVATION).Where(p=> p.Id == PaxId).SingleOrDefault();
             
             if (pAX == null)
             {
@@ -107,9 +107,7 @@ namespace SalesApp.Controllers
                 
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "PRODUCT_RESERVATION", new { Id = Request.Params["resvId"] });
-
-              //  return RedirectToAction("Index");
+                return RedirectToAction("Index", "PRODUCT_RESERVATION", new { ProductCalenderId = Request.Params["ProductCalenderId"] });
             }
             return View(pAX);
         }

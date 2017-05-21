@@ -104,6 +104,15 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AdresseID" Type="int" />
         </EntityType>
+        <EntityType Name="Cabin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="CategoryProductId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="CATEGORY">
           <Key>
             <PropertyRef Name="Id" />
@@ -478,6 +487,7 @@
           <Property Name="DropOff" Type="nvarchar" MaxLength="200" />
           <Property Name="Restrictions" Type="nvarchar" MaxLength="400" />
           <Property Name="Continua" Type="bit" />
+          <Property Name="CabinId" Type="int" />
         </EntityType>
         <EntityType Name="PRODUCT_RESERVATION_TYPE">
           <Key>
@@ -505,9 +515,11 @@
 warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="V_GetPaxList">
           <Key>
+            <PropertyRef Name="Id" />
             <PropertyRef Name="Agencia" />
             <PropertyRef Name="Agente" />
           </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" />
           <Property Name="First_Name" Type="nvarchar" MaxLength="150" />
           <Property Name="Last_Name" Type="nvarchar" MaxLength="150" />
@@ -538,6 +550,18 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
             </Principal>
             <Dependent Role="AGENCY">
               <PropertyRef Name="AdresseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cabin_CATEGORY_PRODUCT">
+          <End Role="CATEGORY_PRODUCT" Type="Self.CATEGORY_PRODUCT" Multiplicity="1" />
+          <End Role="Cabin" Type="Self.Cabin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY_PRODUCT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cabin">
+              <PropertyRef Name="CategoryProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -793,6 +817,18 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_CabinId">
+          <End Role="Cabin" Type="Self.Cabin" Multiplicity="0..1" />
+          <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cabin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="CabinId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PRODUCT_RESERVATION_DiveId">
           <End Role="DIVE" Type="Self.DIVE" Multiplicity="0..1" />
           <End Role="PRODUCT_RESERVATION" Type="Self.PRODUCT_RESERVATION" Multiplicity="*" />
@@ -927,6 +963,7 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
           <EntitySet Name="ADRESS" EntityType="Self.ADRESS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AGENCY" EntityType="Self.AGENCY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AGENT" EntityType="Self.AGENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cabin" EntityType="Self.Cabin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORY" EntityType="Self.CATEGORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORY_PRODUCT" EntityType="Self.CATEGORY_PRODUCT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
@@ -961,6 +998,7 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
           <EntitySet Name="TOUR_DAYS" EntityType="Self.TOUR_DAYS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="V_GetPaxList" EntityType="Self.V_GetPaxList" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [V_GetPaxList].[Id] AS [Id], 
     [V_GetPaxList].[Date] AS [Date], 
     [V_GetPaxList].[First_Name] AS [First_Name], 
     [V_GetPaxList].[Last_Name] AS [Last_Name], 
@@ -978,6 +1016,10 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
           <AssociationSet Name="FK_Agency_Adresse" Association="Self.FK_Agency_Adresse">
             <End Role="ADRESS" EntitySet="ADRESS" />
             <End Role="AGENCY" EntitySet="AGENCY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cabin_CATEGORY_PRODUCT" Association="Self.FK_Cabin_CATEGORY_PRODUCT">
+            <End Role="CATEGORY_PRODUCT" EntitySet="CATEGORY_PRODUCT" />
+            <End Role="Cabin" EntitySet="Cabin" />
           </AssociationSet>
           <AssociationSet Name="FK_CATEGORYPRODUCT_CATEGORYPRODUCT" Association="Self.FK_CATEGORYPRODUCT_CATEGORYPRODUCT">
             <End Role="CATEGORY" EntitySet="CATEGORY" />
@@ -1061,6 +1103,10 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
           </AssociationSet>
           <AssociationSet Name="FK_PRODUCT_RESERVATION_AGENT" Association="Self.FK_PRODUCT_RESERVATION_AGENT">
             <End Role="AGENT" EntitySet="AGENT" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_CabinId" Association="Self.FK_PRODUCT_RESERVATION_CabinId">
+            <End Role="Cabin" EntitySet="Cabin" />
             <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
           </AssociationSet>
           <AssociationSet Name="FK_PRODUCT_RESERVATION_DiveId" Association="Self.FK_PRODUCT_RESERVATION_DiveId">
@@ -1226,6 +1272,7 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
           <NavigationProperty Name="CATEGORY" Relationship="Self.FK_CATEGORYPRODUCT_CATEGORYPRODUCT" FromRole="CATEGORY_PRODUCT" ToRole="CATEGORY" />
           <NavigationProperty Name="GASTOS_TYPE_PROVIDER" Relationship="Self.FK_GASTOS_TYPE_PROVIDER_CATEGORY_PRODUCT" FromRole="CATEGORY_PRODUCT" ToRole="GASTOS_TYPE_PROVIDER" />
           <NavigationProperty Name="PRODUCT_CALENDER" Relationship="Self.FK_PRODUCTCALENDER_CATEGORYPRODUCT" FromRole="CATEGORY_PRODUCT" ToRole="PRODUCT_CALENDER" />
+          <NavigationProperty Name="Cabin" Relationship="Galadventure_TrabajosModel.FK_Cabin_CATEGORY_PRODUCT" FromRole="CATEGORY_PRODUCT" ToRole="Cabin" />
         </EntityType>
         <EntityType Name="COUNTRY">
           <Key>
@@ -1473,6 +1520,8 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
           <Property Name="DropOff" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Restrictions" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="Continua" Type="Boolean" />
+          <Property Name="CabinId" Type="Int32" />
+          <NavigationProperty Name="Cabin" Relationship="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_CabinId" FromRole="PRODUCT_RESERVATION" ToRole="Cabin" />
         </EntityType>
         <EntityType Name="PROVIDER">
           <Key>
@@ -1869,6 +1918,15 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
             <End Role="I_Sales" EntitySet="I_Sales" />
           </AssociationSet>
           <EntitySet Name="V_GetPaxList" EntityType="Galadventure_TrabajosModel.V_GetPaxList" />
+          <EntitySet Name="Cabin" EntityType="Galadventure_TrabajosModel.Cabin" />
+          <AssociationSet Name="FK_Cabin_CATEGORY_PRODUCT" Association="Galadventure_TrabajosModel.FK_Cabin_CATEGORY_PRODUCT">
+            <End Role="CATEGORY_PRODUCT" EntitySet="CATEGORY_PRODUCT" />
+            <End Role="Cabin" EntitySet="Cabin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCT_RESERVATION_CabinId" Association="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_CabinId">
+            <End Role="Cabin" EntitySet="Cabin" />
+            <End Role="PRODUCT_RESERVATION" EntitySet="PRODUCT_RESERVATION" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SP_Insert_PaxDefault_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2252,6 +2310,7 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
           <Key>
             <PropertyRef Name="Agencia" />
             <PropertyRef Name="Agente" />
+            <PropertyRef Name="Id" />
           </Key>
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="First_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
@@ -2261,7 +2320,43 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
           <Property Name="Agente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PAGO" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="ProductCalenderId" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cabin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CATEGORY_PRODUCT" Relationship="Galadventure_TrabajosModel.FK_Cabin_CATEGORY_PRODUCT" FromRole="Cabin" ToRole="CATEGORY_PRODUCT" />
+          <NavigationProperty Name="PRODUCT_RESERVATION" Relationship="Galadventure_TrabajosModel.FK_PRODUCT_RESERVATION_CabinId" FromRole="Cabin" ToRole="PRODUCT_RESERVATION" />
+        </EntityType>
+        <Association Name="FK_Cabin_CATEGORY_PRODUCT">
+          <End Type="Galadventure_TrabajosModel.CATEGORY_PRODUCT" Role="CATEGORY_PRODUCT" Multiplicity="1" />
+          <End Type="Galadventure_TrabajosModel.Cabin" Role="Cabin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORY_PRODUCT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cabin">
+              <PropertyRef Name="CategoryProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCT_RESERVATION_CabinId">
+          <End Type="Galadventure_TrabajosModel.Cabin" Role="Cabin" Multiplicity="0..1" />
+          <End Type="Galadventure_TrabajosModel.PRODUCT_RESERVATION" Role="PRODUCT_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cabin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PRODUCT_RESERVATION">
+              <PropertyRef Name="CabinId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2607,6 +2702,7 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
           <EntitySetMapping Name="PRODUCT_RESERVATION">
             <EntityTypeMapping TypeName="Galadventure_TrabajosModel.PRODUCT_RESERVATION">
               <MappingFragment StoreEntitySet="PRODUCT_RESERVATION">
+                <ScalarProperty Name="CabinId" ColumnName="CabinId" />
                 <ScalarProperty Name="Continua" ColumnName="Continua" />
                 <ScalarProperty Name="Restrictions" ColumnName="Restrictions" />
                 <ScalarProperty Name="DropOff" ColumnName="DropOff" />
@@ -2844,6 +2940,7 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
           <EntitySetMapping Name="V_GetPaxList">
             <EntityTypeMapping TypeName="Galadventure_TrabajosModel.V_GetPaxList">
               <MappingFragment StoreEntitySet="V_GetPaxList">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProductCalenderId" ColumnName="ProductCalenderId" />
                 <ScalarProperty Name="PAGO" ColumnName="PAGO" />
                 <ScalarProperty Name="Agente" ColumnName="Agente" />
@@ -2852,6 +2949,16 @@ warning 6002: The table/view 'Galadventure_Trabajos.dbo.V_GetPaxList' does not h
                 <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cabin">
+            <EntityTypeMapping TypeName="Galadventure_TrabajosModel.Cabin">
+              <MappingFragment StoreEntitySet="Cabin">
+                <ScalarProperty Name="CategoryProductId" ColumnName="CategoryProductId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
