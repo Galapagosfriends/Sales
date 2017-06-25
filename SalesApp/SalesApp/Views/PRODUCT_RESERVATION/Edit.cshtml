@@ -91,8 +91,17 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Price, "Precio", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-7">
-                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            @if (Model.Continua != true)
+                            {
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            }
+                            else
+                            {
+                                @Html.LabelFor(model => model.Price, Model.Price.ToString(), new { htmlAttributes = new { @class = "form-control" } })
+
+                            }
+                          
                         </div>
                     </div>
 
@@ -131,6 +140,28 @@
                                     @Html.ValidationMessageFor(model => model.ProductReservationTypeId, "", new { @class = "text-danger" })
                                 </div>
                          </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FacturaNr, "FacturaNr", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.FacturaNr, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NetoPrice, "NetoPrice", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-7">
+                            @if (Model.Continua != true)
+                            {
+                                @Html.EditorFor(model => model.NetoPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NetoPrice, "", new { @class = "text-danger" })
+                            }
+                            else
+                            {
+                                @Html.LabelFor(model => model.NetoPrice, Model.NetoPrice.ToString(), new { htmlAttributes = new { @class = "form-control" } })
+                                
+                            }                           
+                            
+                        </div>
+                    </div>
 
                     @if (Model.PRODUCT_CALENDER.CategoryProductId == 5)
                     { 
@@ -145,8 +176,15 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.TourDaysId, "Tour-Days", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-7">
+                               @if (Model.Continua != true)
+                               {
                                 @Html.DropDownList("TourDaysId", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.TourDaysId, "", new { @class = "text-danger" })
+                               } else
+                               {  
+                                    @Html.LabelFor(model => model.Continua, "Continuá", htmlAttributes: new { @class = "control-label col-md-2" })
+                               }                                             
+                           
                             </div>
                         </div>
                         <div class="form-group">

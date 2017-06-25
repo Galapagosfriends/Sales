@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using SalesApp.Models.Entities;
+using Microsoft.AspNet.Identity;
 
 namespace SalesApp.Controllers
 {
@@ -22,13 +23,13 @@ namespace SalesApp.Controllers
         [Authorize(Roles = "Admin,Manager,Contador")]
         public ActionResult Index(int ProductCalenderId, int? CategoryProductId)
         {
-            var pRODUCT_RESERVATION = db.PRODUCT_RESERVATION.Include(p => p.AGENCY).Include(p => p.AGENT).Include(p => p.PAX).Include(p => p.PAYMENT_TYPE).Include(p => p.PRODUCT_CALENDER).Include(p => p.PRODUCT_CALENDERHOUR).Include(p => p.PRODUCT_RESERVATION_TYPE).Include(p => p.TOUR_DAYS).Include(p => p.DIVE).Include(p => p.PRODUCT_CALENDER.CATEGORY_PRODUCT).Include(s=>s.CABIN).Where(d => d.ProductCalenderId == ProductCalenderId);
+            var pRODUCT_RESERVATION = db.PRODUCT_RESERVATION.Include(p => p.AGENCY).Include(p => p.AGENT).Include(p => p.PAX).Include(p => p.PAYMENT_TYPE).Include(p => p.PRODUCT_CALENDER).Include(p => p.PRODUCT_CALENDERHOUR).Include(p => p.PRODUCT_RESERVATION_TYPE).Include(p => p.TOUR_DAYS).Include(p => p.DIVE).Include(p => p.PRODUCT_CALENDER.CATEGORY_PRODUCT).Include(s => s.CABIN).Where(d => d.ProductCalenderId == ProductCalenderId);
 
             if (pRODUCT_RESERVATION.ToList().Count < 1)
             {
                 return RedirectToAction("Create", new { ProductCalenderId = ProductCalenderId, CategoryProductId = CategoryProductId });
             }
-           
+
             return View(pRODUCT_RESERVATION.ToList().OrderBy(o => o.PaxId));
         }
 
@@ -65,7 +66,7 @@ namespace SalesApp.Controllers
         {
             string backtoList = Request.Params["BacktoList"] == null && Request.Params["Create"] != null ? "Create" : Request.Params["BacktoList"];
 
-            string calId = ProductCalenderId == null?Request.Params["ProductCalenderId"]: ProductCalenderId.ToString();
+            string calId = ProductCalenderId == null ? Request.Params["ProductCalenderId"] : ProductCalenderId.ToString();
             int id = 0;
             if (calId.Length > 0)
             {
@@ -100,7 +101,7 @@ namespace SalesApp.Controllers
         [Authorize(Roles = "Admin,Manager,Contador")]
         public ActionResult Create(int? ProductCalenderId, int? CategoryProductId, int? tourdays)
         {
-            ViewBag.AgencyId = new SelectList(db.AGENCY.OrderByDescending(a=> a.Name), "Id", "Name");
+            ViewBag.AgencyId = new SelectList(db.AGENCY.OrderByDescending(a => a.Name), "Id", "Name");
             ViewBag.AgentId = new SelectList(db.AGENT.OrderByDescending(a => a.FirstName), "ID", "FirstName");
             ViewBag.PaxId = new SelectList(db.PAX, "Id", "First_Name");
             ViewBag.PaymentTypeId = new SelectList(db.PAYMENT_TYPE, "Id", "Description");
@@ -140,7 +141,7 @@ namespace SalesApp.Controllers
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Manager,Contador")]
-        public ActionResult Create([Bind(Include = "Id,ProductCalenderId,AgentId,PaymentTypeId,PaymentStatusId,AgencyId,Description,PaxId,Price,CreateDate,TourDaysId,ProductReservationTypeId,DivePrice,DiveId,PickUp,DropOff,Restrictions,Continua,CabinId,BloqueoDate")] PRODUCT_RESERVATION pRODUCT_RESERVATION)
+        public ActionResult Create([Bind(Include = "Id,ProductCalenderId,AgentId,PaymentTypeId,PaymentStatusId,AgencyId,Description,PaxId,Price,CreateDate,TourDaysId,ProductReservationTypeId,DivePrice,DiveId,PickUp,DropOff,Restrictions,Continua,CabinId,BloqueoDate,FacturaNr,NetoPrice")] PRODUCT_RESERVATION pRODUCT_RESERVATION)
         {
             string backtoList = Request.Params["BacktoList"] == null && Request.Params["Create"] != null ? "Create" : Request.Params["BacktoList"];
             if (backtoList.Equals("BacktoList"))
@@ -152,8 +153,8 @@ namespace SalesApp.Controllers
                     id = int.Parse(calId);
                     PRODUCT_CALENDER p = db.PRODUCT_CALENDER.Where(s => s.Id == id).FirstOrDefault();
                     if (p == null)
-                    {
-                        return HttpNotFound();
+                    {                      
+                        return View(" Create HttpNotFoundReservation", HttpStatusCode.BadRequest);
                     }
                 }
                 return RedirectToAction("Index", new { ProductCalenderId = id });
@@ -178,6 +179,8 @@ namespace SalesApp.Controllers
                         // SET @ID = SCOPE_IDENTITY()
                         int paxId = db.SP_Insert_PaxDefault((i + 1).ToString() + "pax ");
                         pRODUCT_RESERVATION.PaxId = paxId;
+                        pRODUCT_RESERVATION.UserName = User.Identity.GetUserName();
+                        pRODUCT_RESERVATION.PC_ID = System.Web.HttpContext.Current.Request.UserHostAddress == null ? HttpContext.Request.UserHostAddress : System.Web.HttpContext.Current.Request.UserHostAddress;
 
                         pRODUCT_RESERVATION.CreateDate = DateTime.Now;
                         pRODUCT_RESERVATION.ProductCalenderId = db.PRODUCT_CALENDER.Find(cid).Id;
@@ -187,6 +190,13 @@ namespace SalesApp.Controllers
 
                     db.SP_Insert_CountReservation(pRODUCT_RESERVATION.ProductCalenderId);
 
+                    PRODUCT_CALENDER p = db.PRODUCT_CALENDER.Find(pRODUCT_RESERVATION.ProductCalenderId);
+                    pRODUCT_RESERVATION.PRODUCT_CALENDER = p;
+
+                    if (pRODUCT_RESERVATION.PRODUCT_CALENDER.CategoryProductId == 5)
+                    {
+                        db.SP_Insert_ReservationContinue(pRODUCT_RESERVATION.Id, pRODUCT_RESERVATION.ProductCalenderId, pRODUCT_RESERVATION.PRODUCT_CALENDER.CategoryProductId);
+                    }
 
                     return RedirectToAction("Index", new { ProductCalenderId = pRODUCT_RESERVATION.ProductCalenderId });
                 }
@@ -226,21 +236,20 @@ namespace SalesApp.Controllers
                 return View(pRODUCT_RESERVATION);
             }
         }
-        
+
 
         // GET: PRODUCT_RESERVATION/Edit/5
         [Authorize(Roles = "Admin,Manager,Contador")]
         public ActionResult Edit(int? id, int? ProductCalenderId, int? CategoryProductId, int? tourdays)
         {
-
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View(" Edit HttpNotFoundReservation", HttpStatusCode.BadRequest);
             }
             PRODUCT_RESERVATION pRODUCT_RESERVATION = db.PRODUCT_RESERVATION.Include(a => a.PRODUCT_CALENDER).Include(a => a.PRODUCT_CALENDER.CATEGORY_PRODUCT).Include(a => a.CABIN).Where(a => a.Id == id).First();
             if (pRODUCT_RESERVATION == null)
             {
-                return HttpNotFound();
+                return View(" EditReservation Found", HttpStatusCode.BadRequest);            
             }
 
             int tu;
@@ -263,15 +272,15 @@ namespace SalesApp.Controllers
             ViewBag.DiveId = new SelectList(db.DIVE, "Id", "Name", pRODUCT_RESERVATION.DiveId);
 
             var s = (from a in db.Cabin
-                       from od in a.PRODUCT_RESERVATION.Where(r => r.ProductCalenderId == pRODUCT_RESERVATION.ProductCalenderId).DefaultIfEmpty()
-            where (a.Id != od.CabinId & a.CategoryProductId == pRODUCT_RESERVATION.PRODUCT_CALENDER.CategoryProductId)
+                     from od in a.PRODUCT_RESERVATION.Where(r => r.ProductCalenderId == pRODUCT_RESERVATION.ProductCalenderId).DefaultIfEmpty()
+                     where (a.Id != od.CabinId & a.CategoryProductId == pRODUCT_RESERVATION.PRODUCT_CALENDER.CategoryProductId)
                      select new
-                       {
-                           Id = a.Id,
-                           Name = a.Name,
-                           Description = a.Name + " " + a.Description,
-                           CategoryProductId = a.CategoryProductId
-                       })
+                     {
+                         Id = a.Id,
+                         Name = a.Name,
+                         Description = a.Name + " " + a.Description,
+                         CategoryProductId = a.CategoryProductId
+                     })
                        ;
             ViewBag.CabinId = new SelectList(s, "Id", "Description", pRODUCT_RESERVATION.CabinId);
             return View(pRODUCT_RESERVATION);
@@ -283,22 +292,22 @@ namespace SalesApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Manager,Contador")]
-        public ActionResult Edit([Bind(Include = "Id,ProductCalenderId,AgentId,PaymentTypeId,PaymentStatusId,AgencyId,Description,PaxId,Price,CreateDate,TourDaysId,ProductReservationTypeId,DivePrice,DiveId,PickUp,DropOff,Restrictions,Continua,CabinId,BloqueoDate")] PRODUCT_RESERVATION pRODUCT_RESERVATION)
+        public ActionResult Edit([Bind(Include = "Id,ProductCalenderId,AgentId,PaymentTypeId,PaymentStatusId,AgencyId,Description,PaxId,Price,CreateDate,TourDaysId,ProductReservationTypeId,DivePrice,DiveId,PickUp,DropOff,Restrictions,Continua,CabinId,BloqueoDate,FacturaNr,NetoPrice")] PRODUCT_RESERVATION pRODUCT_RESERVATION)
         {
+            PRODUCT_CALENDER p = db.PRODUCT_CALENDER.Find(pRODUCT_RESERVATION.ProductCalenderId);
+            pRODUCT_RESERVATION.PRODUCT_CALENDER = p;
 
             string backtoList = Request.Params["BacktoList"] == null && Request.Params["Edit"] != null ? "Edit" : Request.Params["BacktoList"];
             if (backtoList.Equals("BacktoList"))
             {
-                PRODUCT_CALENDER p = db.PRODUCT_CALENDER.Find(pRODUCT_RESERVATION.ProductCalenderId);
                 if (p == null)
                 {
-                    return HttpNotFound();
+                    return View("HttpNotFoundReservation", HttpNotFound().StatusDescription);
                 }
                 return RedirectToAction("Index", new { ProductCalenderId = p.Id, CategoryProductId = p.CategoryProductId });
             }
             else
             {
-
                 if (ModelState.IsValid)
                 {
                     if (pRODUCT_RESERVATION.PaxId == null)
@@ -306,20 +315,26 @@ namespace SalesApp.Controllers
                         var pax = db.SP_Insert_PaxDefault(pRODUCT_RESERVATION.ProductCalenderId.ToString());
                         pRODUCT_RESERVATION.PaxId = int.Parse(pax.ToString());
                     }
+                    pRODUCT_RESERVATION.UserName = User.Identity.GetUserName();
+                    pRODUCT_RESERVATION.PC_ID = System.Web.HttpContext.Current.Request.UserHostAddress == null ? HttpContext.Request.UserHostAddress : System.Web.HttpContext.Current.Request.UserHostAddress;
+
                     pRODUCT_RESERVATION.ProductReservationTypeId = pRODUCT_RESERVATION.ProductReservationTypeId == 0 ? 1 : pRODUCT_RESERVATION.ProductReservationTypeId;
                     pRODUCT_RESERVATION.CreateDate = pRODUCT_RESERVATION.CreateDate == null ? DateTime.Now.Date : pRODUCT_RESERVATION.CreateDate;
                     db.Entry(pRODUCT_RESERVATION).State = EntityState.Modified;
+
                     db.SaveChanges();
                     db.SP_Insert_CountReservation(pRODUCT_RESERVATION.ProductCalenderId);
+                    db.SP_Insert_ReservationContinue(pRODUCT_RESERVATION.Id, pRODUCT_RESERVATION.ProductCalenderId, pRODUCT_RESERVATION.PRODUCT_CALENDER.CategoryProductId);
 
                     return RedirectToAction("Index", new { ProductCalenderId = pRODUCT_RESERVATION.ProductCalenderId });
                 }
+
                 ViewBag.AgencyId = new SelectList(db.AGENCY, "Id", "Name", pRODUCT_RESERVATION.AgencyId);
                 ViewBag.AgentId = new SelectList(db.AGENT, "ID", "FirstName", pRODUCT_RESERVATION.AgentId);
                 ViewBag.PaxId = new SelectList(db.PAX, "Id", "First_Name", pRODUCT_RESERVATION.PaxId);
                 ViewBag.PaymentTypeId = new SelectList(db.PAYMENT_TYPE, "Id", "Description", pRODUCT_RESERVATION.PaymentTypeId);
                 ViewBag.ProductCalenderId = new SelectList(db.PRODUCT_CALENDER, "Id", "Id", pRODUCT_RESERVATION.ProductCalenderId);
-                ViewBag.ProductCalenderId = new SelectList(db.PRODUCT_CALENDERHOUR, "Id", "Times", pRODUCT_RESERVATION.ProductCalenderId);
+                //ViewBag.ProductCalenderId = new SelectList(db.PRODUCT_CALENDERHOUR, "Id", "Times", pRODUCT_RESERVATION.ProductCalenderId);
                 ViewBag.PaymentStatusId = new SelectList(db.PAYMENT_STATUS, "Id", "Description", pRODUCT_RESERVATION.PaymentStatusId);
                 ViewBag.TourDaysId = new SelectList(db.TOUR_DAYS, "Id", "Name", pRODUCT_RESERVATION.TourDaysId);
                 ViewBag.ProductReservationTypeId = new SelectList(db.PRODUCT_RESERVATION_TYPE, "Id", "Name", pRODUCT_RESERVATION.ProductReservationTypeId);
@@ -379,6 +394,7 @@ namespace SalesApp.Controllers
             else
             {
                 db.PRODUCT_RESERVATION.Remove(pRODUCT_RESERVATION);
+                db.Database.ExecuteSqlCommand("delete FROM [dbo].[PRODUCT_RESERVATION] where [BookId] = " + pRODUCT_RESERVATION.Id);
 
                 if (pRODUCT_RESERVATION.PaxId <= 0)
                 {

@@ -84,7 +84,13 @@
                 <th>
                     @Html.DisplayName("Precio")
                 </th>
-
+                <th>
+                    @Html.DisplayName("FacturaNr")
+                </th>
+                <th>
+                    @Html.DisplayName("NetoPrice")
+                </th>
+        
                 @if (Model.First().PRODUCT_CALENDER.CategoryProductId == 5)
             {
 
@@ -101,8 +107,11 @@
                     </th>
 
                 }
-
+              
                 <th></th>
+                <th>
+                    @Html.DisplayName("Rervado Por")
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -162,6 +171,13 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Data.Price)
                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.FacturaNr)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.NetoPrice)
+                    </td>
 
                     @if (item.Data.PRODUCT_CALENDER.CategoryProductId == 5)
                 {
@@ -182,12 +198,17 @@
                         <div class="TdLinkButton">
                             @Html.ActionLink("Edit", "Edit", new { id = item.Data.Id, ProductCalenderId = item.Data.ProductCalenderId, tourdays = item.Data.PRODUCT_CALENDER.Tourdays })
                         </div>
-
-                        <div class="TdLinkButton">
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Data.Id })
-                        </div>
+                        @if (item.Data.Continua == false || item.Data.Continua == null)
+                        {
+                            <div class="TdLinkButton">
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Data.Id })
+                            </div>
+                        }
+                      
                     </td>
-
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data.UserName)
+                    </td>
                 </tr>
             }
             <tr>
@@ -204,10 +225,10 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
+                <td></td><td></td>
+             
 
-                <td style="background-color:cornflowerblue; color:white; padding:3px">Total: <b> @Model.Sum(item => item.Price)</b> </td>
+                <td style="background-color:cornflowerblue; color:white; padding:3px">Total Venta: <b> @Model.Sum(item => item.Price)</b> </td>
             </tr>
         </tbody>
     </table>

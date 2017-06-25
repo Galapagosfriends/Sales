@@ -41,3 +41,81 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+
+.tableColor {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 10px;
+  font-size: 11px;
+  background-color: #fff;
+}
+
+.tableColor > thead > tr > th,
+.tableColor > tbody > tr > th,
+.tableColor > tfoot > tr > th,
+.tableColor > thead > tr > td,
+.tableColor > tbody > tr > td,
+.tableColor > tfoot > tr > td {
+  padding: 4px;
+  line-height: 1.42857143;
+  vertical-align: middle;
+  border-top: 1px solid #ddd;
+}
+
+.tableColor > thead > tr > th {
+  vertical-align: middle;
+  align-content: center;
+  border: 1px solid #fff;
+  background-color: skyblue;
+  font-size: 12px;
+}
+
+.tableColor > caption + thead > tr:first-child > th,
+.tableColor > colgroup + thead > tr:first-child > th,
+.tableColor > thead:first-child > tr:first-child > th,
+.tableColor > caption + thead > tr:first-child > td,
+.tableColor > colgroup + thead > tr:first-child > td,
+.tableColor > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+.tableColor > tbody + tbody {
+  border-top: 2px solid #ddd;
+}
+
+
+.LinkButton{
+    float: left;
+    color:#23527c; 
+    background-color: #e6e6e6; 
+    border-color:#adadad; 
+    cursor: pointer; 
+    margin-bottom: 11px; 
+    margin-left: 5px; 
+    margin-right: 5px; 
+    padding-top: 4px; 
+    padding-bottom: 4px; 
+    padding-right: 13px; 
+    padding-left: 13px; 
+    border-radius:8px;
+     line-height: 18px; 
+     font-size: 13px;
+}
+
+.TdLinkButton{
+    color:#23527c; 
+    background-color: #e6e6e6; 
+    border-color:#adadad; 
+    cursor: pointer; 
+    margin-top: 1px; 
+   margin-left: 2px; 
+   margin-right: 2px; 
+    padding-top: 4px; 
+    padding-bottom: 4px; 
+    padding-right: 4px; 
+    padding-left: 4px; 
+    border-radius:5px;
+     line-height: 13px; 
+     font-size: 11px;
+     float: left;
+}

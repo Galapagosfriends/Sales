@@ -19,6 +19,7 @@
             </tr>
         </table>
 
+
 <table class="tableColor">
     <tr>
   <th style="background-color:cornflowerblue; color:white" colspan="6">
@@ -54,7 +55,7 @@
         foreach (var item in Model) 
         {
             if (x == 7) { x = 0;
-                @:</tr> <tr>
+                @:</tr> <tr><td> </td>
             }
             if (item.Date.Value.Day+1 < DateTime.Now.Day && item.Month == DateTime.Now.Month)
             {
@@ -72,7 +73,7 @@
          
                     @if (item.TotalBooks == null || item.TotalBooks ==0)
                     {
-                        @:<font color="Green" >                                            
+                        @:<font color="Green"  size="2">                                            
                         @item.MaxNumber;                         
                         @: Libres</font>
                         <br />
@@ -93,14 +94,14 @@
                             }
                             else
                             {
-                                @:<font color="Red"> 16
+                                @:<font color="Red"  size="2"> 16
                                     @*@(item.MaxNumber - item.TotalBooks);*@
                                     @: Full </font>
 
                             }
                         }else
                         {
-                            @:<font color="Green" >
+                            @:<font color="Green"  size="2">
                             @(item.MaxNumber - item.TotalBooks);
                             @: Libres </font>
                          }
@@ -135,7 +136,7 @@
          
                     @if (item.TotalBooks == null)
                     {
-                        @:<font color="Green" >+6      
+                        @:<font color="Green"  size="2" >+8      
                         @*@item.MaxNumber;*@
                         @: Libres</font>
                     }
@@ -143,20 +144,20 @@
                     {
                         if (item.TotalBooks >= item.MaxNumber || item.Lock == true)
                         {
-                            @:<font color="Red">
+                            @:<font color="Red"  size="2">
                             @*@(item.MaxNumber - item.TotalBooks);*@
                             @: Full </font>
                         }
                         else
                         {
-                            @:<font color="Green" >
-                             if ((item.MaxNumber - item.TotalBooks) <= 6)
+                            @:<font color="Green"  size="2">
+                             if ((item.MaxNumber - item.TotalBooks) <= 8)
                             {
                                 @(item.MaxNumber - item.TotalBooks);
                             }
                             else
                             {
-                                @:+6 
+                                @:+8 
                             }
                             @: Libres </font>
                         }
@@ -175,4 +176,53 @@
 </table>
 
 
+<hr /><hr />
+<p>     Acontinuación les detallamos nuestros diferentes recorridos de viaje.
+</p>
+<h4>Viaje de 4 Días: </h4> 
+<table id="t4" style="font-size: 8pt;" width="520" cellspacing="0" cellpadding="1" border="1pt" align="justify">
+    <tbody>
+        <tr style="background-color: #1b6b8b; color: #FFFFFF; font-size:11pt; font-weight: bolder;">
+            <td>	Codigo	</td>
+            <td>	Descripción	</td>
+        </tr>
+        <tr><td>&nbsp; <a target="_blank" href="http://catamaranlonesomegeorge.com/tour4days.aspx#T4a" title="Click para ver detalles"> 4A_Route1</a></td>  
+        <td>&nbsp;	4 Días desde Viernes a Lunes 	</td>  </tr>
+        <tr><td>&nbsp; <a target="_blank" href="http://catamaranlonesomegeorge.com/tour4days.aspx#T4b" title="Click para ver detalles"> 4B_Route2</a></td> 
+         <td>&nbsp;	4 Días desde Viernes a Lunes 	</td>  </tr>
+
+    </tbody>
+</table>
+<hr />
+<br />
+<h4>Viaje de 5 Días :</h4>
+<table id="t5" style="font-size: 8pt;" width="520" cellspacing="0" cellpadding="1" border="1pt" align="justify">
+    <tbody>
+        <tr style="background-color: #1b6b8b; color: #FFFFFF; font-size: 13pt; font-weight: bolder;">
+            <td>	Codigo	</td>
+            <td>	Descripción	</td>
+        </tr>
+        <tr><td>&nbsp; <a target="_blank" href="http://catamaranlonesomegeorge.com/tour5days.aspx#T5a" title="Click para ver detalles"> 5A_Route1</a></td>  <td>&nbsp;	5 Días desde Lunes a Viernes	</td>  </tr>
+        <tr><td>&nbsp; <a target="_blank"  href="http://catamaranlonesomegeorge.com/tour5days.aspx#T5b" title="Click para ver detalles"> 5B_Route2</a></td>  <td>&nbsp;	5 Días desde Lunes a Viernes 	</td>  </tr>
+        
+    </tbody>
+</table>
+
+<hr />
+<br />
+<h4>Viaje de 8 Días :</h4>
+<table id="t8" style="font-size: 8pt;" width="520" cellspacing="0" cellpadding="1" border="1pt" align="justify" height="120">
+    <tbody>
+        <tr style="background-color: #1b6b8b; color: #FFFFFF; font-size: 13pt; font-weight: bolder;">
+            <td>	Codigo	</td>
+            <td>	Descripción	</td>
+        </tr>
+        <tr><td>&nbsp; <a target="_blank" href="http://catamaranlonesomegeorge.com/tour8days.aspx#T8a" title="Click para ver detalles"> 8A_Route1</a>	</td>  <td>&nbsp;	8 Días desde Viernes a Viernes</td>  </tr>
+        <tr><td>&nbsp; <a  target="_blank" href="http://catamaranlonesomegeorge.com/tour8days.aspx#T8b" title="Click para ver detalles"> 8A_Route2</a>	</td>  <td>&nbsp;	8 Días desde Viernes a Viernes</td>  </tr>
+        <tr><td>&nbsp; <a  target="_blank" href="http://catamaranlonesomegeorge.com/tour8days.aspx#T8c" title="Click para ver detalles"> 8B_Route1</a> </td>  <td>&nbsp;	8 Días desde Lunes a Lunes </td>  </tr>
+        <tr><td>&nbsp; <a target="_blank" href="http://catamaranlonesomegeorge.com/tour8days.aspx#T8d" title="Click para ver detalles"> 8B_Route2</a> </td>  <td>&nbsp;	8 Días desde Lunes a Lunes </td>  </tr>
+
+    </tbody>
+</table>
+<br>
 

@@ -1,0 +1,106 @@
+﻿@model IEnumerable<SalesApp.Models.Entities.PRODUCT_CALENDER>
+   
+@{
+    ViewBag.Title = "Sale";
+}
+@*//1406?ProductCalenderId=1406&CategoryProductId=5&tourdays=58*@
+    <table class="tableColor" >
+        <thead>
+            <tr>
+                @{  int startMonth = startMonth = DateTime.Now.Month; }
+                @if (Request.IsAuthenticated && (User.IsInRole("Contador") || User.IsInRole("Admin")))
+                {
+                    startMonth = 4;
+                }
+                @for (int ii = startMonth; ii < 13; ii++)
+                {
+                    @: <td> <h4>
+                            @Html.ActionLink(DateTime.Now.AddMonths((ii - DateTime.Now.Month)).Date.ToString("MMMM"), "Index", "sale", new { id = Model.First().CategoryProductId, month = ii }, null)
+                    @: </h4> </td>
+                }
+            </tr>
+        </thead>
+        </table>
+
+<table class="tableColor">
+    <thead>
+        <tr>
+            <th style="background-color:cornflowerblue; color:white" colspan="6">
+                <h3>
+                    @if (Model.Count() == 0)
+                    {
+                        @:"";
+          }
+                    else
+                    { @Model.First().CATEGORY_PRODUCT.Name }
+                </h3>
+            </th>
+            <th style="background-color: darkblue; color:white; font-variant:small-caps">
+                <h3>
+                    @*@if (Model.Count() == 0)
+                        {
+                            @:
+                         }
+                        else
+                        {*@
+                    @Model.FirstOrDefault().Date.Value.ToString("MMMM")
+                    @* }*@
+
+                </h3>
+            </th>
+        </tr>
+    </thead>
+    <tbody> 
+    <tr>  
+        @{  int x = 0; int dd = 0; }
+        @foreach (var item1 in Model)
+        {
+            if (dd == 7){ break; };
+            @:<th>  
+            @item1.Date.Value.ToString("dddd");
+            @:   </th>
+            dd = dd + 1;
+        }
+    </tr>
+    <tr>
+    @if (Request.IsAuthenticated)
+    {
+        foreach (var item in Model) 
+        {
+            if (x == 7) { x = 0;
+                @:</tr> <tr>
+            }
+            if (item.Date.Value.Day+2 < DateTime.Now.Day && item.Month == DateTime.Now.Month)
+            {
+                @:<td>
+                    @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { ProductCalenderId = item.Id }, null)
+                @:close </ td >
+
+                    @*@:<td><h3> @item.Day </h3> close</td>*@
+            }
+            else {
+                <td>
+               
+                  <h3> 
+                       @Html.ActionLink(item.Day.ToString(), "Index", "PRODUCT_RESERVATION", new { ProductCalenderId = item.Id }, null)
+                    </h3> 
+                        <font color="Green" size="2" >
+                            @item.TotalBooks 
+                           Reservados </font>
+                        
+                    <br />
+                    @Html.ActionLink("Gastos", "setGastos", "GASTOS_OPERATION", new { ProductCalenderId = item.Id, CategoryProductId = item.CategoryProductId }, null)
+                </td>
+            }
+            x = x + 1;
+        }
+    }
+        
+   
+
+    </tr>
+        </tbody>
+</table>
+
+
+

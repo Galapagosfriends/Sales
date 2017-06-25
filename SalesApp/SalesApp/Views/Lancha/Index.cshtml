@@ -86,7 +86,7 @@
          
                     @if (item.TotalBooks == null || item.TotalBooks ==0)
                     {
-                        @:<font color="Green" >  
+                        @:<font color="Green"  size="2" >  
                         @item.MaxNumber;
                         @: Libres</font>
                         <br />
@@ -108,14 +108,14 @@
                             }
                             else
                             {
-                                @:<font color="Red"> 10
+                                @:<font color="Red"  size="2"> 10
                                     @*@(item.MaxNumber - item.TotalBooks);*@
                                     @: Full </font>
 
                             }
                         }else
                         {
-                            @:<font color="Green" >
+                            @:<font color="Green"  size="2">
                             @(item.MaxNumber - item.TotalBooks);
                             @: Libres </font>
                          }
@@ -148,7 +148,7 @@
          
                     @if (item.TotalBooks == null)
                     {
-                        @:<font color="Green" >  
+                        @:<font color="Green"  size="2">  
                         @item.MaxNumber;
                         @: Libres</font>
                     }
@@ -156,13 +156,13 @@
                     {
                         if (item.TotalBooks >= item.MaxNumber || item.Lock == true)
                         {
-                            @:<font color="Red">10
+                            @:<font color="Red"  size="2">10
                          @*   @(item.MaxNumber - item.TotalBooks);*@
                             @: Full </font>
                         }
                         else
                         { 
-                            @:<font color="Green" >
+                            @:<font color="Green"   size="2">
                             @(item.MaxNumber - item.TotalBooks);
                             @: Libres </font>
                         }

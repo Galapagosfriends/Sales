@@ -163,5 +163,23 @@ namespace SalesApp.Models.Entities
 
             return this.Database.SqlQuery<int>("SP_SetGastos @ProductCalenderId, @CategoryProductId", customerIdParameter, categoryProductIdParameter).SingleOrDefault();
         }
+
+        public virtual int SP_Insert_ReservationContinue(int? id, int? productCalenderId, int? categoryProductId)
+        {
+            var IdParameter = id.HasValue ?
+              new SqlParameter("rId", id) :
+              new SqlParameter("rId", typeof(int));
+
+            var productCalenderIdParameter = productCalenderId.HasValue ?
+                new SqlParameter("ProductCalenderId", productCalenderId) :
+                new SqlParameter("ProductCalenderId", typeof(int));
+
+            var categoryProductIdParameter = categoryProductId.HasValue ?
+                         new SqlParameter("CategoryProductId", categoryProductId) :
+                         new SqlParameter("CategoryProductId", typeof(int));
+
+            return this.Database.SqlQuery<int>("SP_Insert_ReservationContinue  @rId, @ProductCalenderId,  @CategoryProductId ", IdParameter, productCalenderIdParameter, categoryProductIdParameter).SingleOrDefault();
+
+        }
     }
 }

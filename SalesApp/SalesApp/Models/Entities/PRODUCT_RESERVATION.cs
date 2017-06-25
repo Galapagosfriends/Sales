@@ -62,20 +62,28 @@ namespace SalesApp.Models.Entities
         [ForeignKey("PaymentStatusId")]
         public virtual PAYMENT_STATUS PAYMENT_STATUS { get; set; }
 
-        //[NotMapped]
-        //private PRODUCT_RESERVATION_TYPE _PRODUCT_RESERVATION_TYPE;
+        public string FacturaNr { get; set; }
 
-        //public virtual PRODUCT_RESERVATION_TYPE PRODUCT_RESERVATION_TYPE
-        //{
-        //    get
-        //    {
-        //        if (_PRODUCT_RESERVATION_TYPE == null) { return new _PRODUCT_RESERVATION_TYPE() { Id = 1 }; }
-        //        return _PRODUCT_RESERVATION_TYPE;
-        //    }
-        //    set { _PRODUCT_RESERVATION_TYPE = value; }
-        //  }
+        public Nullable<decimal> NetoPrice { get; set; }
 
-        [ForeignKey("ProductReservationTypeId")]
+        public string UserName { get; set; }
+
+        public string PC_ID { get; set; }
+
+       //[NotMapped]
+       //private PRODUCT_RESERVATION_TYPE _PRODUCT_RESERVATION_TYPE;
+
+       //public virtual PRODUCT_RESERVATION_TYPE PRODUCT_RESERVATION_TYPE
+       //{
+       //    get
+       //    {
+       //        if (_PRODUCT_RESERVATION_TYPE == null) { return new _PRODUCT_RESERVATION_TYPE() { Id = 1 }; }
+       //        return _PRODUCT_RESERVATION_TYPE;
+       //    }
+       //    set { _PRODUCT_RESERVATION_TYPE = value; }
+       //  }
+
+       [ForeignKey("ProductReservationTypeId")]
         public virtual PRODUCT_RESERVATION_TYPE PRODUCT_RESERVATION_TYPE {get; set;}
 
         [ForeignKey("TourDaysId")]
